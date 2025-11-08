@@ -399,7 +399,7 @@ function customizer(id){
     const link = document.createElement('link');    
     link.rel = 'stylesheet';
     link.type = 'text/css';
-    link.href = './waeeas.css';
+    link.href = 'https://sergiovarelab.github.io/wawas/styleWawas.css';
     document.head.appendChild(link);
     //adjuntar html2canvas 
     let scriptDom = document.createElement('script')
