@@ -90,7 +90,7 @@ const charmsKeyboardHTML=`<div class="customizer-accordion">
       </div>
     </div>
     <div class="accordion-item">
-      <button class="accordion-header">03: Comenzar a personalizar tus Charms!</button>
+      <button class="accordion-header">03: Comienza a personalizar tus Charms!</button>
       <div class="accordion-content">
         <h4 class="elije-charms">Elije tus charms (mínimo 5 - máximo 9)</h4>
         <div id="keyboard-container" class="charms-sml">
