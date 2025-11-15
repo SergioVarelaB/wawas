@@ -903,7 +903,7 @@ function updateCharms(caller){
     if(phone){
       html=html+'<span><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
     } 
-    return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp"></div>`
+    return `<div style="padding:16px">${html}</div><div>Captura:<br></div>`
   }
   function numberToHex(num){
     num=parseInt(num)
@@ -1026,7 +1026,7 @@ function displayGummies(array){
        phone=true
      }
    }
-   return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp"></div>`
+   return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br></div>`
  }
 function getIdPixelemos(){
   document.querySelector('#idPixelemos').value=currentSlug+'-'+Date.now();
