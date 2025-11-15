@@ -681,7 +681,6 @@ function enableBuyButton(enabled){
 }
 
 function myLog(message){
-  console.log("Aqiooooo")
   verbose ? console.log(message) : verbose=false
 }
 
@@ -1053,28 +1052,30 @@ function getIdPixelemos(){
           formData.append('imageData', imageData);
           formData.append('idPixelemos', idPixelemosValue);
 
+          console.log(formData)
+
           // Realizar la solicitud POST utilizando fetch
-          fetch('https://wawas.pixelemos.com/generador.php', {
-              method: 'POST',
-              body: formData,
-          })
-          .then(response => {
-              if (!response.ok) {
-                  throw new Error('Error al enviar la imagen al servidor.');
-              }
-              return response.json(); // Convertir la respuesta a JSON
-          })
-          .then(data => {
-              // Manejar la respuesta del servidor
-              if (data.success && data.imageUrl) {
-                  console.log('URL de la imagen generada:', data.imageUrl);
-              } else {
-                  throw new Error('Error al procesar la respuesta del servidor.');
-              }
-          })
-          .catch(error => {
-              console.error('Error en la solicitud fetch:', error);
-          });
+          // fetch('https://wawas.pixelemos.com/generador.php', {
+          //     method: 'POST',
+          //     body: formData,
+          // })
+          // .then(response => {
+          //     if (!response.ok) {
+          //         throw new Error('Error al enviar la imagen al servidor.');
+          //     }
+          //     return response.json(); // Convertir la respuesta a JSON
+          // })
+          // .then(data => {
+          //     // Manejar la respuesta del servidor
+          //     if (data.success && data.imageUrl) {
+          //         console.log('URL de la imagen generada:', data.imageUrl);
+          //     } else {
+          //         throw new Error('Error al procesar la respuesta del servidor.');
+          //     }
+          // })
+          // .catch(error => {
+          //     console.error('Error en la solicitud fetch:', error);
+          // });
       });
     } catch(error){
       console.warn('Errores de captura: '+error)
