@@ -4863,9 +4863,28 @@ span.medidas {
     padding: 12px 10px 18px;
 }
 
+.pack-container {
+  padding: 20px;
+}
 
+.pack-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
 
+.customizer {
+  border: 1px solid #ddd;
+  padding: 16px;
+  border-radius: 10px;
+  background: #fafafa;
+}
 
+.separator {
+  margin: 25px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}
 
 
 /*
