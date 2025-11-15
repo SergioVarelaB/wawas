@@ -10,7 +10,7 @@ const instances = [
     { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
     { id: 7634477645974, class: 'collar-de-gummies' },
     { id: 8289135952022, class: 'llavero-de-charms'}, 
-    { id: 9117784867049, class: 'llavero-de-charms'}, 
+    { id: 9117784867049, class: 'collar-para-charms' },
 ];
 
 //obtener el id del producto
@@ -427,7 +427,7 @@ function customizer(id){
     
     //cargar teclado personalizado segun id
     switch (id) {
-        case 7340949438614: //collar-de-charms
+        case 9117784867049: //collar-de-charms
           myLog(currentSlug)
           $charmsArray=[['C',11],['H',12],['A',13],['R',14],['M',15],['S',16],['1',17],['2',18],['#',19]]
           wawasContainer.innerHTML=charmsKeyboardHTML
@@ -593,7 +593,7 @@ function customizer(id){
           minCharms=15
           maxCharms=15
           break;
-          case 8289135952022: //llavero-de-charms
+        case 8289135952022: //llavero-de-charms
           myLog(currentSlug)          
           $charmsArray=[['W',11],['A',12],['W',13],['A',14],['S',15],['1',21]]
           wawasContainer.innerHTML=charmsKeyboardHTML
@@ -681,6 +681,7 @@ function enableBuyButton(enabled){
 }
 
 function myLog(message){
+  console.log("Aqiooooo")
   verbose ? console.log(message) : verbose=false
 }
 
