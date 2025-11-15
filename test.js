@@ -56,7 +56,7 @@ let $gummiesArray=[]
 
 const charmsKeyboardHTML=`<div class="customizer-accordion">
     <div class="accordion-item active">
-      <button class="accordion-header"> 01: Elige el tamaño de tu collar</button>
+      <button id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
       <div class="accordion-content">
         <div id="size-container">
           <div class="size-button size-xs" onclick="changeCollarSize('xs')">XS<span class="medidas">17-29cm</span>
