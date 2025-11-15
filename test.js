@@ -13,7 +13,6 @@ const instances = [
     { id: 9117784867049, class: 'collar-para-charms' },
 ];
 
-
 //obtener el id del producto
 const idProduct = __st.rid;
 
@@ -595,6 +594,32 @@ function customizer(id){
           maxCharms=15
           break;
           case 8289135952022: //llavero-de-charms
+          myLog(currentSlug)          
+          $charmsArray=[['W',11],['A',12],['W',13],['A',14],['S',15],['1',21]]
+          wawasContainer.innerHTML=charmsKeyboardHTML
+          document.querySelector('#charm-container').innerHTML=renderCharms($charmsArray)
+          document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
+          document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+          document.querySelector('#charm-container').innerHTML=renderCharms($charmsArray)
+          document.querySelector('#size-container').style.display='none'
+          document.querySelector('#size-title').innerHTML="Elije tus 6 charms"
+          document.querySelector('#charm-key-phone').style.pointerEvents="none"
+          document.querySelector('#charm-key-phone').innerHTML="&nbsp;"
+          document.querySelector('.size-sml').style.display="none"
+          document.querySelector('.size-xs').style.display="none"          
+          document.querySelector('.size-xl').style.display="none"          
+          document.querySelector('.collar-title').style.display="none"          
+          document.querySelector('.color-collar').style.display="none"          
+          document.querySelector('.collar').style.display="none"
+          document.querySelector('.elije-charms').style.display="none"
+          document.querySelector('#charm-container').classList.add('charms-sueltos')
+          changeCollarSize('s',false)          
+          enableBuyButton(false)
+          changeKeysColor('color11')
+          minCharms=6
+          maxCharms=6
+          break;
+          case 9117784867049: //llavero-de- testttttttt
           myLog(currentSlug)          
           $charmsArray=[['W',11],['A',12],['W',13],['A',14],['S',15],['1',21]]
           wawasContainer.innerHTML=charmsKeyboardHTML
