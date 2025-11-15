@@ -17,6 +17,8 @@ const instances = [
 //obtener el id del producto
 const idProduct = __st.rid;
 
+console.log(idProduct, "-sdkcjvbnsdkcjndscjkn")
+
 document.addEventListener('DOMContentLoaded', function () {
 if(instances.some(product => product.id === idProduct)){
 console.log('Powered by Pixelemos ðŸ’œ')
