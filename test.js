@@ -855,10 +855,10 @@ function customizer(id) {
 
   //cargar teclado personalizado segun id
   switch (id) {
-    case 91177848670495: //collar-de-charms
+    case 7340949438614: //collar-de-charms
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
-      wawasContainer.innerHTML = packKeyboard
+      wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
@@ -1156,7 +1156,7 @@ function removeActive() {
 function addCartPropertiesField() {
   let field = document.createElement('input')
   field.setAttribute('type', 'hidden')
-  field.setAttribute('name', 'properties[_Charms]')
+  field.setAttribute('name', 'properties[]')
   field.setAttribute('id', 'charmsForm')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(field, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
   let idfield = document.createElement('input')
@@ -1164,6 +1164,12 @@ function addCartPropertiesField() {
   idfield.setAttribute('name', 'properties[_id_pixelemos]')
   idfield.setAttribute('id', 'idPixelemos')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
+  let fieldurl = document.createElement('input')
+  fieldurl.setAttribute('type','hidden')
+  fieldurl.setAttribute('name', 'properties[_image]')
+  fieldurl.setAttribute('id','imageProduct')
+  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(fieldurl,document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
+
 }
 
 
@@ -1328,7 +1334,7 @@ function displayCharms(array) {
   if (phone) {
     html = html + '<span><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
   }
-  return `<div style="padding:16px">${html}</div><div>Captura:<br></div>`
+  return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp"></div>`
 }
 function numberToHex(num) {
   num = parseInt(num)
@@ -1451,7 +1457,8 @@ function displayGummies(array) {
       phone = true
     }
   }
-  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br></div>`
+  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img class="imageProduct" src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp"></div>`
+
 }
 function getIdPixelemos() {
   document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
@@ -1476,6 +1483,30 @@ function capture() {
       formData.append('imageData', imageData);
       formData.append('idPixelemos', idPixelemosValue);
       console.log(formData)
+
+      // Realizar la solicitud POST utilizando fetch
+          fetch('https://wawas.pixelemos.com/generador.php', {
+              method: 'POST',
+              body: formData,
+          })
+          .then(response => {
+              if (!response.ok) {
+                  throw new Error('Error al enviar la imagen al servidor.');
+              }
+              return response.json(); // Convertir la respuesta a JSON
+          })
+          .then(data => {
+              // Manejar la respuesta del servidor
+              if (data.success && data.imageUrl) {
+                  console.log('URL de la imagen generada:', data.imageUrl);
+              } else {
+                  throw new Error('Error al procesar la respuesta del servidor.');
+              }
+          })
+          .catch(error => {
+              console.error('Error en la solicitud fetch:', error);
+          });
+
     });
   } catch (error) {
     console.warn('Errores de captura: ' + error)

@@ -634,6 +634,11 @@ function addCartPropertiesField(){
   idfield.setAttribute('name','properties[_id_pixelemos]')
   idfield.setAttribute('id','idPixelemos')  
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield,document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
+  let fieldurl = document.createElement('input')
+  fieldurl.setAttribute('type','hidden')
+  fieldurl.setAttribute('name', 'properties[_image]')
+  fieldurl.setAttribute('id','image')
+  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(fieldurl,document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
 }
 async function getCart() {
   let x = await fetch('/cart.js')
