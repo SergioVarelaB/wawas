@@ -1,6 +1,6 @@
 //ids de producto activas
 const instances = [
-  { id: 4484848949, class: 'collar-para-charms' },
+  { id: 9117785129193, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
