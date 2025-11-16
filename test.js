@@ -1,6 +1,6 @@
 //ids de producto activas
 const instances = [
-  { id: 7340949438614, class: 'collar-para-charms' },
+  { id: 9117784867049, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
@@ -1047,7 +1047,7 @@ function customizer(id) {
       minCharms = 6
       maxCharms = 6
       break;
-    case 9117784867049: //llavero-de- testttttttt
+    case 91177848670494: //llavero-de- testttttttt
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1166,7 +1166,7 @@ function addCartPropertiesField() {
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
   let fieldurl = document.createElement('input')
   fieldurl.setAttribute('type','hidden')
-  fieldurl.setAttribute('name', 'properties[preview_image]')
+  fieldurl.setAttribute('name', 'properties[img]')
   fieldurl.setAttribute('id','imageProduct')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(fieldurl,document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
 
