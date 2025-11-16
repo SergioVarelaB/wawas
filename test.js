@@ -1164,11 +1164,11 @@ function addCartPropertiesField() {
   idfield.setAttribute('name', 'properties[_id_pixelemos]')
   idfield.setAttribute('id', 'idPixelemos')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let fieldurl = document.createElement('input')
-  fieldurl.setAttribute('type','hidden')
-  fieldurl.setAttribute('name', 'properties[img]')
-  fieldurl.setAttribute('id','imageProduct')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(fieldurl,document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
+  // let fieldurl = document.createElement('input')
+  // fieldurl.setAttribute('type','hidden')
+  // fieldurl.setAttribute('name', 'properties[img]')
+  // fieldurl.setAttribute('id','imageProduct')
+  // document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(fieldurl,document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
 
 }
 
