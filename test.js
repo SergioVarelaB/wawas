@@ -1,6 +1,6 @@
 //ids de producto activas
 const instances = [
-  { id: 9117785129193, class: 'collar-para-charms' },
+  { id: 7340949438614, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
@@ -1050,7 +1050,7 @@ function customizer(id) {
     case 9117784867049: //llavero-de- testttttttt
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
-      wawasContainer.innerHTML = packKeyboard
+      wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
