@@ -1469,7 +1469,7 @@ function capture() {
   // Seleccionar el elemento que deseas capturar
   const elementToCapture = document.querySelector('.collar-container');
   const idPixelemosInput = document.querySelector('#idPixelemos');
-  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp`
+  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp`
 
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
