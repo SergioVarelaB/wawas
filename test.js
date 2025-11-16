@@ -1064,10 +1064,10 @@ function customizer(id) {
       document.querySelector('#phone').addEventListener('input', updateCharms)
       enableBuyButton(false)
       document.querySelector('#charmsForm').value = ""
-      window.$gummyColor = document.querySelector('#values-gummys-color')
-      window.$qtyGummies = document.querySelector('#values-gummys-number')
-      $gummyColor.value = 'rojo'
-      changeGummysCollarSize('xs')
+      // window.$gummyColor = document.querySelector('#values-gummys-color')
+      // window.$qtyGummies = document.querySelector('#values-gummys-number')
+      // $gummyColor.value = 'rojo'
+      // changeGummysCollarSize('xs')
       break;
     case 7484253372566: //collar-de-charms-glow-in-the-dark
       myLog(currentSlug)
