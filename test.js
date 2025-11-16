@@ -873,7 +873,7 @@ function customizer(id) {
       enableBuyButton(false)
       document.querySelector('#charmsForm').value = ""
       break;
-    case 7412912783510: //collar-de-charms-mini
+    case 9117785129193: //collar-de-charms-mini
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
