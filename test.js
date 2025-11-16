@@ -1,11 +1,11 @@
 //ids de producto activas
 const instances = [
-  { id: 9117784867049, class: 'collar-para-charms' },
+  { id: 4484848949, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
   { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
-  { id: 7923429998742, class: 'correa-de-charms' },
+  { id: 9117784867049, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 7634477645974, class: 'collar-de-gummies' },
