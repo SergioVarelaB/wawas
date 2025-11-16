@@ -1462,7 +1462,6 @@ function displayGummies(array) {
 }
 function getIdPixelemos() {
   document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
-  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp`
   return document.querySelector('#idPixelemos').value;
 }
 /*Capturar pantalla y enviarla a https://wawas.pixelemos.com/generador.php */
@@ -1470,6 +1469,7 @@ function capture() {
   // Seleccionar el elemento que deseas capturar
   const elementToCapture = document.querySelector('.collar-container');
   const idPixelemosInput = document.querySelector('#idPixelemos');
+  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp`
 
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
