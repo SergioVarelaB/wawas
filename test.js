@@ -10,7 +10,7 @@ const instances = [
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 7634477645974, class: 'collar-de-gummies' },
   { id: 8289135952022, class: 'llavero-de-charms' },
-  { id: 9117784867049, class: 'collar-para-charms' },
+  { id: 91177848670491, class: 'collar-para-charms' },
 ];
 
 //obtener el id del producto
