@@ -1156,7 +1156,7 @@ function removeActive() {
 function addCartPropertiesField() {
   let field = document.createElement('input')
   field.setAttribute('type', 'hidden')
-  field.setAttribute('name', 'properties[]')
+  field.setAttribute('name', 'properties[_charmsIMG]')
   field.setAttribute('id', 'charmsForm')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(field, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
   let idfield = document.createElement('input')
@@ -1164,11 +1164,6 @@ function addCartPropertiesField() {
   idfield.setAttribute('name', 'properties[_id_pixelemos]')
   idfield.setAttribute('id', 'idPixelemos')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  // let fieldurl = document.createElement('input')
-  // fieldurl.setAttribute('type','hidden')
-  // fieldurl.setAttribute('name', 'properties[img]')
-  // fieldurl.setAttribute('id','imageProduct')
-  // document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(fieldurl,document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
 
 }
 
