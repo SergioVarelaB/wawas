@@ -1457,11 +1457,12 @@ function displayGummies(array) {
       phone = true
     }
   }
-  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img class="imageProduct" src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp"></div>`
+  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp"></div>`
 
 }
 function getIdPixelemos() {
   document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
+  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp`
   return document.querySelector('#idPixelemos').value;
 }
 /*Capturar pantalla y enviarla a https://wawas.pixelemos.com/generador.php */
