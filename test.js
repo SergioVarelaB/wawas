@@ -1166,7 +1166,7 @@ function addCartPropertiesField() {
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
   let idfieldImg = document.createElement('input')
   idfieldImg.setAttribute('type', 'hidden')
-  idfieldImg.setAttribute('name', 'properties[imagePreview]')
+  idfieldImg.setAttribute('name', 'properties[preview_image]')
   idfieldImg.setAttribute('id', 'imageProduct')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldImg, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
 
@@ -1334,7 +1334,7 @@ function displayCharms(array) {
   if (phone) {
     html = html + '<span><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
   }
-  return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp"></div>`
+  return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp"></div>`
 }
 function numberToHex(num) {
   num = parseInt(num)
@@ -1457,7 +1457,7 @@ function displayGummies(array) {
       phone = true
     }
   }
-  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}.webp"></div>`
+  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp"></div>`
 
 }
 function getIdPixelemos() {
@@ -1469,7 +1469,7 @@ function capture() {
   // Seleccionar el elemento que deseas capturar
   const elementToCapture = document.querySelector('.collar-container');
   const idPixelemosInput = document.querySelector('#idPixelemos');
-  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp`
+  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/.webp`
 
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
