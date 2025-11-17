@@ -8,9 +8,9 @@ const instances = [
   { id: 9117784867049, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
-  { id: 7634477645974, class: 'collar-de-gummies' },
+  { id: 9117784867049, class: 'collar-de-gummies' },
   { id: 8289135952022, class: 'llavero-de-charms' },
-  { id: 91177848670491, class: 'collar-para-charms' },
+  { id: 9120268222697, class: 'collar-para-charms' },
 ];
 
 //obtener el id del producto
@@ -1047,10 +1047,10 @@ function customizer(id) {
       minCharms = 6
       maxCharms = 6
       break;
-    case 91177848670494: //llavero-de- testttttttt
+    case 9120268222697: //llavero-de- testttttttt
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
-      wawasContainer.innerHTML = charmsKeyboardHTML
+      wawasContainer.innerHTML = packKeyboard
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
@@ -1064,10 +1064,10 @@ function customizer(id) {
       document.querySelector('#phone').addEventListener('input', updateCharms)
       enableBuyButton(false)
       document.querySelector('#charmsForm').value = ""
-      // window.$gummyColor = document.querySelector('#values-gummys-color')
-      // window.$qtyGummies = document.querySelector('#values-gummys-number')
-      // $gummyColor.value = 'rojo'
-      // changeGummysCollarSize('xs')
+      window.$gummyColor = document.querySelector('#values-gummys-color')
+      window.$qtyGummies = document.querySelector('#values-gummys-number')
+      $gummyColor.value = 'rojo'
+      changeGummysCollarSize('xs')
       break;
     case 7484253372566: //collar-de-charms-glow-in-the-dark
       myLog(currentSlug)
@@ -1085,7 +1085,7 @@ function customizer(id) {
       // document.querySelector(`input[value='5']+label`).click()
       enableBuyButton(false)
       break;
-    case 7634477645974: //collar-de-gummies
+    case 9117784867049: //collar-de-gummies
       myLog('Inicializando collar de gummys')
       wawasContainer.innerHTML = gummysKeyboardHTML
       window.$gummyColor = document.querySelector('#values-gummys-color')
