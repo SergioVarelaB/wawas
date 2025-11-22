@@ -16,13 +16,12 @@ const instances = [
 //obtener el id del producto
 const idProduct = __st.rid;
 
-console.log(idProduct, "-sdkcjvbnsdkcjndscjkn")
+console.log(idProduct, "idProduct")
 
 document.addEventListener('DOMContentLoaded', function () {
   if (instances.some(product => product.id === idProduct)) {
     console.log('Powered by Pixelemos ðŸ’œ')
     customizer(idProduct)
-
 
   } else {
     console.log('Powered by Pixelemos ðŸ¤')
@@ -1486,7 +1485,7 @@ function capture() {
       console.log(formData)
 
       // Realizar la solicitud POST utilizando fetch
-          fetch('https://wawas.pixelemos.com/generador.php', {
+          fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
               method: 'POST',
               body: formData,
           })
