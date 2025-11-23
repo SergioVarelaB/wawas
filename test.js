@@ -1480,14 +1480,14 @@ function capture() {
       const imageData = canvas.toDataURL('image/webp');
       // Preparar los datos a enviar al servidor
       const formData = new FormData();
-      formData.append('imageData', imageData);
+      formData.append('image_data', imageData);
       // formData.append('idPixelemos', idPixelemosValue);
       console.log(formData)
 
       // Realizar la solicitud POST utilizando fetch
           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
               method: 'POST',
-              body: formData,
+              body: {image_data : imageData},
           })
           .then(response => {
               if (!response.ok) {
