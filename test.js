@@ -1477,17 +1477,20 @@ function capture() {
   try {
     html2canvas(elementToCapture).then(canvas => {
       // Obtener la URL de la imagen en formato base64
-      const imageData = canvas.toDataURL('image/webp');
+      const imageData = canvas.toDataURL('image/jpeg');
       // Preparar los datos a enviar al servidor
-      const formData = new FormData();
-      formData.append('image_data', imageData);
+      // const formData = new FormData();
+      // formData.append('image_data', imageData);
+      const dataToSend = {
+            image_data: `${imageData}` 
+      };
       // formData.append('idPixelemos', idPixelemosValue);
-      console.log(formData)
+      console.log(dataToSend)
 
       // Realizar la solicitud POST utilizando fetch
           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
               method: 'POST',
-              body: {image_data : imageData},
+              body: dataToSend,
           })
           .then(response => {
               if (!response.ok) {
