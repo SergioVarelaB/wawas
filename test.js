@@ -1481,7 +1481,7 @@ function capture() {
       // Preparar los datos a enviar al servidor
       const formData = new FormData();
       formData.append('imageData', imageData);
-      formData.append('idPixelemos', idPixelemosValue);
+      // formData.append('idPixelemos', idPixelemosValue);
       console.log(formData)
 
       // Realizar la solicitud POST utilizando fetch
