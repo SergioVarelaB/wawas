@@ -1490,8 +1490,12 @@ function capture() {
       // Realizar la solicitud POST utilizando fetch
           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
               method: 'POST',
-              body: dataToSend,
-          })
+              body: JSON.stringify(dataToSend),
+              headers: {
+                // ESTO ES CRUCIAL: Debe ser application/json para que el Worker use request.json()
+                'Content-Type': 'application/json' 
+              },
+           })
           .then(response => {
               if (!response.ok) {
                   throw new Error('Error al enviar la imagen al servidor.');
