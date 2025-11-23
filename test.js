@@ -1333,7 +1333,7 @@ function displayCharms(array) {
   if (phone) {
     html = html + '<span><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
   }
-  return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp"></div>`
+  return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/orders/${getIdPixelemos()}"></div>`
 }
 function numberToHex(num) {
   num = parseInt(num)
@@ -1456,7 +1456,7 @@ function displayGummies(array) {
       phone = true
     }
   }
-  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp"></div>`
+  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}"></div>`
 
 }
 function getIdPixelemos() {
