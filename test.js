@@ -1478,9 +1478,10 @@ function capture() {
     html2canvas(elementToCapture).then(canvas => {
       // Obtener la URL de la imagen en formato base64
       const imageData = canvas.toDataURL('image/webp');
+      const imageBlob = dataURLtoBlob(imageData);
       // Preparar los datos a enviar al servidor
       const formData = new FormData();
-      formData.append('image_data', imageData);
+      formData.append('image_data', imageBlob, 'uploaded_image.webp');
       // formData.append('idPixelemos', idPixelemosValue);
       console.log(formData)
 
@@ -1512,3 +1513,24 @@ function capture() {
     console.warn('Errores de captura: ' + error)
   }
 }
+
+/**
+ * Convierte una cadena Data URI (ej: data:image/webp;base64,...) a un objeto Blob binario.
+ * @param {string} dataurl - La cadena Base64 Data URI.
+ * @returns {Blob} - El objeto Blob listo para FormData.
+ */
+function dataURLtoBlob(dataurl) {
+    const arr = dataurl.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1]; // Obtiene 'image/webp'
+    const bstr = atob(arr[1]); // Decodifica Base64 a cadena binaria
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    // Crea un array binario de bytes
+    while(n--){
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    
+    return new Blob([u8arr], {type: mime});
+}
+
