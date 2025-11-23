@@ -1479,22 +1479,15 @@ function capture() {
       // Obtener la URL de la imagen en formato base64
       const imageData = canvas.toDataURL('image/webp');
       // Preparar los datos a enviar al servidor
-      // const formData = new FormData();
-      // formData.append('image_data', imageData);
-      const dataToSend = {
-            image_data: `${imageData}` 
-      };
+      const formData = new FormData();
+      formData.append('image_data', imageData);
       // formData.append('idPixelemos', idPixelemosValue);
       console.log(dataToSend)
 
       // Realizar la solicitud POST utilizando fetch
           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
               method: 'POST',
-              body: JSON.stringify(dataToSend),
-              headers: {
-                // ESTO ES CRUCIAL: Debe ser application/json para que el Worker use request.json()
-                'Content-Type': 'application/json' 
-              },
+              body: formData,
            })
           .then(response => {
               if (!response.ok) {
