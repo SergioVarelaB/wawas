@@ -1482,7 +1482,7 @@ function capture() {
       const formData = new FormData();
       formData.append('image_data', imageData);
       // formData.append('idPixelemos', idPixelemosValue);
-      console.log(dataToSend)
+      console.log(formData)
 
       // Realizar la solicitud POST utilizando fetch
           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
