@@ -1477,7 +1477,7 @@ function capture() {
   try {
     html2canvas(elementToCapture).then(canvas => {
       // Obtener la URL de la imagen en formato base64
-      const imageData = canvas.toDataURL('image/jpeg');
+      const imageData = canvas.toDataURL('image/webp');
       // Preparar los datos a enviar al servidor
       // const formData = new FormData();
       // formData.append('image_data', imageData);
