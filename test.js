@@ -1468,7 +1468,6 @@ function capture() {
   // Seleccionar el elemento que deseas capturar
   const elementToCapture = document.querySelector('.collar-container');
   const idPixelemosInput = document.querySelector('#idPixelemos');
-  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp`
 
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
@@ -1497,9 +1496,11 @@ function capture() {
               return response.json(); // Convertir la respuesta a JSON
           })
           .then(data => {
+              console.log(data)
               // Manejar la respuesta del servidor
               if (data.success && data.imageUrl) {
-                  console.log('URL de la imagen generada:', data.imageUrl);
+                  console.log('URL de la imagen generada:', data.imageId);
+                  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp`
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
