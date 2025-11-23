@@ -1333,7 +1333,7 @@ function displayCharms(array) {
   if (phone) {
     html = html + '<span><img class="phone-charm" src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" alt="phone charm"></span>'
   }
-  return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/orders/${getIdPixelemos()}"></div>`
+  return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://imagedelivery.net/vXE13JhqlXIbFcsT7hu9vQ/${getIdPixelemos()}/public"></div>`
 }
 function numberToHex(num) {
   num = parseInt(num)
@@ -1456,7 +1456,7 @@ function displayGummies(array) {
       phone = true
     }
   }
-  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://wawas.pixelemos.com/orders/${getIdPixelemos()}"></div>`
+  return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://imagedelivery.net/vXE13JhqlXIbFcsT7hu9vQ/${getIdPixelemos()}/public"></div>`
 
 }
 function getIdPixelemos() {
@@ -1468,6 +1468,7 @@ function capture() {
   // Seleccionar el elemento que deseas capturar
   const elementToCapture = document.querySelector('.collar-container');
   const idPixelemosInput = document.querySelector('#idPixelemos');
+  document.querySelector('#imageProduct').value = `https://imagedelivery.net/vXE13JhqlXIbFcsT7hu9vQ/${getIdPixelemos()}/public`
 
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
@@ -1500,7 +1501,6 @@ function capture() {
               // Manejar la respuesta del servidor
               if (data.success && data.publicUrl) {
                   console.log('URL de la imagen generada:', data.publicUrl);
-                  document.querySelector('#imageProduct').value = data.publicUrl
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
