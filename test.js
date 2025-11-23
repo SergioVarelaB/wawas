@@ -1464,11 +1464,15 @@ function getIdPixelemos() {
   return document.querySelector('#idPixelemos').value;
 }
 /*Capturar pantalla y enviarla a https://wawas.pixelemos.com/generador.php */
-function capture() {
+function capture(event) {
   // Seleccionar el elemento que deseas capturar
+  event.preventDefault();
+
+
+  const productForm = event.target.closest('form');
+
   const elementToCapture = document.querySelector('.collar-container');
   const idPixelemosInput = document.querySelector('#idPixelemos');
-  document.querySelector('#imageProduct').value = `https://imagedelivery.net/vXE13JhqlXIbFcsT7hu9vQ/${getIdPixelemos()}/public`
 
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
@@ -1501,6 +1505,8 @@ function capture() {
               // Manejar la respuesta del servidor
               if (data.success && data.publicUrl) {
                   console.log('URL de la imagen generada:', data.publicUrl);
+                  document.querySelector('#imageProduct').value = data.publicUrl
+                  productForm.submit();
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
