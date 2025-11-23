@@ -1498,9 +1498,9 @@ function capture() {
           .then(data => {
               console.log(data)
               // Manejar la respuesta del servidor
-              if (data.success && data.imageUrl) {
-                  console.log('URL de la imagen generada:', data.imageId);
-                  document.querySelector('#imageProduct').value = `https://wawas.pixelemos.com/orders/collar-de-gummies-1763326929260.webp`
+              if (data.success && data.publicUrl) {
+                  console.log('URL de la imagen generada:', data.publicUrl);
+                  document.querySelector('#imageProduct').value = data.publicUrl
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
