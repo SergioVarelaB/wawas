@@ -830,7 +830,7 @@ function customizer(id) {
   document.head.appendChild(link);
   //adjuntar html2canvas 
   let scriptDom = document.createElement('script')
-  scriptDom.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"
+  scriptDom.src = "https://cdn.jsdelivr.net/npm/dom-to-image-more@2.8.0/dist/dom-to-image-more.min.js"
   scriptDom.crossorigin = "anonymous"
   scriptDom.referrerpolicy = "no-referrer"
   document.head.appendChild(scriptDom)
@@ -1463,26 +1463,24 @@ function getIdPixelemos() {
   document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
   return document.querySelector('#idPixelemos').value;
 }
-/*Capturar pantalla y enviarla a https://wawas.pixelemos.com/generador.php */
-function capture(event) {
+/*Capturar pantalla y enviarla */
+async function capture(event) {
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
 
-
   const productForm = event.target.closest('form');
 
-  const elementToCapture = document.querySelector('.collar-container');
+  const finalImage = await getFinalCaptureImage();
   const idPixelemosInput = document.querySelector('#idPixelemos');
-
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
 
   // Utilizar html2canvas para capturar el elemento como una imagen
   try {
-    html2canvas(elementToCapture).then(canvas => {
+    // html2canvas(elementToCapture).then(canvas => {
       // Obtener la URL de la imagen en formato base64
-      const imageData = canvas.toDataURL('image/webp');
-      const imageBlob = dataURLtoBlob(imageData);
+      // const imageData = canvas.toDataURL('image/webp');
+      const imageBlob = dataURLtoBlob(finalImage);
       // Preparar los datos a enviar al servidor
       const formData = new FormData();
       formData.append('image_data', imageBlob, 'uploaded_image.webp');
@@ -1515,11 +1513,59 @@ function capture(event) {
               console.error('Error en la solicitud fetch:', error);
           });
 
-    });
+    // });
   } catch (error) {
     console.warn('Errores de captura: ' + error)
   }
 }
+
+
+async function getFinalCaptureImage() {
+  // Obtiene todos los elementos marcados para capturar
+  const elements = document.querySelectorAll(".collar-container");
+
+  if (elements.length === 0) {
+    console.error("No hay elementos para capturar.");
+    return null;
+  }
+
+  // Capturar cada elemento como PNG usando tu librería actual (dom-to-image)
+  const images = [];
+  for (const el of elements) {
+    const dataUrl = await domtoimage.toPng(el, { quality: 1 });
+    images.push(dataUrl);
+  }
+
+  // Cargar las imágenes en objetos <img> para unirlas
+  const loadedImages = await Promise.all(
+    images.map(src => new Promise(resolve => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.src = src;
+    }))
+  );
+
+  // Crear el canvas final (vertical stacking)
+  const totalHeight = loadedImages.reduce((acc, img) => acc + img.height, 0);
+  const maxWidth = Math.max(...loadedImages.map(img => img.width));
+
+  const finalCanvas = document.createElement("canvas");
+  finalCanvas.width = maxWidth;
+  finalCanvas.height = totalHeight;
+
+  const ctx = finalCanvas.getContext("2d");
+
+  // Dibujar imágenes una debajo de otra
+  let y = 0;
+  loadedImages.forEach(img => {
+    ctx.drawImage(img, 0, y);
+    y += img.height;
+  });
+
+  // Retornar la imagen final como PNG
+  return finalCanvas.toDataURL("image/webp");
+}
+
 
 /**
  * Convierte una cadena Data URI (ej: data:image/webp;base64,...) a un objeto Blob binario.
