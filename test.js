@@ -1155,7 +1155,7 @@ function removeActive() {
 function addCartPropertiesField() {
   let field = document.createElement('input')
   field.setAttribute('type', 'hidden')
-  field.setAttribute('name', 'properties[_chars]')
+  field.setAttribute('name', 'properties[_charms]')
   field.setAttribute('id', 'charmsForm')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(field, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
   let idfield = document.createElement('input')
