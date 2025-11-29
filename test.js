@@ -1532,7 +1532,13 @@ async function getFinalCaptureImage() {
   // Capturar cada elemento como PNG usando tu librería actual (dom-to-image)
   const images = [];
   for (const el of elements) {
-    const dataUrl = await domtoimage.toPng(el, { quality: 1, style: true, filter: node => true});
+    const dataUrl = await domtoimage.toPng(el, {
+    quality: 1,
+    style: true,
+    filter: () => true,
+    cacheBust: true,
+    bgcolor: null
+  });
     images.push(dataUrl);
   }
 
