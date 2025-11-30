@@ -3982,6 +3982,7 @@ details-disclosure>details {
     --charm17: #00d6ff;
     --charm18: #1900fa;
     --charm19: #a080ff;
+    --charm20: 
     --gummies-container-height: 32px;
 }
 
@@ -4249,6 +4250,12 @@ input[id^='color'] {
     background-clip: unset;
 }
 
+#color22 {
+    background-image: url('assets/confeti.webp');
+    background-size: 32px;
+    background-clip: unset;
+}
+
 .color1 {
     color: var(--charm1);
 }
@@ -4343,6 +4350,17 @@ input[id^='color'] {
     background-size: 32px;
     text-shadow: none;
     -webkit-text-stroke: 1px #000;
+}
+
+.color22 {
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-image: url('assets/confeti.webp');
+    background-size: 32px;
+    text-shadow: none;
+    -webkit-text-stroke: 1px #000;
+
 }
 
 #vaciar-collar {

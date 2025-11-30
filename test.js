@@ -117,6 +117,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
         <div id="color19" class="color-picker color19"  onclick="changeKeysColor('color19')">&nbsp;</div>
         <div id="color20" class="color-picker color20 hidden"  onclick="changeKeysColor('color20')">&nbsp;</div>
         <div id="color21" class="color-picker color21 hidden"  onclick="changeKeysColor('color21')">&nbsp;</div>
+        <div id="color22" class="color-picker color22 hidden"  onclick="changeKeysColor('color22')">&nbsp;</div>
     </div>
     <div class="row">
       <div class="keyboard_key color11" id="charm-key-Q" onclick="addCharm('Q')">Q</div>
@@ -140,7 +141,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       <div class="keyboard_key color11" id="charm-key-J" onclick="addCharm('J')">J</div>
       <div class="keyboard_key color11" id="charm-key-K" onclick="addCharm('K')">K</div>
       <div class="keyboard_key color11" id="charm-key-L" onclick="addCharm('L')">L</div>
-      <div class="keyboard_key color11" id="charm-key-Ã‘" onclick="addCharm('Ã‘')">Ã‘</div>
+      <div class="keyboard_key color11" id="charm-key-Ã‘" onclick="addCharm('Ñ')">Ñ</div>
     </div>
     <div class="row"> 
       <div class="keyboard_key color11" id="charm-key-Z" onclick="addCharm('Z')">Z</div>
