@@ -8,6 +8,7 @@ const instances = [
   { id: 9117784867049, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
+  { id: 1, class: 'collar-de-charms-conffetti' },
   { id: 9117784867049, class: 'collar-de-gummies' },
   { id: 8289135952022, class: 'llavero-de-charms' },
   { id: 9120268222697, class: 'collar-para-charms' },
@@ -845,7 +846,7 @@ function customizer(id) {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = 'https://sergiovarelab.github.io/wawas/styleWawas.css';
+  link.href = '../styleWawas.css';
   document.head.appendChild(link);
   //adjuntar html2canvas 
   let scriptDom = document.createElement('script')
@@ -966,7 +967,6 @@ function customizer(id) {
       myLog(currentSlug)
       $charmsArray = [['P', 11], ['E', 12], ['C', 13], ['H', 14], ['E', 15], ['R', 16], ['A', 17], ['2', 18], ['8', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
@@ -991,7 +991,6 @@ function customizer(id) {
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
@@ -1017,7 +1016,6 @@ function customizer(id) {
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
@@ -1043,7 +1041,6 @@ function customizer(id) {
       myLog(currentSlug)
       $charmsArray = [['W', 11], ['A', 12], ['W', 13], ['A', 14], ['S', 15], ['1', 21]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
@@ -1092,7 +1089,6 @@ function customizer(id) {
       $charmsArray = [['C', 10], ['H', 10], ['A', 10], ['R', 10], ['M', 10], ['S', 10], ['1', 10], ['2', 10], ['#', 10]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "none"
@@ -1103,6 +1099,21 @@ function customizer(id) {
       // document.querySelector(`input[value='5']+label`).click()
       enableBuyButton(false)
       break;
+    case 1: //collar-de-charms-conffeti
+      myLog(currentSlug)
+      $charmsArray = [['C', 22], ['H', 22], ['A', 22], ['R', 22], ['M', 22], ['S', 22], ['1', 22], ['2', 22], ['#', 22]]
+      wawasContainer.innerHTML = charmsKeyboardHTML
+      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      document.querySelector('.size-sml').style.display = "none"
+      document.querySelector('.size-xl').style.display = "none"
+      document.querySelector('.color-keyboard').style.display = "none"
+      document.querySelector('.new-color-keyboard').style.display = "none"
+      changeCollarSize('xs', false)
+      changeCollarColor('collar1', 'Naranja Neon', false)
+      changeKeysColor('color22')
+      // document.querySelector(`input[value='5']+label`).click()
+      enableBuyButton(false)
+      break;  
     case 9117784867049: //collar-de-gummies
       myLog('Inicializando collar de gummys')
       wawasContainer.innerHTML = gummysKeyboardHTML
@@ -1276,7 +1287,7 @@ function renderCharms(array) {
 function changeCollarColor(clave, color, update = true) {
   const $collar = document.querySelector('.collar')
   $collar.classList.remove('collar1', 'collar2', 'collar3', 'collar4', 'collar5', 'collar6')
-  $collar.classList.add(clave)
+  $collar.classList.add(clave) 
   document.querySelector('#values-collar-color').value = color
   if (document.querySelector(`input[value='${color}']+label`)) document.querySelector(`input[value='${color}']+label`).click()
   if (update) updateCharms('changeCollarColor')
