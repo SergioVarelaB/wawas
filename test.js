@@ -1240,6 +1240,7 @@ function updateCharms(caller) {
     enableBuyButton(false)
   }
 }
+
 function emptyCharms() {
   $charmsArray = [];
   document.querySelector('#values-charms-number').value = 0
@@ -1291,6 +1292,7 @@ function changeCollarColor(clave, color, update = true) {
   document.querySelector('#values-collar-color').value = color
   if (document.querySelector(`input[value='${color}']+label`)) document.querySelector(`input[value='${color}']+label`).click()
   if (update) updateCharms('changeCollarColor')
+
 }
 
 function changeKeysColor(color) {
@@ -1328,6 +1330,7 @@ function deletePhone() {
   phonecharm = false
   updateCharms('deletePhone')
 }
+
 function changeCollarSize(size, update = true) {
   console.log(size)
   document.querySelector('#values-collar-size').value = size;
@@ -1365,6 +1368,8 @@ function displayCharms(array) {
   }
   return `<div style="padding:16px">${html}</div><div>Captura:<br><img src="https://imagedelivery.net/vXE13JhqlXIbFcsT7hu9vQ/${getIdPixelemos()}/public"></div>`
 }
+
+
 function numberToHex(num) {
   num = parseInt(num)
   switch (num) {
@@ -1408,6 +1413,9 @@ function numberToHex(num) {
       return '#a080ff'
   }
 }
+
+
+
 //Gummys functions
 
 function changeGummysCollarSize(size, update = true) {
@@ -1416,6 +1424,7 @@ function changeGummysCollarSize(size, update = true) {
   document.querySelector('.size-' + size).classList.add('active')
   updateGummys('changeGummysCollarSize')
 }
+
 function emptyGummies() {
   document.querySelector('#gummies-container').innerHTML = ''
 }
@@ -1456,6 +1465,7 @@ function deleteGummy(index) {
   updateGummys('deleteGummy')
   enableBuyButton(true)
 }
+
 function updateGummys(caller) {
   myLog(caller)
   document.querySelector('#charmsForm').value = `<div style="padding:16px">TamaÃ±o del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
@@ -1489,10 +1499,12 @@ function displayGummies(array) {
   return `<div id="gummies" style="padding:16px">${html}</div><div>Captura:<br><img src="https://imagedelivery.net/vXE13JhqlXIbFcsT7hu9vQ/${getIdPixelemos()}/public"></div>`
 
 }
+
 function getIdPixelemos() {
   document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
   return document.querySelector('#idPixelemos').value;
 }
+
 /*Capturar pantalla y enviarla */
 async function capture(event) {
   // Seleccionar el elemento que deseas capturar
@@ -1624,4 +1636,29 @@ function dataURLtoBlob(dataurl) {
     
     return new Blob([u8arr], {type: mime});
 }
+
+
+function enableAccordion() {
+  const headers = document.querySelectorAll('.accordion-header');
+  if (!headers.length) return; // todavía no existe el acordeón en el DOM
+
+  headers.forEach(header => {
+    header.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+
+      const item = header.parentElement;
+      const accordion = item.parentElement;
+
+      accordion.querySelectorAll('.accordion-item').forEach(i => {
+        if (i !== item) i.classList.remove('active');
+      });
+
+      item.classList.toggle('active');
+    });
+  });
+}
+
+
+
 
