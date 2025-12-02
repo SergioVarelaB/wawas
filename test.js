@@ -1562,7 +1562,6 @@ async function getFinalCaptureImage() {
   images = images.filter(item => item !== "data:,");
 
 
-
   // Cargar las imágenes en objetos <img> para unirlas
   const loadedImages = await Promise.all(
     images.map(src => new Promise(resolve => {
