@@ -801,7 +801,7 @@ function packKeyboard(firstKeyboard) {
       ${firstKeyboard}
     </div>
 
-    <button type="button" onClick=saveCurrentKeyboard()  id="save-and-continue" class="btn">Guardar y Continuar</button>
+    <button type="button" onClick=saveCurrentKeyboard()  id="save-and-continue" class="shopify-payment-button__button shopify-payment-button__button--unbranded">Guardar y Continuar</button>
   </div>
   <div id="previewPack" class="previewPack"> </div>
 </div>
