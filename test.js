@@ -1703,5 +1703,7 @@ function renderStep() {
         renderResultados(packs)
         hideKeyboard()
         enableBuyButton(true)
+        const title = document.getElementById("tittleCustomizer") 
+        title.innerText = "Finaliza tu compra!"
     }  
 }
