@@ -1033,6 +1033,7 @@ function customizer(id) {
       break;
     case 9120268222697: //llavero-de- testttttttt
       myLog(currentSlug)
+      document.querySelector("form[id^='product-form-template-'] .product-form__buttons").style.display = "none";
       // primer elemento
       isPack = true;
       $steps = [
@@ -1544,7 +1545,6 @@ async function getFinalCaptureImage() {
     return null;
   }
 
-  console.log("dkfjbvndfkjnvdfkjvndfkvjn 2")
 
   // Capturar cada elemento como PNG usando tu librería actual (dom-to-image)
   let images = [];
@@ -1572,8 +1572,6 @@ async function getFinalCaptureImage() {
   );
 
 
-  console.log("dkfjbvndfkjnvdfkjvndfkvjn 2.5")
-
   // Crear el canvas final (vertical stacking)
   const totalHeight = loadedImages.reduce((acc, img) => acc + img.height, 0);
   const maxWidth = Math.max(...loadedImages.map(img => img.width));
@@ -1591,7 +1589,6 @@ async function getFinalCaptureImage() {
     y += img.height;
   });
 
-  console.log("dkfjbvndfkjnvdfkjvndfkvjn 3")
 
   // Retornar la imagen final como PNG
   return finalCanvas.toDataURL("image/webp");
@@ -1702,6 +1699,7 @@ function renderStep() {
         const title = document.getElementById("tittleCustomizer") 
         title.innerText = $steps[currentStep].stepName
     }else{
+        document.querySelector("form[id^='product-form-template-'] .product-form__buttons").style.display = "block";
         renderResultados(packs)
         hideKeyboard()
         enableBuyButton(true)
