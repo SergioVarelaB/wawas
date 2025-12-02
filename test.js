@@ -9,9 +9,9 @@ const instances = [
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 1, class: 'collar-de-charms-conffetti' },
-  { id: 9117784867049, class: 'collar-de-gummies' },
+  { id: 9120268222697, class: 'collar-de-gummies' },
   { id: 8289135952022, class: 'llavero-de-charms' },
-  { id: 9120268222697, class: 'collar-para-charms' },
+  { id: 9120268222692, class: 'collar-para-charms' },
 ];
 
 //obtener el id del producto
@@ -794,8 +794,6 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
 function packKeyboard(firstKeyboard) {
     return `
 <div class="pack-container">
-  <!-- PACK HEADER -->
-  <h2 class="pack-title">Pack Collar + Llavero</h2>
 
   <div class="customizer">
     <h3 id='tittleCustomizer'>Personaliza...</h3>
@@ -1487,6 +1485,7 @@ async function capture(event) {
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
 
+  console.log(finalImage)
   // Utilizar html2canvas para capturar el elemento como una imagen
   try {
     // html2canvas(elementToCapture).then(canvas => {
