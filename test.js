@@ -1616,10 +1616,16 @@ function dataURLtoBlob(dataurl) {
 
 
 function saveCurrentKeyboard() {
+  // const size = ""
+  // if ($steps[currentStep].keyboardType == "charms"){
+  //   size = 
+  // }else{
+  //   size = 
+  // }
     const obj = {
         id : currentStep,
-        size : collarSize,
-        type_keyboard : type,
+        size : document.querySelector('#values-collar-size').value,
+        type_keyboard : $steps[currentStep].keyboardType,
         charms : $charmsArray.length || $gummiesArray.length,
         content : cleanHTML(document.querySelector(".collar-container")),
     }
@@ -1666,14 +1672,28 @@ function renderResultados(resultados) {
     cont.innerHTML = ""; // limpiamos antes de renderizar
     resultados.forEach(node => {
         const clone = node.content.cloneNode(true);
+
+        const infoContainer = document.createElement('div');
+        infoContainer.className = 'info-bottom-right';
+        const h3Tamaño = document.createElement('p');
+        h3Tamaño.textContent = "Tamaño: " + (node.tamaño || 'No especificado'); 
+        h3Tamaño.className = 'info-item'; 
+        const h3Telefono = document.createElement('p');
+        h3Telefono.textContent = "Teléfono: " + (node.telefono || 'No disponible'); 
+        h3Telefono.className = 'info-item';
+        infoContainer.appendChild(h3Tamaño);
+        infoContainer.appendChild(h3Telefono);
+        clone.appendChild(infoContainer);
+        clone.classList.add('resultado-item-container');
+        
         cont.appendChild(clone);
+
     });
 }
 
 
 function renderStep() {
     if (currentStep < $steps.length){
-        console.log($steps[currentStep].keyboardType +  "charms")
         if($steps[currentStep].keyboardType == "charms") {
             keyborard = packKeyboard(charmsKeyboardHTML)
             wawasContainer.innerHTML = keyborard

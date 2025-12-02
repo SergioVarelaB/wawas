@@ -1074,7 +1074,34 @@ span.medidas {
 }
 
 
+.info-item {
+    font-size: 12px; /* Reducir el tamaño de la fuente */
+    margin: 0; /* Quitar márgenes */
+    line-height: 1.2;
+    font-weight: bold; /* Hacerlo más legible */
+}
 
+
+.info-bottom-right {
+    /* 1. Posicionamiento absoluto */
+    position: absolute;
+    bottom: 0; /* Lo fija en la parte inferior del .resultado-item-container */
+    right: 0;  /* Lo fija en la parte derecha del .resultado-item-container */
+    
+    /* 2. Diseño y Legibilidad */
+    background: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente para mejor lectura */
+    color: white; /* Color del texto */
+    padding: 5px 10px; /* Un poco de padding para que no se pegue al borde */
+    
+    /* 3. Flexbox para organizar el texto */
+    display: flex;
+    flex-direction: column; 
+    align-items: flex-end; /* Alinea el texto a la derecha */
+    
+    /* Asegúrate de que tenga un z-index alto si la imagen de los charms
+       o cualquier otro elemento tiene un z-index que lo cubre */
+    z-index: 10; 
+}
 /*
  .charms-sml  #charm-key-6.color21{
   pointer-events: none;
