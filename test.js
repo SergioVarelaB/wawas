@@ -1475,6 +1475,9 @@ function getIdPixelemos() {
 
 /*Capturar pantalla y enviarla */
 async function capture(event) {
+
+  console.log("dkfjbvndfkjnvdfkjvndfkvjn")
+  
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
 
@@ -1485,7 +1488,6 @@ async function capture(event) {
   // Obtener el valor del input #idPixelemos
   const idPixelemosValue = idPixelemosInput.value.trim();
 
-  console.log(finalImage)
   // Utilizar html2canvas para capturar el elemento como una imagen
   try {
     // html2canvas(elementToCapture).then(canvas => {
@@ -1535,15 +1537,17 @@ async function getFinalCaptureImage() {
   // Obtiene todos los elementos marcados para capturar
 
   await document.fonts.ready;
-  const elements = document.querySelectorAll(".collar-container, .previewPack");
+  const elements = document.querySelectorAll(".collar-container");
 
   if (elements.length === 0) {
     console.error("No hay elementos para capturar.");
     return null;
   }
 
+  console.log("dkfjbvndfkjnvdfkjvndfkvjn 2")
+
   // Capturar cada elemento como PNG usando tu librería actual (dom-to-image)
-  const images = [];
+  let images = [];
   for (const el of elements) {
     const dataUrl = await domtoimage.toPng(el, {
     quality: 1,
@@ -1555,6 +1559,10 @@ async function getFinalCaptureImage() {
     images.push(dataUrl);
   }
 
+  images = images.filter(item => item !== "data:,");
+
+
+
   // Cargar las imágenes en objetos <img> para unirlas
   const loadedImages = await Promise.all(
     images.map(src => new Promise(resolve => {
@@ -1563,6 +1571,9 @@ async function getFinalCaptureImage() {
       img.src = src;
     }))
   );
+
+
+  console.log("dkfjbvndfkjnvdfkjvndfkvjn 2.5")
 
   // Crear el canvas final (vertical stacking)
   const totalHeight = loadedImages.reduce((acc, img) => acc + img.height, 0);
@@ -1580,6 +1591,8 @@ async function getFinalCaptureImage() {
     ctx.drawImage(img, 0, y);
     y += img.height;
   });
+
+  console.log("dkfjbvndfkjnvdfkjvndfkvjn 3")
 
   // Retornar la imagen final como PNG
   return finalCanvas.toDataURL("image/webp");
