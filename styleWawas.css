@@ -482,6 +482,7 @@ input[id^='color']{
 .color19{
  color: var(--charm19);
 }
+
 .color20{
   -webkit-background-clip: text;
   background-clip: text;
@@ -528,6 +529,13 @@ input[id^='color']{
   filter: drop-shadow(2px 2px 2px #000a);
 }
 #size-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+  margin-bottom: 32px;
+}
+
+.size-container {
   display: flex;
   width: 100%;
   justify-content: space-around;

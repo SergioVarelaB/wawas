@@ -38,6 +38,7 @@ const buyButton = document.querySelector('[id^="ProductSubmitButton"]')
 const quantityInput = document.querySelector('[id^="Quantity-Form-template"]')
 const $sizeform = document.querySelector('#values-collar-size')
 var $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+var isPack = false
 let verbose = false
 let wawasContainer
 let currentColor = 4
@@ -50,13 +51,15 @@ let minGummys = 7
 let collarSize = 'XS'
 let enabledKeyboard = false
 let $gummiesArray = []
+let packs = []
+let currentStep = 0
+let type = 'charms'
+let $steps = []
 
-
-/* Campos originales */
 
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div class="accordion-item active">
-      <button id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
+      <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
       <div class="accordion-content">
         <div id="size-container">
           <div class="size-button size-xs" onclick="changeCollarSize('xs')">XS<span class="medidas">17-29cm</span>
@@ -71,7 +74,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       </div>
     </div>
     <div class="accordion-item">
-      <button class="accordion-header">02: Elige el color de tu collar</button>
+      <button type="button" class="accordion-header">02: Elige el color de tu collar</button>
       <div class="accordion-content">
         <div class="color-collar">
           <div id="collar1" class="collar-option collar1" data-label="Naranja neón"
@@ -90,7 +93,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       </div>
     </div>
     <div class="accordion-item">
-      <button class="accordion-header">03: Comienza a personalizar tus Charms!</button>
+      <button type="button" class="accordion-header">03: Comienza a personalizar tus Charms!</button>
       <div class="accordion-content">
         <h4 class="elije-charms">Elije tus charms (mínimo 5 - máximo 9)</h4>
         <div id="keyboard-container" class="charms-sml">
@@ -213,11 +216,11 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
   <input type="text" id="values-collar-color" value="No aplica"><br>
   <label for="values-charms-number">NÃºmero de charms</label><br>
   <input type="number" id="values-charms-number"  value="0"><br>  
-  </div>  `
+  </div>`
 
 const gummysKeyboardHTML = `<div class="customizer-accordion">
       <div class="accordion-item active">
-        <button id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
+        <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
         <div class="accordion-content">
           <div id="size-container">
             <div class="size-button size-xs" onclick="changeGummysCollarSize('xs')">XS</div>
@@ -229,7 +232,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
         </div>
       </div>
       <div class="accordion-item active">
-        <button id="size-title" class="accordion-header"> 02: Comienza a personalizar tus Charms!</button>
+        <button type="button" id="size-title" class="accordion-header"> 02: Comienza a personalizar tus Charms!</button>
         <div class="accordion-content">
           <div id="keyboard-container">
             <div class="color-keyboard">
@@ -788,55 +791,23 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
     </div>`
 
 
-const packKeyboard = `
+function packKeyboard(firstKeyboard) {
+    return `
 <div class="pack-container">
-
   <!-- PACK HEADER -->
   <h2 class="pack-title">Pack Collar + Llavero</h2>
 
-  <!-- PERSONALIZADOR 1 -->
   <div class="customizer">
-    <h3>Personaliza el Collar</h3>
-    <div class="customizer-body">
-      ${charmsKeyboardHTML}
+    <h3 id='tittleCustomizer'>Personaliza...</h3>
+    <div id="customizer-body" class="customizer-body">
+      ${firstKeyboard}
     </div>
-  </div>
 
-  <!-- SEPARADOR -->
-  <hr class="separator">
-
-  <!-- PERSONALIZADOR 2 -->
-  <div class="customizer">
-    <h3>Personaliza el Llavero</h3>
-    <div class="customizer-body">
-      ${gummysKeyboardHTML}
-    </div>
+    <button type="button" onClick=saveCurrentKeyboard()  id="save-and-continue" class="btn">Guardar y Continuar</button>
   </div>
+  <div id="previewPack" class="previewPack"> </div>
 </div>
-`
-
-
-function enableAccordion() {
-  const headers = document.querySelectorAll('.accordion-header');
-  if (!headers.length) return; // todavía no existe el acordeón en el DOM
-
-  headers.forEach(header => {
-    header.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const item = header.parentElement;
-      const accordion = item.parentElement;
-
-      accordion.querySelectorAll('.accordion-item').forEach(i => {
-        if (i !== item) i.classList.remove('active');
-      });
-
-      item.classList.toggle('active');
-    });
-  });
-}
-
+`}
 
 
 //Start customization
@@ -1064,25 +1035,26 @@ function customizer(id) {
       break;
     case 9120268222697: //llavero-de- testttttttt
       myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
-      wawasContainer.innerHTML = packKeyboard
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('.size-xs').style.display = "none"
-      document.querySelector('.size-sml').style.display = "none"
-      document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      changeCollarSize('s', false)
-      changeCollarColor('collar1', 'Naranja Neon', false)
-      changeKeysColor('color11')
-      // document.querySelector(`input[value='5']+label`).click()
-      //detectar el numero de digitos del telefono
-      document.querySelector('#phone').addEventListener('input', updateCharms)
-      enableBuyButton(false)
-      document.querySelector('#charmsForm').value = ""
-      window.$gummyColor = document.querySelector('#values-gummys-color')
-      window.$qtyGummies = document.querySelector('#values-gummys-number')
-      $gummyColor.value = 'rojo'
-      changeGummysCollarSize('xs')
+      // primer elemento
+      isPack = true;
+      $steps = [
+        {
+            id:1,
+            stepName :  "Personaliza tu collar",
+            keyboardType : "charms",
+            minCharms : 5,
+            maxCharms : 9,
+        },
+        {
+            id:2,
+            stepName :  "Personaliza tu llavero",
+            keyboardType : "gummies",
+            minCharms : 5,
+            maxCharms : 9,
+        }
+      ]
+      renderStep()
+      
       break;
     case 7484253372566: //collar-de-charms-glow-in-the-dark
       myLog(currentSlug)
@@ -1147,27 +1119,6 @@ function createWawasContainer(node) {
 }
 
 
-function enableAccordion() {
-  const headers = document.querySelectorAll('.accordion-header');
-  if (!headers.length) return; // todavía no existe el acordeón en el DOM
-
-  headers.forEach(header => {
-    header.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-
-      const item = header.parentElement;
-      const accordion = item.parentElement;
-
-      accordion.querySelectorAll('.accordion-item').forEach(i => {
-        if (i !== item) i.classList.remove('active');
-      });
-
-      item.classList.toggle('active');
-    });
-  });
-}
-
 function selectCollar(el) {
   document.querySelectorAll('.collar-option').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
@@ -1181,6 +1132,26 @@ function removeActive() {
   }
 }
 
+
+function enableAccordion() {
+  const headers = document.querySelectorAll('.accordion-header');
+  if (!headers.length) return; 
+
+  headers.forEach(header => {
+    header.addEventListener('click', () => {
+      // e.preventDefault() y e.stopPropagation() eliminados.
+      
+      const item = header.parentElement;
+      const accordion = item.parentElement;
+
+      accordion.querySelectorAll('.accordion-item').forEach(i => {
+        if (i !== item) i.classList.remove('active');
+      });
+
+      item.classList.toggle('active');
+    });
+  });
+}
 
 function addCartPropertiesField() {
   let field = document.createElement('input')
@@ -1198,7 +1169,6 @@ function addCartPropertiesField() {
   idfieldImg.setAttribute('name', 'properties[preview_image]')
   idfieldImg.setAttribute('id', 'imageProduct')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldImg, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-
 }
 
 
@@ -1566,7 +1536,7 @@ async function getFinalCaptureImage() {
   // Obtiene todos los elementos marcados para capturar
 
   await document.fonts.ready;
-  const elements = document.querySelectorAll(".collar-container");
+  const elements = document.querySelectorAll(".collar-container, .previewPack");
 
   if (elements.length === 0) {
     console.error("No hay elementos para capturar.");
@@ -1616,7 +1586,6 @@ async function getFinalCaptureImage() {
   return finalCanvas.toDataURL("image/webp");
 }
 
-
 /**
  * Convierte una cadena Data URI (ej: data:image/webp;base64,...) a un objeto Blob binario.
  * @param {string} dataurl - La cadena Base64 Data URI.
@@ -1638,27 +1607,92 @@ function dataURLtoBlob(dataurl) {
 }
 
 
-function enableAccordion() {
-  const headers = document.querySelectorAll('.accordion-header');
-  if (!headers.length) return; // todavía no existe el acordeón en el DOM
+function saveCurrentKeyboard() {
+    const obj = {
+        id : currentStep,
+        size : collarSize,
+        type_keyboard : type,
+        charms : $charmsArray.length || $gummiesArray.length,
+        content : cleanHTML(document.querySelector(".collar-container")),
+    }
 
-  headers.forEach(header => {
-    header.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
+    if ($steps[currentStep].minCharms > $charmsArray.length) {
 
-      const item = header.parentElement;
-      const accordion = item.parentElement;
+    }else {
+        packs.push(obj);
+        currentStep += 1
+        renderStep()
+    }
+}
 
-      accordion.querySelectorAll('.accordion-item').forEach(i => {
-        if (i !== item) i.classList.remove('active');
-      });
+function getKeyboards(){
+    console.log(packs)
+}
 
-      item.classList.toggle('active');
+function cleanHTML(originalNode) {
+  const clone = originalNode.cloneNode(true);
+
+  clone.querySelectorAll("button").forEach(btn => btn.remove());
+
+  clone.querySelectorAll("*").forEach(el => {
+    [...el.attributes].forEach(attr => {
+      if (attr.name.startsWith("on")) el.removeAttribute(attr.name);
     });
   });
+
+  clone.querySelectorAll("#vaciar-collar, .msg-borrar").forEach(el => el.remove());
+
+  return clone;
+}
+
+function hideKeyboard(){
+    const teclado = document.getElementById("customizer-body");
+    const btnSiguiente = document.getElementById("save-and-continue");
+    teclado.style.display = "none";
+    btnSiguiente.style.display = "none";
 }
 
 
+function renderResultados(resultados) {
+    const cont = document.getElementById('previewPack');
+    cont.innerHTML = ""; // limpiamos antes de renderizar
+    resultados.forEach(node => {
+        const clone = node.content.cloneNode(true);
+        cont.appendChild(clone);
+    });
+}
 
 
+function renderStep() {
+    if (currentStep < $steps.length){
+        console.log($steps[currentStep].keyboardType +  "charms")
+        if($steps[currentStep].keyboardType == "charms") {
+            keyborard = packKeyboard(charmsKeyboardHTML)
+            wawasContainer.innerHTML = keyborard
+            $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+            document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+            document.querySelector('.size-xs').style.display = "none"
+            document.querySelector('.size-xs').style.display = "none"
+            document.querySelector('.size-sml').style.display = "none"
+            document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
+            document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+            changeCollarSize('s', false)
+            changeCollarColor('collar1', 'Naranja Neon', false)
+            changeKeysColor('color11')
+            document.querySelector('#phone').addEventListener('input', updateCharms)
+        }else{
+            keyborard = packKeyboard(gummysKeyboardHTML)
+            wawasContainer.innerHTML = keyborard
+            window.$gummyColor = document.querySelector('#values-gummys-color')
+            window.$qtyGummies = document.querySelector('#values-gummys-number')
+            $gummyColor.value = 'rojo'
+            changeGummysCollarSize('xs')
+        }
+        const title = document.getElementById("tittleCustomizer") 
+        title.innerText = $steps[currentStep].stepName
+    }else{
+        renderResultados(packs)
+        hideKeyboard()
+        enableBuyButton(true)
+    }  
+}
