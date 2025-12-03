@@ -8,7 +8,7 @@ const instances = [
   { id: 9117784867049, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
-  { id: 1, class: 'collar-de-charms-conffetti' },
+  { id: 9141063024873, class: 'collar-de-charms-conffetti' },
   { id: 9120268222697, class: 'collar-de-gummies' },
   { id: 8289135952022, class: 'llavero-de-charms' },
   { id: 9120268222692, class: 'collar-para-charms' },
@@ -1070,7 +1070,7 @@ function customizer(id) {
       // document.querySelector(`input[value='5']+label`).click()
       enableBuyButton(false)
       break;
-    case 1: //collar-de-charms-conffeti
+    case 9141063024873: //collar-de-charms-conffeti
       myLog(currentSlug)
       $charmsArray = [['C', 22], ['H', 22], ['A', 22], ['R', 22], ['M', 22], ['S', 22], ['1', 22], ['2', 22], ['#', 22]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1616,18 +1616,13 @@ function dataURLtoBlob(dataurl) {
 
 
 function saveCurrentKeyboard() {
-  // const size = ""
-  // if ($steps[currentStep].keyboardType == "charms"){
-  //   size = 
-  // }else{
-  //   size = 
-  // }
     const obj = {
         id : currentStep,
         size : document.querySelector('#values-collar-size').value,
         type_keyboard : $steps[currentStep].keyboardType,
         charms : $charmsArray.length || $gummiesArray.length,
         content : cleanHTML(document.querySelector(".collar-container")),
+        phone : document.querySelector('#phone')? document.querySelector('#phone').value : "",
     }
 
     if ($steps[currentStep].minCharms > $charmsArray.length) {
@@ -1676,13 +1671,15 @@ function renderResultados(resultados) {
         const infoContainer = document.createElement('div');
         infoContainer.className = 'info-bottom-right';
         const h3Tamaño = document.createElement('p');
-        h3Tamaño.textContent = "Tamaño: " + (node.tamaño || 'No especificado'); 
+        h3Tamaño.textContent = "Tamaño: " + (node.size || 'No especificado'); 
         h3Tamaño.className = 'info-item'; 
-        const h3Telefono = document.createElement('p');
-        h3Telefono.textContent = "Teléfono: " + (node.telefono || 'No disponible'); 
-        h3Telefono.className = 'info-item';
+        if (node.phone != "") { 
+          const h3Telefono = document.createElement('p');
+          h3Telefono.textContent = "Teléfono: " + (node.phone || 'No disponible'); 
+          h3Telefono.className = 'info-item';
+          infoContainer.appendChild(h3Telefono);
+        }
         infoContainer.appendChild(h3Tamaño);
-        infoContainer.appendChild(h3Telefono);
         clone.appendChild(infoContainer);
         clone.classList.add('resultado-item-container');
         
@@ -1725,5 +1722,5 @@ function renderStep() {
         enableBuyButton(true)
         const title = document.getElementById("tittleCustomizer") 
         title.innerText = "Finaliza tu compra!"
-    }  
+    }
 }
