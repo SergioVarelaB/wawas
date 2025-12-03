@@ -1715,6 +1715,7 @@ function renderStep() {
         }
         const title = document.getElementById("tittleCustomizer") 
         title.innerText = $steps[currentStep].stepName
+        enableAccordion();
     }else{
         document.querySelector("form[id^='product-form-template-'] .product-form__buttons").style.display = "block";
         renderResultados(packs)
