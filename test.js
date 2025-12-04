@@ -1096,7 +1096,9 @@ function customizer(id) {
     default:
       break;
   }
-  enableAccordion();
+  if(id != 9120268222697){
+    enableAccordion();
+  }
 }
 
 //Shared functions
