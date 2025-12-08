@@ -74,7 +74,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       </div>
     </div>
     <div class="accordion-item">
-      <button type="button" class="accordion-header">02: Elige el color de tu collar</button>
+      <button type="button" class="accordion-header collar-title">02: Elige el color de tu collar</button>
       <div class="accordion-content">
         <div class="color-collar">
           <div id="collar1" class="collar-option collar1" data-label="Naranja neón"
@@ -206,7 +206,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       </div>
       <div class="msg-borrar"> Da click a la figura para borrar un charm</div>
     </div>
-     <h4 id="phone-title" style="display:none">TelÃ©fono (10 digitos)</h4>
+     <h4 id="phone-title" style="display:none">Teléfono (10 digitos)</h4>
   <input type="phone" id="phone" value="" style="display:none">
   <div id="phone-level" style="display:none">&nbsp;</div>
   <div id="general-values" class="invisible">
@@ -232,7 +232,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
         </div>
       </div>
       <div class="accordion-item active">
-        <button type="button" id="size-title" class="accordion-header"> 02: Comienza a personalizar tus Charms!</button>
+        <button type="button" id="size-title" class="accordion-header collar-title"> 02: Comienza a personalizar tus Charms!</button>
         <div class="accordion-content">
           <div id="keyboard-container">
             <div class="color-keyboard">
@@ -272,7 +272,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-J" onclick="addGummy('J')">J</div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-K" onclick="addGummy('K')">K</div>
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-L" onclick="addGummy('L')">L</div>
-                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Ã‘" onclick="addGummy('Ã‘')">Ã‘</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Ñ" onclick="addGummy('Ñ')">Ñ</div>
               </div>
               <div class="row">
                 <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-Z" onclick="addGummy('Z')">Z</div>
@@ -779,7 +779,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
 
 
 
-    <!-- <h4 id="phone-title">TelÃ©fono (10 digitos)</h4>
+    <!-- <h4 id="phone-title">Teléfono (10 digitos)</h4>
   <input type="phone" id="phone"> -->
     <div id="general-values" class="invisible">
       <label for="values-collar-size">TamaÃ±o Collar</label><br>
@@ -1096,13 +1096,14 @@ function customizer(id) {
     default:
       break;
   }
-  if(id != 9120268222697){
+  if(!isPack){ //isPack
     enableAccordion();
   }
 }
 
 //Shared functions
 function enableBuyButton(enabled) {
+  nextBtn(enabled)
   enabled ? buyButton.removeAttribute('disabled') : buyButton.setAttribute('disabled', true)
 }
 
@@ -1137,6 +1138,8 @@ function removeActive() {
 function enableAccordion() {
   const headers = document.querySelectorAll('.accordion-header');
   if (!headers.length) return; 
+
+  console.log("fjnvfkjvndfkvjndfkvjn")
 
   headers.forEach(header => {
     header.addEventListener('click', () => {
@@ -1189,6 +1192,7 @@ function updateCharms(caller) {
     if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`))
       document.querySelector(`input[value='${$charmsArray.length}']+label`).click()
   }
+
   //avanzar el termometro del telefono
   let phoneDigits = document.querySelector('#phone').value.length
   document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%'
@@ -1196,7 +1200,7 @@ function updateCharms(caller) {
   myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
   document.querySelector('#charmsForm').value = displayCharms($charmsArray)
   let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : ' No aplica'
-  let general = `<div style="padding:16px">TamaÃ±o del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>TelÃ©fono: ${telefono}</div>`
+  let general = `<div style="padding:16px">TamaÃ±o del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono}</div>`
   if ($gummiesArray.length !== 0) {
     document.querySelector('#charmsForm').value = general + displayCharms($charmsArray) + displayGummies($gummiesArray)
   } else {
@@ -1206,6 +1210,7 @@ function updateCharms(caller) {
   if (($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm)) {
     myLog('Compras desbloqueadas')
     enableBuyButton(true)
+    nextBtn()
   } else {
     myLog('Compras bloqueadas')
     enableBuyButton(false)
@@ -1478,8 +1483,6 @@ function getIdPixelemos() {
 
 /*Capturar pantalla y enviarla */
 async function capture(event) {
-
-  console.log("dkfjbvndfkjnvdfkjvndfkvjn")
   
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
@@ -1502,7 +1505,6 @@ async function capture(event) {
       formData.append('image_data', imageBlob, 'uploaded_image.webp');
       formData.append('idPixelemos', idPixelemosValue);
       console.log(formData)
-
       // Realizar la solicitud POST utilizando fetch
           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
               method: 'POST',
@@ -1661,6 +1663,11 @@ function hideKeyboard(){
     const btnSiguiente = document.getElementById("save-and-continue");
     teclado.style.display = "none";
     btnSiguiente.style.display = "none";
+}
+
+function nextBtn(){
+  const btnSiguiente = document.getElementById("save-and-continue");
+  // btnSiguiente.
 }
 
 
