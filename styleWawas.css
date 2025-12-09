@@ -910,6 +910,20 @@ span.medidas {
     justify-content: space-between;
 }
 
+.accordion-header-disabled {
+    width: 100%;
+    background: #fff;
+    padding: 14px 12px;
+    font-size: 17px;
+    text-align: left;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+}
+
+
 .accordion-content {
     max-height: 0;
     overflow: hidden;

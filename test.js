@@ -1025,6 +1025,8 @@ function customizer(id) {
       document.querySelector('.collar').style.display = "none"
       document.querySelector('.elije-charms').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
+      document.querySelector('#size-title').classList.add('accordion-header-disabled')
+      document.querySelector('#size-title').classList.remove('accordion-header')
       changeCollarSize('s', false)
       enableBuyButton(false)
       changeKeysColor('color11')
@@ -1210,11 +1212,12 @@ function updateCharms(caller) {
   if (($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm)) {
     myLog('Compras desbloqueadas')
     enableBuyButton(true)
-    nextBtn()
   } else {
     myLog('Compras bloqueadas')
     enableBuyButton(false)
   }
+
+  nextBtn()
 }
 
 function emptyCharms() {
@@ -1444,6 +1447,7 @@ function deleteGummy(index) {
 
 function updateGummys(caller) {
   myLog(caller)
+  nextBtn()
   document.querySelector('#charmsForm').value = `<div style="padding:16px">TamaÃ±o del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
 }
 
@@ -1666,8 +1670,18 @@ function hideKeyboard(){
 }
 
 function nextBtn(){
-  const btnSiguiente = document.getElementById("save-and-continue");
-  // btnSiguiente.
+  if(isPack){
+    const btnSiguiente = document.getElementById("save-and-continue");
+    var charmsGummies = 0
+    if ($steps[currentStep].keyboardType == "charms") { charmsGummies = $charmsArray.length } else {charmsGummies = $gummiesArray.length}
+    if ($steps[currentStep].minCharms - charmsGummies > 0) {
+      btnSiguiente.innerHTML = `recuerda que faltan al menos ${$steps[currentStep].minCharms - charmsGummies} ${$steps[currentStep].keyboardType}`
+      btnSiguiente.setAttribute('disabled', true)
+    }else {
+      btnSiguiente.innerHTML = "Guardar y Continuar"
+      btnSiguiente.removeAttribute('disabled')
+    }
+  }
 }
 
 
