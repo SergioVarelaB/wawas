@@ -803,10 +803,9 @@ function packKeyboard(firstKeyboard) {
     <div id="customizer-body" class="customizer-body">
       ${firstKeyboard}
     </div>
-
     <button type="button" onClick=saveCurrentKeyboard()  id="save-and-continue" class="shopify-payment-button__button shopify-payment-button__button--unbranded">Guardar y Continuar</button>
   </div>
-  <div id="previewPack" class="previewPack"> </div>
+  <div id="previewPack" class="previewPack" style="background: #FFFFFF; padding: 10px"> </div>
 </div>
 `}
 
