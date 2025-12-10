@@ -5,15 +5,14 @@ const instances = [
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
-  { id: 9117785129193, class: 'pechera-y-correa-para-mascota-de-charms' },
+  { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
   // { id: 9117784867049, class: 'correa-de-charms' },
   { id: 7923429998742, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
-  { id: 9141063024873, class: 'collar-de-charms-conffetti' },
-  { id: 9120268222697, class: 'collar-de-gummies' },
+  { id: 9141063024873, class: 'collar-de-charms-conffetti' }, //
+  { id: 9120268222697, class: 'collar-de-gummies' }, // packs
   { id: 8289135952022, class: 'llavero-de-charms' },
-  { id: 9120268222692, class: 'collar-para-charms' },
 ];
 
 //obtener el id del producto
@@ -811,6 +810,19 @@ function packKeyboard(firstKeyboard) {
 `}
 
 
+const loadingContainer = `<div class="loader" aria-hidden="false">
+      <div class="ring" aria-hidden="true"></div>
+      <div class="pulse" aria-hidden="true"></div>
+      <span class="sr-only">Cargando…</span>
+    </div>
+    <!-- Ejemplos de tamaño -->
+    <div style="display:flex;gap:18px;align-items:center;margin-top:14px">
+      <div style="text-align:center">
+        <div class="loader large" aria-hidden="true"><div class="ring"></div><div class="pulse"></div></div>
+        <div style="font-size:12px;margin-top:6px;color:#888">Grande</div>
+      </div>
+    </div>`
+
 //Start customization
 
 function customizer(id) {
@@ -939,7 +951,7 @@ function customizer(id) {
       minCharms = 1
       maxCharms = 100
       break;
-    case 9117785129193: //pechera-y-correa-para-mascota-de-charms
+    case 7804532261014: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
       $charmsArray = [['P', 11], ['E', 12], ['C', 13], ['H', 14], ['E', 15], ['R', 16], ['A', 17], ['2', 18], ['8', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -984,13 +996,16 @@ function customizer(id) {
       document.querySelector('.collar').style.display = "none"
       document.querySelector('.elije-charms').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
+      document.querySelector('#size-title').classList.add('accordion-header-disabled')
+      document.querySelector('#size-title').classList.remove('accordion-header')
+      document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
       changeCollarSize('s', false)
       enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
       break;
-    case 8247523573910: //correa-para-gato-y-razas-chicas
+    case 8247523573910: //correa-para-gato-y-razas-chicas ///
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1009,6 +1024,9 @@ function customizer(id) {
       document.querySelector('.collar').style.display = "none"
       document.querySelector('.elije-charms').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
+      document.querySelector('#size-title').classList.add('accordion-header-disabled')
+      document.querySelector('#size-title').classList.remove('accordion-header')
+      document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
       changeCollarSize('s', false)
       enableBuyButton(false)
       changeKeysColor('color11')
@@ -1036,6 +1054,7 @@ function customizer(id) {
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
+      document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
       changeCollarSize('s', false)
       enableBuyButton(false)
       changeKeysColor('color11')
@@ -1501,7 +1520,10 @@ function getIdPixelemos() {
 
 /*Capturar pantalla y enviarla */
 async function capture(event) {
+
+  buyButton.style.display = "none"
   
+  wawasContainer.innerHTML = loadingContainer
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
 
@@ -1547,11 +1569,13 @@ async function capture(event) {
           })
           .catch(error => {
               console.error('Error en la solicitud fetch:', error);
+              buyButton.style.display = "flex"
           });
 
     // });
   } catch (error) {
     console.warn('Errores de captura: ' + error)
+    buyButton.style.display = "flex"
   }
 }
 
@@ -1654,10 +1678,6 @@ function saveCurrentKeyboard() {
         currentStep += 1
         renderStep()
     }
-}
-
-function getKeyboards(){
-    console.log(packs)
 }
 
 function cleanHTML(originalNode) {
