@@ -409,7 +409,7 @@ input[id^='color']{
 #color19{
   background-color: var(--charm19);
 }
-#color22{
+#color23{
   background-color: var(--color23);
 }
 #color20{
@@ -486,7 +486,7 @@ input[id^='color']{
 .color19{
  color: var(--charm19);
 }
-.color20{
+.color23{
  color: var(--color23);
 }
 
