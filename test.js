@@ -1,16 +1,16 @@
 //ids de producto activas
 const instances = [
-  // { id: 9117785129193, class: 'collar-para-charms' },// copia dev
+  { id: 9117785129193, class: 'collar-para-charms' },// copia dev
   { id: 7340949438614, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
   { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
-  // { id: 9117784867049, class: 'correa-de-charms' },
+  { id: 9117784867049, class: 'correa-de-charms' }, // otra copia
   { id: 7923429998742, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
-  { id: 9141063024873, class: 'collar-de-charms-conffetti' }, //
+  { id: 9141063024873, class: 'collar-de-charms-conffetti' }, // confeti
   { id: 9120268222697, class: 'collar-de-gummies' }, // packs
   { id: 8289135952022, class: 'llavero-de-charms' },
 ];
@@ -1128,12 +1128,12 @@ function customizer(id) {
   if(!isPack){ //isPack
     enableAccordion();
   }
-  nextBtn()
+  // nextBtn()
 }
 
 //Shared functions
 function enableBuyButton(enabled) {
-  nextBtn(enabled)
+  nextBtn()
   enabled ? buyButton.removeAttribute('disabled') : buyButton.setAttribute('disabled', true)
 }
 
@@ -1704,6 +1704,7 @@ function hideKeyboard(){
 }
 
 function nextBtn(){
+  console.log("sdckjnsdckjdnsckjsn" + firstClick)
   if(isPack){
     const btnSiguiente = document.getElementById("save-and-continue");
     var charmsGummies = 0
