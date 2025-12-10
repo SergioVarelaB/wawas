@@ -810,18 +810,17 @@ function packKeyboard(firstKeyboard) {
 `}
 
 
-const loadingContainer = `<div class="loader" aria-hidden="false">
+const loadingContainer = `
+<div class="loader" aria-hidden="false">
       <div class="ring" aria-hidden="true"></div>
       <div class="pulse" aria-hidden="true"></div>
       <span class="sr-only">Cargando…</span>
     </div>
-    <!-- Ejemplos de tamaño -->
     <div style="display:flex;gap:18px;align-items:center;margin-top:14px">
       <div style="text-align:center">
         <div class="loader large" aria-hidden="true"><div class="ring"></div><div class="pulse"></div></div>
-        <div style="font-size:12px;margin-top:6px;color:#888">Grande</div>
       </div>
-    </div>`
+</div>`
 
 //Start customization
 
@@ -1523,7 +1522,6 @@ async function capture(event) {
 
   buyButton.style.display = "none"
   
-  wawasContainer.innerHTML = loadingContainer
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
 
