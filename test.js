@@ -1151,7 +1151,6 @@ function customizer(id) {
 
 //Shared functions
 function enableBuyButton(enabled) {
-  nextBtn()
   enabled ? buyButton.removeAttribute('disabled') : buyButton.setAttribute('disabled', true)
 }
 
@@ -1259,7 +1258,7 @@ function updateCharms(caller) {
     document.querySelector('#charmsForm').value = general + displayCharms($charmsArray)
   }
   //desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
-  if (($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm)) {
+  if (($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm) && (!firstClick)) {
     myLog('Compras desbloqueadas')
     enableBuyButton(true)
   } else {
@@ -1497,7 +1496,6 @@ function deleteGummy(index) {
 
 function updateGummys(caller) {
   myLog(caller)
-  nextBtn()
   document.querySelector('#charmsForm').value = `<div style="padding:16px">TamaÃ±o del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
 }
 
