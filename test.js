@@ -1601,7 +1601,12 @@ async function getFinalCaptureImage() {
   // Obtiene todos los elementos marcados para capturar
 
   await document.fonts.ready;
-  const elements = document.querySelectorAll(".collar-container");
+  const elements = "" 
+  if(isPack){
+   elements = document.querySelectorAll(".previewPack"); 
+  }else{
+    elements = document.querySelectorAll(".collar-container");
+  }
 
   if (elements.length === 0) {
     console.error("No hay elementos para capturar.");
