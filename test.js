@@ -3,9 +3,9 @@ const instances = [
   // { id: 9117785129193, class: 'collar-para-charms' },// copia dev
   { id: 7340949438614, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
-  { id: 9117785129193, class: 'charms-extra-xs' },
+  { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
-  { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
+  { id: 9117785129193, class: 'pechera-y-correa-para-mascota-de-charms' },
   // { id: 9117784867049, class: 'correa-de-charms' },
   { id: 7923429998742, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
@@ -887,7 +887,7 @@ function customizer(id) {
       changeKeysColor('color11')
       enableBuyButton(false)
       break;
-    case 9117785129193: //charms-extra-xs
+    case 7820838174870: //charms-extra-xs
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -930,20 +930,24 @@ function customizer(id) {
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('.medidas').style.display = "none"
+      document.querySelector('#size-title').innerHTML="01: Eligue el tamaño de tus charms"
+      document.querySelector('#personalize').innerHTML="02: Perzonaliza tus charms"
       changeCollarSize('sml', false)
       enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 1
       maxCharms = 100
       break;
-    case 7804532261014: //pechera-y-correa-para-mascota-de-charms
+    case 9117785129193: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
       $charmsArray = [['P', 11], ['E', 12], ['C', 13], ['H', 14], ['E', 15], ['R', 16], ['A', 17], ['2', 18], ['8', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('#size-title').innerHTML = "Elije el tamaÃ±o de tu pechera y los 15 charms"
+      document.querySelector('#size-title').innerHTML = "01: Elije el tamaño de tu pechera y los 15 charms"
+      document.querySelector('#personalize').innerHTML="02: Perzonaliza tus charms"
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
@@ -960,6 +964,7 @@ function customizer(id) {
       minCharms = 15
       maxCharms = 15
       break;
+
     case 7923429998742: //correa-de-charms
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
