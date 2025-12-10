@@ -1,11 +1,13 @@
 //ids de producto activas
 const instances = [
-  { id: 9117785129193, class: 'collar-para-charms' },
+  // { id: 9117785129193, class: 'collar-para-charms' },// copia dev
+  { id: 7340949438614, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
-  { id: 7820838174870, class: 'charms-extra-xs' },
+  { id: 9117785129193, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
   { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
-  { id: 9117784867049, class: 'correa-de-charms' },
+  // { id: 9117784867049, class: 'correa-de-charms' },
+  { id: 7923429998742, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 9141063024873, class: 'collar-de-charms-conffetti' },
@@ -55,6 +57,7 @@ let packs = []
 let currentStep = 0
 let type = 'charms'
 let $steps = []
+let firstClick = true
 
 
 const charmsKeyboardHTML = `<div class="customizer-accordion">
@@ -93,7 +96,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       </div>
     </div>
     <div class="accordion-item">
-      <button type="button" class="accordion-header">03: Comienza a personalizar tus Charms!</button>
+      <button id="personalize" type="button" class="accordion-header">03: Comienza a personalizar tus Charms!</button>
       <div class="accordion-content">
         <h4 class="elije-charms">Elije tus charms (mínimo 5 - máximo 9)</h4>
         <div id="keyboard-container" class="charms-sml">
@@ -232,7 +235,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
         </div>
       </div>
       <div class="accordion-item active">
-        <button type="button" id="size-title" class="accordion-header collar-title"> 02: Comienza a personalizar tus Charms!</button>
+        <button type="button" id="personalize" class="accordion-header collar-title"> 02: Comienza a personalizar tus Gummies!</button>
         <div class="accordion-content">
           <div id="keyboard-container">
             <div class="color-keyboard">
@@ -861,7 +864,7 @@ function customizer(id) {
       enableBuyButton(false)
       document.querySelector('#charmsForm').value = ""
       break;
-    case 9117785129193: //collar-de-charms-mini
+    case 7412912783510: //collar-de-charms-mini
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -884,7 +887,7 @@ function customizer(id) {
       changeKeysColor('color11')
       enableBuyButton(false)
       break;
-    case 7820838174870: //charms-extra-xs
+    case 9117785129193: //charms-extra-xs
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -902,6 +905,7 @@ function customizer(id) {
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "flex"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
+      document.querySelector('#personalize').innerHTML="Perzonaliza tus charms"
       changeCollarSize('xs', false)
       enableBuyButton(false)
       changeKeysColor('color1')
@@ -1101,6 +1105,7 @@ function customizer(id) {
   if(!isPack){ //isPack
     enableAccordion();
   }
+  nextBtn()
 }
 
 //Shared functions
@@ -1141,11 +1146,15 @@ function enableAccordion() {
   const headers = document.querySelectorAll('.accordion-header');
   if (!headers.length) return; 
 
-  console.log("fjnvfkjvndfkvjndfkvjn")
-
   headers.forEach(header => {
     header.addEventListener('click', () => {
       // e.preventDefault() y e.stopPropagation() eliminados.
+      if(header.id === "personalize" && firstClick){
+        if($steps[currentStep]?.keyboardType != "gummies"){
+          emptyCharms()
+        }
+        firstClick = false
+      }
       
       const item = header.parentElement;
       const accordion = item.parentElement;
@@ -1674,12 +1683,18 @@ function nextBtn(){
     const btnSiguiente = document.getElementById("save-and-continue");
     var charmsGummies = 0
     if ($steps[currentStep].keyboardType == "charms") { charmsGummies = $charmsArray.length } else {charmsGummies = $gummiesArray.length}
-    if ($steps[currentStep].minCharms - charmsGummies > 0) {
-      btnSiguiente.innerHTML = `recuerda que faltan al menos ${$steps[currentStep].minCharms - charmsGummies} ${$steps[currentStep].keyboardType}`
+    if(firstClick) {
+      btnSiguiente.innerHTML = `Perzonaliza tus ${$steps[currentStep].keyboardType}`
       btnSiguiente.setAttribute('disabled', true)
-    }else {
-      btnSiguiente.innerHTML = "Guardar y Continuar"
-      btnSiguiente.removeAttribute('disabled')
+    }else{
+      if ($steps[currentStep].minCharms - charmsGummies > 0) {
+        btnSiguiente.innerHTML = `recuerda que faltan al menos ${$steps[currentStep].minCharms - charmsGummies} ${$steps[currentStep].keyboardType}`
+        btnSiguiente.setAttribute('disabled', true)
+      } 
+      else {
+        btnSiguiente.innerHTML = "Guardar y Continuar"
+        btnSiguiente.removeAttribute('disabled')
+      }
     }
   }
 }
@@ -1714,6 +1729,7 @@ function renderResultados(resultados) {
 
 function renderStep() {
     if (currentStep < $steps.length){
+        firstClick = true
         if($steps[currentStep].keyboardType == "charms") {
             keyborard = packKeyboard(charmsKeyboardHTML)
             wawasContainer.innerHTML = keyborard
