@@ -6,12 +6,12 @@ const instances = [
   { id: 7820838174870, class: 'charms-extra-xs' },
   { id: 7319719280790, class: 'charms-extra' },
   { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
-  { id: 9117784867049, class: 'correa-de-charms' }, // otra copia
+  { id: 9117784867049, class: 'collar-de-gummies' }, // otra copia gummies
   { id: 7923429998742, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 9141063024873, class: 'collar-de-charms-conffetti' }, // confeti
-  { id: 9120268222697, class: 'collar-de-gummies' }, // packs
+  { id: 9120268222697, class: 'collar-de-gummies-packs' }, // packs
   { id: 8289135952022, class: 'llavero-de-charms' },
 ];
 
@@ -858,6 +858,24 @@ function customizer(id) {
   //cargar teclado personalizado segun id
   switch (id) {
     case 7340949438614: //collar-de-charms
+      myLog(currentSlug)
+      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+      wawasContainer.innerHTML = charmsKeyboardHTML
+      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      document.querySelector('.size-xs').style.display = "none"
+      document.querySelector('.size-sml').style.display = "none"
+      document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+      changeCollarSize('s', false)
+      changeCollarColor('collar1', 'Naranja Neon', false)
+      changeKeysColor('color11')
+      // document.querySelector(`input[value='5']+label`).click()
+      //detectar el numero de digitos del telefono
+      document.querySelector('#phone').addEventListener('input', updateCharms)
+      enableBuyButton(false)
+      document.querySelector('#charmsForm').value = ""
+      break;
+    case 9117785129193: //collar-de-charms
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
