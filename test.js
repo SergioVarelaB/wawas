@@ -1601,7 +1601,7 @@ async function getFinalCaptureImage() {
   // Obtiene todos los elementos marcados para capturar
 
   await document.fonts.ready;
-  const elements = "" 
+  let elements = "" 
   if(isPack){
    elements = document.querySelectorAll(".previewPack"); 
   }else{
