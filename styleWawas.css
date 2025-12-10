@@ -195,6 +195,7 @@
   --charm17:#00d6ff; 
   --charm18:#1900fa; 
   --charm19:#a080ff; 
+  --color23 : #34f0ab;
   --gummies-container-height:32px;
 }
 .collar-container {
@@ -408,6 +409,9 @@ input[id^='color']{
 #color19{
   background-color: var(--charm19);
 }
+#color22{
+  background-color: var(--color23);
+}
 #color20{
   background-image: url('assets/bg-glitter.png');
   background-size: 32px;
@@ -482,6 +486,10 @@ input[id^='color']{
 .color19{
  color: var(--charm19);
 }
+.color20{
+ color: var(--color23);
+}
+
 
 .color20{
   -webkit-background-clip: text;
@@ -1222,7 +1230,7 @@ span.medidas {
       .loading-label { font-size: 13px; }
     }
 
-    
+
 /*
  .charms-sml  #charm-key-6.color21{
   pointer-events: none;

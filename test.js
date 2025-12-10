@@ -121,6 +121,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
         <div id="color17" class="color-picker color17"  onclick="changeKeysColor('color17')">&nbsp;</div>
         <div id="color18" class="color-picker color18"  onclick="changeKeysColor('color18')">&nbsp;</div>
         <div id="color19" class="color-picker color19"  onclick="changeKeysColor('color19')">&nbsp;</div>
+        <div id="color23" class="color-picker color23"  onclick="changeKeysColor('color23')">&nbsp;</div>
         <div id="color20" class="color-picker color20 hidden"  onclick="changeKeysColor('color20')">&nbsp;</div>
         <div id="color21" class="color-picker color21 hidden"  onclick="changeKeysColor('color21')">&nbsp;</div>
         <div id="color22" class="color-picker color22 hidden"  onclick="changeKeysColor('color22')">&nbsp;</div>
