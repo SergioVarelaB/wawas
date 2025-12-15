@@ -1791,6 +1791,7 @@ function renderStep() {
             changeCollarColor('collar1', 'Naranja Neon', false)
             changeKeysColor('color11')
             document.querySelector('#phone').addEventListener('input', updateCharms)
+            nextBtn();
         }else{
             keyborard = packKeyboard(gummysKeyboardHTML)
             wawasContainer.innerHTML = keyborard
