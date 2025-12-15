@@ -1577,7 +1577,6 @@ async function capture(event) {
               if (data.success && data.publicUrl) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
-                  enableBuyButton(true)
                   productForm.submit();
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
@@ -1725,7 +1724,6 @@ function hideKeyboard(){
 }
 
 function nextBtn(){
-  console.log("sdckjnsdckjdnsckjsn" + firstClick)
   if(isPack){
     const btnSiguiente = document.getElementById("save-and-continue");
     var charmsGummies = 0
