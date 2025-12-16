@@ -1209,6 +1209,11 @@ function enableAccordion() {
 }
 
 function addCartPropertiesField() {
+  let idfieldImg = document.createElement('input')
+  idfieldImg.setAttribute('type', 'hidden')
+  idfieldImg.setAttribute('name', 'properties[Url de la imagen]')
+  idfieldImg.setAttribute('id', 'imageProduct') 
+  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldImg, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
   let field = document.createElement('input')
   field.setAttribute('type', 'hidden')
   field.setAttribute('name', 'properties[_charms]')
@@ -1219,11 +1224,6 @@ function addCartPropertiesField() {
   idfield.setAttribute('name', 'properties[_id_pixelemos]')
   idfield.setAttribute('id', 'idPixelemos')
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfieldImg = document.createElement('input')
-  idfieldImg.setAttribute('type', 'hidden')
-  idfieldImg.setAttribute('name', 'properties[preview_image]')
-  idfieldImg.setAttribute('id', 'imageProduct')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldImg, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
 }
 
 
