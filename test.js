@@ -1539,7 +1539,7 @@ async function capture(event) {
   enableBuyButton(false)
   
   // Seleccionar el elemento que deseas capturar
-  // event.preventDefault();
+  event.preventDefault();
 
   const productForm = event.target.closest('form');
 
