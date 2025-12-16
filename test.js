@@ -1539,9 +1539,9 @@ async function capture(event) {
   enableBuyButton(false)
   
   // Seleccionar el elemento que deseas capturar
-  event.preventDefault();
+  // event.preventDefault();
 
-  const productForm = event.target.closest('form');
+  // const productForm = event.target.closest('form');
 
   const finalImage = await getFinalCaptureImage();
   const idPixelemosInput = document.querySelector('#idPixelemos');
@@ -1577,7 +1577,8 @@ async function capture(event) {
               if (data.success && data.publicUrl) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
-                  productForm.submit();
+                  
+                  // productForm.submit();
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
