@@ -1541,7 +1541,7 @@ async function capture(event) {
   // Seleccionar el elemento que deseas capturar
   // event.preventDefault();
 
-  // const productForm = event.target.closest('form');
+  const productForm = event.target.closest('form');
 
   const finalImage = await getFinalCaptureImage();
   const idPixelemosInput = document.querySelector('#idPixelemos');
