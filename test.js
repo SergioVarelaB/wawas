@@ -843,6 +843,9 @@ function customizer(id) {
   // document.querySelector("button[id^='ProductSubmitButton']").addEventListener('click', capture)
   document.querySelectorAll("button[id^='ProductSubmitButton']").forEach(button => { button.addEventListener('click', capture);});
 
+  const productForm = document.querySelector('form[action*="/cart/add"]');
+
+
   //crear el contenedor del personalizador
   wawasContainer = createWawasContainer(quantityInput)
 
@@ -1610,6 +1613,68 @@ async function capture(event) {
     enableBuyButton(true)
   }
 }
+
+productForm.addEventListener('submit', async (event) => {
+  if (allowSubmit) return;
+  
+  // Seleccionar el elemento que deseas capturar
+  event.preventDefault();
+  // const button = event.currentTarget;
+
+  const finalImage = await getFinalCaptureImage();
+  const idPixelemosInput = document.querySelector('#idPixelemos');
+  // Obtener el valor del input #idPixelemos
+  const idPixelemosValue = idPixelemosInput.value.trim();
+
+  // Utilizar html2canvas para capturar el elemento como una imagen
+  try {
+    // html2canvas(elementToCapture).then(canvas => {
+      // Obtener la URL de la imagen en formato base64
+      // const imageData = canvas.toDataURL('image/webp');
+      const imageBlob = dataURLtoBlob(finalImage);
+      // Preparar los datos a enviar al servidor
+      const formData = new FormData();
+      formData.append('image_data', imageBlob, 'uploaded_image.webp');
+      formData.append('idPixelemos', idPixelemosValue);
+      console.log(formData)
+      // Realizar la solicitud POST utilizando fetch
+          fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
+              method: 'POST',
+              body: formData,
+           })
+          .then(response => {
+              if (!response.ok) {
+                  enableBuyButton(true)
+                  throw new Error('Error al enviar la imagen al servidor.');
+              }
+              return response.json(); // Convertir la respuesta a JSON
+          })
+          .then(data => {
+              console.log(data)
+              // Manejar la respuesta del servidor
+              if (data.success && data.publicUrl) {
+                  console.log('URL de la imagen generada:', data.publicUrl);
+                  document.querySelector('#imageProduct').value = data.publicUrl
+                  allowSubmit = true;
+                  setTimeout(() => {
+                    productForm.submit();
+                  }, 0);
+              } else {
+                  throw new Error('Error al procesar la respuesta del servidor.');
+              }
+          })
+          .catch(error => {
+              console.error('Error en la solicitud fetch:', error);
+              allowSubmit = false;
+              enableBuyButton(true)
+          });
+
+    // });
+  } catch (error) {
+    console.warn('Errores de captura: ' + error)
+    enableBuyButton(true)
+  }
+});
 
 
 async function getFinalCaptureImage() {
