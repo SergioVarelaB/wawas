@@ -1222,7 +1222,7 @@ function enableAccordion() {
 function addCartPropertiesField() {
   let idfieldImg = document.createElement('input')
   idfieldImg.setAttribute('type', 'hidden')
-  idfieldImg.setAttribute('name', 'properties[Url de la imagen]')
+  idfieldImg.setAttribute('name', 'properties[Ingresa el siguiente link en tu navegador para ver tu diseño: ]')
   idfieldImg.setAttribute('id', 'imageProduct') 
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldImg, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
   let field = document.createElement('input')
