@@ -976,8 +976,8 @@ function customizer(id) {
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('#size-title').innerHTML = "01: Elije el tamaño de tu pechera y los 15 charms"
-      document.querySelector('#personalize').innerHTML="02: Perzonaliza tus charms"
+      document.querySelector('#size-title').innerHTML = "01: Elije el tamaño de tu pechera"
+      document.querySelector('#personalize').innerHTML="02: Perzonaliza tus 15 charms"
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
@@ -1587,7 +1587,7 @@ async function capture(event) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
                   
-                  productForm.submit();
+                  // productForm.submit();/
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
