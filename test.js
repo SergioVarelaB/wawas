@@ -1552,6 +1552,8 @@ async function capture(event) {
 
   const productForm = event.target.closest('form');
 
+  console.log('dkcjnsdkcjnsdckjnsd.      ' + event)
+
   const finalImage = await getFinalCaptureImage();
   const idPixelemosInput = document.querySelector('#idPixelemos');
   // Obtener el valor del input #idPixelemos
@@ -1587,7 +1589,7 @@ async function capture(event) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
                   
-                  // productForm.submit();/
+                  productForm.submit();
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
