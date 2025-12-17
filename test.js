@@ -58,7 +58,7 @@ let currentStep = 0
 let type = 'charms'
 let $steps = []
 let firstClick = true
-
+let allowSubmit = false;
 
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div class="accordion-item active">
@@ -1544,6 +1544,7 @@ function getIdPixelemos() {
 
 /*Capturar pantalla y enviarla */
 async function capture(event) {
+  if (allowSubmit) return;
 
   enableBuyButton(false)
   
@@ -1588,6 +1589,7 @@ async function capture(event) {
               if (data.success && data.publicUrl) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
+                  allowSubmit = true;
                   button.click()
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
