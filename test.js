@@ -1201,6 +1201,7 @@ function enableAccordion() {
       if(header.id === "personalize" && firstClick){
         console.log(` ${$steps[currentStep]?.keyboardType} o  ${(!currentSlug.includes('gummies'))}`)
         if(($steps[currentStep]?.keyboardType != "gummies") || (!currentSlug.includes('gummies'))){
+          console.log(($steps[currentStep]?.keyboardType != "gummies") || (!currentSlug.includes('gummies')))
           emptyCharms()
         }
         firstClick = false
