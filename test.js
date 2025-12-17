@@ -840,7 +840,8 @@ function customizer(id) {
   document.head.appendChild(scriptDom)
 
   //activar la captura si se activa el personalizador
-  document.querySelector("button[id^='ProductSubmitButton']").addEventListener('click', capture)
+  // document.querySelector("button[id^='ProductSubmitButton']").addEventListener('click', capture)
+  document.querySelectorAll("button[id^='ProductSubmitButton']").forEach(button => { button.addEventListener('click', capture);});
 
   //crear el contenedor del personalizador
   wawasContainer = createWawasContainer(quantityInput)
