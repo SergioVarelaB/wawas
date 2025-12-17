@@ -7,6 +7,7 @@ const instances = [
   { id: 7319719280790, class: 'charms-extra' },
   { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
   { id: 9117784867049, class: 'collar-de-gummies' }, // otra copia gummies
+  { id: 7634477645974, class: 'collar-de-gummies' },
   { id: 7923429998742, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
@@ -1140,6 +1141,14 @@ function customizer(id) {
       $gummyColor.value = 'rojo'
       changeGummysCollarSize('xs')
       break;
+    case 7634477645974: //collar-de-gummies
+      myLog('Inicializando collar de gummys')
+      wawasContainer.innerHTML = gummysKeyboardHTML
+      window.$gummyColor = document.querySelector('#values-gummys-color')
+      window.$qtyGummies = document.querySelector('#values-gummys-number')
+      $gummyColor.value = 'rojo'
+      changeGummysCollarSize('xs')
+    break;
     default:
       break;
   }
