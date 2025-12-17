@@ -1588,7 +1588,6 @@ async function capture(event) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
                   allowSubmit = true;
-                  e
                   setTimeout(() => {
                     button.click();
                   }, 0);
