@@ -1545,8 +1545,6 @@ function getIdPixelemos() {
 /*Capturar pantalla y enviarla */
 async function capture(event) {
   if (allowSubmit) return;
-
-  enableBuyButton(false)
   
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
@@ -1590,6 +1588,7 @@ async function capture(event) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
                   allowSubmit = true;
+                  e
                   setTimeout(() => {
                     button.click();
                   }, 0);
