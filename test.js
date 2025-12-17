@@ -12,7 +12,7 @@ const instances = [
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 9141063024873, class: 'collar-de-charms-conffetti' }, // confeti
-  { id: 9120268222697, class: 'collar-de-gummies-packs' }, // packs
+  { id: 9120268222697, class: 'packs' }, // packs
   { id: 8289135952022, class: 'llavero-de-charms' },
 ];
 
@@ -1199,7 +1199,7 @@ function enableAccordion() {
     header.addEventListener('click', () => {
       // e.preventDefault() y e.stopPropagation() eliminados.
       if(header.id === "personalize" && firstClick){
-        if($steps[currentStep]?.keyboardType != "gummies" || idProduct != "7634477645974"){
+        if(($steps[currentStep]?.keyboardType != "gummies") || (!currentSlug.includes('gummies'))){
           emptyCharms()
         }
         firstClick = false
