@@ -1199,6 +1199,7 @@ function enableAccordion() {
     header.addEventListener('click', () => {
       // e.preventDefault() y e.stopPropagation() eliminados.
       if(header.id === "personalize" && firstClick){
+        console.log(` ${$steps[currentStep]?.keyboardType} o  ${(!currentSlug.includes('gummies'))}`)
         if(($steps[currentStep]?.keyboardType != "gummies") || (!currentSlug.includes('gummies'))){
           emptyCharms()
         }
