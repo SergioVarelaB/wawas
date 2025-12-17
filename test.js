@@ -1590,16 +1590,16 @@ async function capture(event) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
                   allowSubmit = true;
-                  button.dispatchEvent(new MouseEvent('click', {
-                    bubbles: true,
-                    cancelable: true
-                  }));
+                  setTimeout(() => {
+                    button.click();
+                  }, 0);
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
           })
           .catch(error => {
               console.error('Error en la solicitud fetch:', error);
+              allowSubmit = false;
               enableBuyButton(true)
           });
 
