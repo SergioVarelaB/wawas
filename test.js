@@ -1199,7 +1199,7 @@ function enableAccordion() {
     header.addEventListener('click', () => {
       // e.preventDefault() y e.stopPropagation() eliminados.
       if(header.id === "personalize" && firstClick){
-        if($steps[currentStep]?.keyboardType != "gummies"){
+        if($steps[currentStep]?.keyboardType != "gummies" || idProduct != "7634477645974"){
           emptyCharms()
         }
         firstClick = false
