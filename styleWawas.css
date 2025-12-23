@@ -564,7 +564,9 @@ input[id^='color']{
   width: 80px;
 }
 .size-button.active {
-  background: #ddd;
+  background: #252525;
+  border: solid 2px #000;
+  color: #FFF;
 }
 #phone {
   border: 1px solid #999;
@@ -587,19 +589,22 @@ input[id^='color']{
 }
 
 .color-picker {
-  width: 9%;
-  height: 42px;
+  width: 5rem;
+  aspect-ratio: 1 / 1;      
   border-radius: 8px;
-  cursor: pointer;
-  margin: 0 2px;
+  border: 1px solid rgba(0,0,0,0.12);
+  box-shadow:
+    0 1px 2px rgba(0,0,0,0.08),
+    0 4px 10px rgba(0,0,0,0.06);
 }
+
 #charmsForm{
   display: none;
 }
 
 @media (max-width: 768px){
   #charm-container {
-    font-size: 52px;  
+    font-size: 2.7rem;  
   }
   .collar {  
     height: 37px;  
@@ -869,6 +874,7 @@ span.medidas {
   border-radius: 20px;
   background: #fff;
   z-index: 1;  
+  color: #0d0d0d;
 }
 .collar-de-charms span.medidas, .collar-de-charms-glow-in-the-dark span.medidas{
   display: flex;
@@ -963,6 +969,7 @@ span.medidas {
   cursor: pointer;
   position: relative;
   border: 2px solid transparent;
+
   outline-offset: -4px;
   transition: 0.2s ease;
 }
@@ -979,6 +986,7 @@ span.medidas {
 .collar-option.active {
   border: 2px solid #373737;
   outline: 2px solid #FFF;
+
 }
 
 /* Texto del color solo en el seleccionado */
@@ -992,7 +1000,8 @@ span.medidas {
   margin-top: 5px;
   transform: translateX(-50%);
   white-space: nowrap;
-  text-align: center;
+  white-space: normal;
+  max-width: 60px;
   color: #373737;
 }
 
