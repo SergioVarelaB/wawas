@@ -1202,6 +1202,12 @@ span.medidas {
       letter-spacing: 0.2px;
     }
 
+.product-option,
+.product-form__label,
+dt {
+  font-weight: 600;
+}
+
     /* Variantes (pequeño / grande) */
     .loader.small { --loader-size: 36px; --loader-border: 5px; }
     .loader.large { --loader-size: 96px; --loader-border: 12px; }
@@ -1291,3 +1297,4 @@ input[id^=collar].agotado {
 .pechera-y-correa-para-mascota-de-charms .medidas{
   display: none;
 }
+
