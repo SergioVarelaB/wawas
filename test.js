@@ -1727,14 +1727,14 @@ async function getFinalCaptureImage() {
       clone.style.top = '-9999px';
       document.body.appendChild(clone);
 
-      const dataUrl = await domtoimage.toPng(el, {
+      const dataUrl = await domtoimage.toPng(clone, {
         quality: 1,
         style: true,
         filter: () => true,
         cacheBust: true,
         bgcolor: null
       });
-      
+
       images.push(dataUrl);
 
       document.body.removeChild(clone);
