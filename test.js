@@ -1708,7 +1708,7 @@ async function getFinalCaptureImage() {
     infoContainer.className = 'info-bottom-right';
 
     const h3Tamaño = document.createElement('h3');
-    h3Tamaño.textContent = document.querySelector('#values-collar-size').value;
+    h3Tamaño.textContent = "khjbjkhbjkhbjhb";
     h3Tamaño.className = 'info-item';
     
     const h3Telefono = document.createElement('h3');
@@ -1723,8 +1723,8 @@ async function getFinalCaptureImage() {
       clone.classList.add('resultado-item-container');
 
       // 4. Insertar clon en el DOM (fuera de vista)
-      clone.style.position = 'fixed';
-      clone.style.top = '-9999px';
+      // clone.style.position = 'fixed';
+      // clone.style.top = '-9999px';
       document.body.appendChild(clone);
 
       const dataUrl = await domtoimage.toPng(clone, {
