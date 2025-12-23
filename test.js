@@ -1619,69 +1619,6 @@ async function capture(event) {
   }
 }
 
-// productForm.addEventListener('submit', async (event) => {
-//   if (allowSubmit) return;
-  
-//   // Seleccionar el elemento que deseas capturar
-//   event.preventDefault();
-//   // const button = event.currentTarget;
-
-//   const finalImage = await getFinalCaptureImage();
-//   const idPixelemosInput = document.querySelector('#idPixelemos');
-//   // Obtener el valor del input #idPixelemos
-//   const idPixelemosValue = idPixelemosInput.value.trim();
-
-//   // Utilizar html2canvas para capturar el elemento como una imagen
-//   try {
-//     // html2canvas(elementToCapture).then(canvas => {
-//       // Obtener la URL de la imagen en formato base64
-//       // const imageData = canvas.toDataURL('image/webp');
-//       const imageBlob = dataURLtoBlob(finalImage);
-//       // Preparar los datos a enviar al servidor
-//       const formData = new FormData();
-//       formData.append('image_data', imageBlob, 'uploaded_image.webp');
-//       formData.append('idPixelemos', idPixelemosValue);
-//       console.log(formData)
-//       // Realizar la solicitud POST utilizando fetch
-//           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
-//               method: 'POST',
-//               body: formData,
-//            })
-//           .then(response => {
-//               if (!response.ok) {
-//                   enableBuyButton(true)
-//                   throw new Error('Error al enviar la imagen al servidor.');
-//               }
-//               return response.json(); // Convertir la respuesta a JSON
-//           })
-//           .then(data => {
-//               console.log(data)
-//               // Manejar la respuesta del servidor
-//               if (data.success && data.publicUrl) {
-//                   console.log('URL de la imagen generada:', data.publicUrl);
-//                   document.querySelector('#imageProduct').value = data.publicUrl
-//                   allowSubmit = true;
-//                   setTimeout(() => {
-//                     productForm.submit();
-//                   }, 0);
-//               } else {
-//                   throw new Error('Error al procesar la respuesta del servidor.');
-//               }
-//           })
-//           .catch(error => {
-//               console.error('Error en la solicitud fetch:', error);
-//               allowSubmit = false;
-//               enableBuyButton(true)
-//           });
-
-//     // });
-//   } catch (error) {
-//     console.warn('Errores de captura: ' + error)
-//     enableBuyButton(true)
-//   }
-// });
-
-
 async function getFinalCaptureImage() {
   // Obtiene todos los elementos marcados para capturar
 
@@ -1702,43 +1639,30 @@ async function getFinalCaptureImage() {
   // Capturar cada elemento como PNG usando tu librería actual (dom-to-image)
   let images = [];
   for (const el of elements) {
-    const clone = el.cloneNode(true);
-
     const infoContainer = document.createElement('div');
     infoContainer.className = 'info-bottom-right';
 
     const h3Tamaño = document.createElement('h3');
-    h3Tamaño.textContent = "khjbjkhbjkhbjhb";
+    h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
     h3Tamaño.className = 'info-item';
-    
-    const h3Telefono = document.createElement('h3');
-      h3Telefono.textContent = 'Teléfono: 555-123-4567';
+    if(document.querySelector('#phone').value !== "") {
+      const h3Telefono = document.createElement('h3');
+      h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone')? document.querySelector('#phone').value : ""}`;
       h3Telefono.className = 'info-item';
-
       infoContainer.appendChild(h3Telefono);
-      infoContainer.appendChild(h3Tamaño);
+    }
+    infoContainer.appendChild(h3Tamaño);
 
-      // 3. Agregar al clon
-      clone.appendChild(infoContainer);
-      clone.classList.add('resultado-item-container');
-
-      // 4. Insertar clon en el DOM (fuera de vista)
-      // clone.style.position = 'fixed';
-      // clone.style.top = '-9999px';
-      document.body.appendChild(clone);
-
-      const dataUrl = await domtoimage.toPng(clone, {
-        quality: 1,
-        style: true,
-        filter: () => true,
-        cacheBust: true,
-        bgcolor: null
-      });
-
-      images.push(dataUrl);
-
-      document.body.removeChild(clone);
-  }
+    el.appendChild(infoContainer);
+    const dataUrl = await domtoimage.toPng(el, {
+      quality: 1,
+      style: true,
+      cacheBust: true,
+      bgcolor: null
+    });
+    images.push(dataUrl);
+    el.removeChild(infoContainer);
+    }
 
   images = images.filter(item => item !== "data:,");
 
