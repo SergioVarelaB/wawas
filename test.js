@@ -1618,7 +1618,7 @@ async function capture(event) {
 
 async function getFinalCaptureImage() {
   // Obtiene todos los elementos marcados para capturar
-
+  const scale = 2; // 2x o 3x para más calidad
   await document.fonts.ready;
   let elements = "" 
   if(isPack){
@@ -1651,7 +1651,14 @@ async function getFinalCaptureImage() {
     infoContainer.appendChild(h3Tamaño);
 
     el.appendChild(infoContainer);
+    
     const dataUrl = await domtoimage.toPng(el, {
+      width: 400 * scale,
+      height: 200 * scale,
+      style: {
+        transform: `scale(${scale})`,
+        transformOrigin: 'top left'
+      },
       quality: 1,
       style: true,
       cacheBust: true,
