@@ -1654,7 +1654,7 @@ async function getFinalCaptureImage() {
     
     const dataUrl = await domtoimage.toPng(el, {
       width: 200 * scale,
-      height: 200 * scale,
+      height: 400 * scale,
       style: {
         transform: `scale(${scale})`,
         transformOrigin: 'top left'
