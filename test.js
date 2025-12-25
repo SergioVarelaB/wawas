@@ -1559,7 +1559,11 @@ async function capture(event) {
 
   const button = event.currentTarget;
   const form = button.closest('form');
-
+  // Esconder los items de borrar charms
+  const msgBorrar = document.querySelector('.msg-borrar');
+  const borrarIcon = document.getElementById('#vaciar-collar');
+  msgBorrar.style.display = "none";
+  borrarIcon.style.display = "none";
 
   const finalImage = await getFinalCaptureImage();
   const idPixelemosInput = document.querySelector('#idPixelemos');
@@ -1621,6 +1625,7 @@ async function getFinalCaptureImage() {
   const scale = 2; // 2x o 3x para más calidad
   await document.fonts.ready;
   let elements = "" 
+  
   if(isPack){
    elements = document.querySelectorAll(".previewPack"); 
   }else{
