@@ -1653,8 +1653,8 @@ async function getFinalCaptureImage() {
     el.appendChild(infoContainer);
     
     const dataUrl = await domtoimage.toPng(el, {
-      width: 400 * scale,
-      height: 200 * scale,
+      width: 200 * scale,
+      height: 100 * scale,
       style: {
         transform: `scale(${scale})`,
         transformOrigin: 'top left'
