@@ -1656,13 +1656,23 @@ async function getFinalCaptureImage() {
     infoContainer.appendChild(h3Tamaño);
 
     el.appendChild(infoContainer);
+    const styles = window.getComputedStyle(el);
     
     const dataUrl = await domtoimage.toPng(el, {
       width: 240 * scale,
       height: 105 * scale,
       style: {
         transform: `scale(${scale})`,
-        transformOrigin: 'top left'
+        transformOrigin: 'top left',
+        color: styles.color,
+        fontFamily: styles.fontFamily,
+        fontSize: styles.fontSize,
+        fontWeight: styles.fontWeight,
+        lineHeight: styles.lineHeight,
+
+        whiteSpace: 'nowrap',     // 🔥 evita el salto de línea
+        display: 'flex',
+        alignItems: 'center',
       },
       quality: 1,
       style: true,
