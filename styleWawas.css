@@ -200,7 +200,6 @@
 }
 .collar-container {
   background-color: #FFFFFF;
-  background-color: #FF0000;
   height: 200px;
   display: flex;
   justify-content: center;  
@@ -1122,7 +1121,7 @@ span.medidas {
     /* 2. Diseño y Legibilidad */
     background: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente para mejor lectura */
     color: white; /* Color del texto */
-    padding: 15px 25px; /* Un poco de padding para que no se pegue al borde */
+    padding: 25px 35px; /* Un poco de padding para que no se pegue al borde */
     /* 3. Flexbox para organizar el texto */
     display: flex;
     flex-direction: column; 
