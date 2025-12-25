@@ -1561,7 +1561,7 @@ async function capture(event) {
   const form = button.closest('form');
   // Esconder los items de borrar charms
   const msgBorrar = document.querySelector('.msg-borrar');
-  const borrarIcon = document.getElementById('#vaciar-collar');
+  const borrarIcon = document.getElementById('vaciar-collar');
   msgBorrar.style.display = "none";
   borrarIcon.style.display = "none";
 
