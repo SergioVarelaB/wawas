@@ -1660,12 +1660,14 @@ async function getFinalCaptureImage() {
 
     const clone = el.cloneNode(true);
 
-    clone.style.color = '#ffffff';
+    clone.style.color = '#ff0fe7ff';
     clone.style.whiteSpace = 'nowrap';
     clone.style.fontFamily = styles.fontFamily;
     clone.style.fontSize = styles.fontSize;
     clone.style.fontWeight = styles.fontWeight;
     clone.style.lineHeight = styles.lineHeight;
+    
+    document.body.appendChild(clone);
     
     const dataUrl = await domtoimage.toPng(clone, {
       width: 240 * scale,
