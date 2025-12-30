@@ -1121,15 +1121,15 @@ span.medidas {
 .info-bottom-right {
     /* 1. Posicionamiento absoluto */
     position: absolute;
-    bottom: 0; /* Lo fija en la parte inferior del .resultado-item-container */
-    right: 0;  /* Lo fija en la parte derecha del .resultado-item-container */
+    top: 0; /* Lo fija en la parte inferior del .resultado-item-container */
+    left: 0;  /* Lo fija en la parte derecha del .resultado-item-container */
     /* 2. Diseño y Legibilidad */
     background: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente para mejor lectura */
     color: white; /* Color del texto */
     padding: 15px 25px; /* Un poco de padding para que no se pegue al borde */
     /* 3. Flexbox para organizar el texto */
     display: flex;
-    flex-direction: column; 
+    flex-direction: row; 
     align-items: baseline;
     z-index: 10; 
 }
