@@ -1657,24 +1657,21 @@ async function getFinalCaptureImage() {
 
     el.appendChild(infoContainer);
     const styles = window.getComputedStyle(el);
-
-    const clone = el.cloneNode(true);
-
-    clone.style.color = '#ff0fe7ff';
-    clone.style.whiteSpace = 'nowrap';
-    clone.style.fontFamily = styles.fontFamily;
-    clone.style.fontSize = styles.fontSize;
-    clone.style.fontWeight = styles.fontWeight;
-    clone.style.lineHeight = styles.lineHeight;
     
-    document.body.appendChild(clone);
-    
-    const dataUrl = await domtoimage.toPng(clone, {
+    const dataUrl = await domtoimage.toPng(el, {
       width: 240 * scale,
       height: 105 * scale,
       style: {
         transform: `scale(${scale})`,
-        transformOrigin: 'top left'
+        transformOrigin: 'top left',
+        color: "#ff00FF",
+        fontFamily: styles.fontFamily,
+        fontSize: styles.fontSize,
+        fontWeight: styles.fontWeight,
+        lineHeight: styles.lineHeight,
+        whiteSpace: 'nowrap',     // 🔥 evita el salto de línea
+        display: 'flex',
+        alignItems: 'center',
       },
       quality: 1,
       style: true,
@@ -1683,7 +1680,6 @@ async function getFinalCaptureImage() {
     });
     images.push(dataUrl);
     el.removeChild(infoContainer);
-    clone.remove()
     }
 
   images = images.filter(item => item !== "data:,");
