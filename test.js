@@ -1657,22 +1657,22 @@ async function getFinalCaptureImage() {
 
     el.appendChild(infoContainer);
     const styles = window.getComputedStyle(el);
+
+    const clone = el.cloneNode(true);
+
+    clone.style.color = '#ffffff';
+    clone.style.whiteSpace = 'nowrap';
+    clone.style.fontFamily = styles.fontFamily;
+    clone.style.fontSize = styles.fontSize;
+    clone.style.fontWeight = styles.fontWeight;
+    clone.style.lineHeight = styles.lineHeight;
     
-    const dataUrl = await domtoimage.toPng(el, {
-      width: el.offsetWidth * 2,
-      height: el.offsetHeight * 2,
+    const dataUrl = await domtoimage.toPng(clone, {
+      width: 240 * scale,
+      height: 105 * scale,
       style: {
         transform: `scale(${scale})`,
-        transformOrigin: 'top left',
-        color: "#ff00FF",
-        fontFamily: styles.fontFamily,
-        fontSize: styles.fontSize,
-        fontWeight: styles.fontWeight,
-        lineHeight: styles.lineHeight,
-
-        whiteSpace: 'nowrap',     // 🔥 evita el salto de línea
-        display: 'flex',
-        alignItems: 'center',
+        transformOrigin: 'top left'
       },
       quality: 1,
       style: true,
@@ -1681,6 +1681,7 @@ async function getFinalCaptureImage() {
     });
     images.push(dataUrl);
     el.removeChild(infoContainer);
+    clone.remove()
     }
 
   images = images.filter(item => item !== "data:,");
