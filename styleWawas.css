@@ -1108,8 +1108,11 @@ span.medidas {
 .info-item {
     font-size: 12px; /* Reducir el tamaño de la fuente */
     margin: 0; /* Quitar márgenes */
-    color: #00AC0F;
-    white-space: 'nowrap';
+    color: #FFFFFF;
+    white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    line-height: 1;
     line-height: 1.2;
     font-weight: bold; /* Hacerlo más legible */
 }
