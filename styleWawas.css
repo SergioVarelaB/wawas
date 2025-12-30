@@ -1129,7 +1129,7 @@ span.medidas {
     padding: 15px 25px; /* Un poco de padding para que no se pegue al borde */
     /* 3. Flexbox para organizar el texto */
     display: flex;
-    flex-direction: row; 
+    flex-direction: column; 
     align-items: baseline;
     z-index: 10; 
 }
