@@ -1229,8 +1229,13 @@ function addCartPropertiesField() {
   let idfielPhone = document.createElement('input')
   idfielPhone.setAttribute('type', 'hidden')
   idfielPhone.setAttribute('name', 'properties[telefono]')
-  idfielPhone.setAttribute('id', 'phone') 
+  idfielPhone.setAttribute('id', 'telefono') 
   document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfielPhone, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
+  let idfieldSize = document.createElement('input')
+  idfieldSize.setAttribute('type', 'hidden')
+  idfieldSize.setAttribute('name', 'properties[tamaño]')
+  idfieldSize.setAttribute('id', 'size') 
+  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldSize, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
   let field = document.createElement('input')
   field.setAttribute('type', 'hidden')
   field.setAttribute('name', 'properties[_charms]')
@@ -1647,11 +1652,14 @@ async function getFinalCaptureImage() {
     const h3Tamaño = document.createElement('h3');
     h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
     h3Tamaño.className = 'info-item';
+    // document.querySelector('#charmsForm')
+    document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
     if(document.querySelector('#phone').value !== "") {
       const h3Telefono = document.createElement('h3');
       h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone')? document.querySelector('#phone').value : ""}`;
       h3Telefono.className = 'info-item';
       infoContainer.appendChild(h3Telefono);
+      document.querySelector('#telefono').value = document.querySelector('#phone')? document.querySelector('#phone').value : ""
     }
     infoContainer.appendChild(h3Tamaño);
 
