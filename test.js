@@ -1659,12 +1659,12 @@ async function getFinalCaptureImage() {
     const styles = window.getComputedStyle(el);
     
     const dataUrl = await domtoimage.toPng(el, {
-      width: 240 * scale,
-      height: 105 * scale,
+      width: el.offsetWidth * 2,
+      height: el.offsetHeight * 2,
       style: {
         transform: `scale(${scale})`,
         transformOrigin: 'top left',
-        color: styles.color,
+        color: "#ff00FF",
         fontFamily: styles.fontFamily,
         fontSize: styles.fontSize,
         fontWeight: styles.fontWeight,
