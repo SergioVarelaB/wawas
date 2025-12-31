@@ -1561,6 +1561,7 @@ async function capture(event) {
   
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
+  enableBuyButton(false)
 
   const button = event.currentTarget;
   const form = button.closest('form');
@@ -1602,12 +1603,14 @@ async function capture(event) {
               console.log(data)
               // Manejar la respuesta del servidor
               if (data.success && data.publicUrl) {
+                  enableBuyButton(true)
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
                   allowSubmit = true;
                   setTimeout(() => {
                     button.click();
                   }, 0);
+                  //set To zero
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
@@ -1672,12 +1675,11 @@ async function getFinalCaptureImage() {
       style: {
         transform: `scale(${scale})`,
         transformOrigin: 'top left',
-        color: "#ff00FF",
         fontFamily: styles.fontFamily,
         fontSize: styles.fontSize,
         fontWeight: styles.fontWeight,
         lineHeight: styles.lineHeight,
-        whiteSpace: 'nowrap',     // 🔥 evita el salto de línea
+        whiteSpace: 'nowrap',
         display: 'flex',
         alignItems: 'center',
       },
