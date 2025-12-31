@@ -1225,6 +1225,7 @@ function enableAccordion() {
         console.log(` ${$steps[currentStep]?.keyboardType} o  ${(!currentSlug.includes('gummies'))}`)
         if(($steps[currentStep]?.keyboardType && $steps[currentStep].keyboardType !== "gummies") || (!currentSlug.includes('gummies'))){
           console.log(($steps[currentStep]?.keyboardType && $steps[currentStep].keyboardType !== "gummies") || (!currentSlug.includes('gummies')))
+          allowSubmit = false;
           emptyCharms()
         }
         firstClick = false
@@ -1633,7 +1634,6 @@ async function capture(event) {
                     button.click();
                   }, 0);
                   pointZero()
-                  //set To zero
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
               }
@@ -1649,7 +1649,6 @@ async function capture(event) {
     console.warn('Errores de captura: ' + error)
     enableBuyButton(true)
   }
-  allowSubmit = false;
 }
 
 async function getFinalCaptureImage() {
