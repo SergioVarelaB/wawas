@@ -1558,10 +1558,10 @@ function getIdPixelemos() {
 /*Capturar pantalla y enviarla */
 async function capture(event) {
   if (allowSubmit) return;
+  enableBuyButton(false)
   
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
-  enableBuyButton(false)
 
   const button = event.currentTarget;
   const form = button.closest('form');
