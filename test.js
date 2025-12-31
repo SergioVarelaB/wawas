@@ -60,6 +60,31 @@ let $steps = []
 let firstClick = true
 let allowSubmit = false;
 
+function pointZero(){
+  $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+  isPack = false
+  verbose = false
+  wawasContainer
+  currentColor = 4
+  phoneNumber = ""
+  phonecharm = false
+  maxCharms = 9
+  minCharms = 5
+  maxGummys = 7
+  minGummys = 7
+  collarSize = 'XS'
+  enabledKeyboard = false
+  $gummiesArray = []
+  packs = []
+  currentStep = 0
+  type = 'charms'
+  $steps = []
+  firstClick = true
+  allowSubmit = false;
+
+  customizer(idProduct)
+
+}
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div class="accordion-item active">
       <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
@@ -1610,6 +1635,7 @@ async function capture(event) {
                   setTimeout(() => {
                     button.click();
                   }, 0);
+                  pointZero()
                   //set To zero
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
