@@ -1153,7 +1153,7 @@ function switchCustomizer(id, isFirst = true){
       // document.querySelector(`input[value='5']+label`).click()
       if (isFirst) enableBuyButton(false)
       break;
-    case 9141063024873: //collar-de-charms-conffeti
+    case 8582499074198: //collar-de-charms-conffeti
       myLog(currentSlug)
       $charmsArray = [['C', 22], ['H', 22], ['A', 22], ['R', 22], ['M', 22], ['S', 22], ['1', 22], ['2', 22], ['#', 22]]
       wawasContainer.innerHTML = charmsKeyboardHTML
