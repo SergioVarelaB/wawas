@@ -61,7 +61,7 @@ let firstClick = true
 let allowSubmit = false;
 
 function pointZero(){
-  $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+  // $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
   isPack = false
   verbose = false
   wawasContainer
@@ -80,7 +80,7 @@ function pointZero(){
   type = 'charms'
   $steps = []
   firstClick = true
-
+  switchCustomizer(idProduct)
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div class="accordion-item active">
@@ -880,6 +880,16 @@ function customizer(id) {
   document.querySelector('#charmsForm').value = ""
 
   //cargar teclado personalizado segun id
+  switchCustomizer(id)
+
+  if(!isPack){ //isPack
+    enableAccordion();
+  }
+  // nextBtn()
+}
+
+function switchCustomizer(id){
+
   switch (id) {
     case 7340949438614: //collar-de-charms
       myLog(currentSlug)
@@ -1175,10 +1185,6 @@ function customizer(id) {
     default:
       break;
   }
-  if(!isPack){ //isPack
-    enableAccordion();
-  }
-  // nextBtn()
 }
 
 //Shared functions
