@@ -80,7 +80,7 @@ function pointZero(){
   type = 'charms'
   $steps = []
   firstClick = true
-  switchCustomizer(idProduct)
+  switchCustomizer(idProduct, false)
   enableAccordion()
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
@@ -889,7 +889,7 @@ function customizer(id) {
   // nextBtn()
 }
 
-function switchCustomizer(id){
+function switchCustomizer(id, isFirst = true){
 
   switch (id) {
     case 7340949438614: //collar-de-charms
@@ -907,7 +907,7 @@ function switchCustomizer(id){
       // document.querySelector(`input[value='5']+label`).click()
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       document.querySelector('#charmsForm').value = ""
       break;
     case 9117785129193: //collar-de-charms
@@ -925,7 +925,7 @@ function switchCustomizer(id){
       // document.querySelector(`input[value='5']+label`).click()
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       document.querySelector('#charmsForm').value = ""
       break;
     case 7412912783510: //collar-de-charms-mini
@@ -949,7 +949,7 @@ function switchCustomizer(id){
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       changeKeysColor('color11')
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       break;
     case 7820838174870: //charms-extra-xs
       myLog(currentSlug)
@@ -971,7 +971,7 @@ function switchCustomizer(id){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#personalize').innerHTML="Perzonaliza tus charms"
       changeCollarSize('xs', false)
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       changeKeysColor('color1')
       minCharms = 1
       maxCharms = 100
@@ -998,7 +998,7 @@ function switchCustomizer(id){
       document.querySelector('#size-title').innerHTML="01: Eligue el tamaño de tus charms"
       document.querySelector('#personalize').innerHTML="02: Perzonaliza tus charms"
       changeCollarSize('sml', false)
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 1
       maxCharms = 100
@@ -1023,7 +1023,7 @@ function switchCustomizer(id){
       document.querySelector('.elije-charms').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       changeCollarSize('s', false)
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
@@ -1052,7 +1052,7 @@ function switchCustomizer(id){
       document.querySelector('#size-title').classList.remove('accordion-header')
       document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
       changeCollarSize('s', false)
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
@@ -1080,7 +1080,7 @@ function switchCustomizer(id){
       document.querySelector('#size-title').classList.remove('accordion-header')
       document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
       changeCollarSize('s', false)
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
@@ -1108,7 +1108,7 @@ function switchCustomizer(id){
       document.querySelector('#size-title').classList.remove('accordion-header')
       document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
       changeCollarSize('s', false)
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 6
       maxCharms = 6
@@ -1150,7 +1150,7 @@ function switchCustomizer(id){
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color10')
       // document.querySelector(`input[value='5']+label`).click()
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       break;
     case 9141063024873: //collar-de-charms-conffeti
       myLog(currentSlug)
@@ -1165,7 +1165,7 @@ function switchCustomizer(id){
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color22')
       // document.querySelector(`input[value='5']+label`).click()
-      enableBuyButton(false)
+      if (isFirst) enableBuyButton(false)
       break;  
     case 9117784867049: //collar-de-gummies
       myLog('Inicializando collar de gummys')
