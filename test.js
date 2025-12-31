@@ -80,7 +80,6 @@ function pointZero(){
   type = 'charms'
   $steps = []
   firstClick = true
-  allowSubmit = false;
 
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
@@ -1650,6 +1649,7 @@ async function capture(event) {
     console.warn('Errores de captura: ' + error)
     enableBuyButton(true)
   }
+  allowSubmit = false;
 }
 
 async function getFinalCaptureImage() {
