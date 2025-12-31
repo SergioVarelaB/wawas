@@ -82,8 +82,6 @@ function pointZero(){
   firstClick = true
   allowSubmit = false;
 
-  customizer(idProduct)
-
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div class="accordion-item active">
