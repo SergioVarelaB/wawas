@@ -12,6 +12,7 @@ const instances = [
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 9141063024873, class: 'collar-de-charms-conffetti' }, // confeti
+  { id: 8582499074198, class: 'collar-de-charms-conffetti' }, // confeti 
   { id: 9120268222697, class: 'packs' }, // packs
   { id: 8289135952022, class: 'llavero-de-charms' },
 ];
