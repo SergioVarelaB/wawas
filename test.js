@@ -81,6 +81,7 @@ function pointZero(){
   $steps = []
   firstClick = true
   switchCustomizer(idProduct)
+  enableAccordion()
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div class="accordion-item active">
