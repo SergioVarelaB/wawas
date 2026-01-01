@@ -1165,6 +1165,8 @@ function switchCustomizer(id, isFirst = true){
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color22')
+      //detectar el numero de digitos del telefono
+      document.querySelector('#phone').addEventListener('input', updateCharms)
       // document.querySelector(`input[value='5']+label`).click()
       if (isFirst) enableBuyButton(false)
       break;  
@@ -1304,7 +1306,7 @@ function updateCharms(caller) {
   myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
   document.querySelector('#charmsForm').value = displayCharms($charmsArray)
   let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : ' No aplica'
-  let general = `<div style="padding:16px">TamaÃ±o del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono}</div>`
+  let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono}</div>`
   if ($gummiesArray.length !== 0) {
     document.querySelector('#charmsForm').value = general + displayCharms($charmsArray) + displayGummies($gummiesArray)
   } else {
