@@ -588,8 +588,8 @@ input[id^='color']{
 }
 
 .color-picker {
-  width: 5rem;
-  aspect-ratio: 1 / 1;      
+  width: 3.3rem;
+  aspect-ratio: 1 / 1;
   border-radius: 8px;
   border: 1px solid rgba(0,0,0,0.12);
   box-shadow:
