@@ -406,7 +406,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
       </div>
       </div>
       <div class="accordion-item active">
-        <button type="button" id="personalize" class="accordion-header collar-title"> 02: Comienza a personalizar tus Gummies!</button>
+        <button type="button" id="personalize" class="accordion-header collar-title"> 02: Comienza a personalizar tus 7 Gummies!</button>
         <div class="accordion-content">
           <div id="keyboard-container">
             <div class="color-keyboard">
@@ -1175,6 +1175,7 @@ function switchCustomizer(id, isFirst = true){
       wawasContainer.innerHTML = gummysKeyboardHTML
       window.$gummyColor = document.querySelector('#values-gummys-color')
       window.$qtyGummies = document.querySelector('#values-gummys-number')
+      // document.querySelector('#collar-title').innerHTML = "02: Elije tus 7 gummies"
       $gummyColor.value = 'rojo'
       changeGummysCollarSize('xs')
       break;
@@ -1545,13 +1546,13 @@ function deleteGummy(index) {
   renderGummies($gummiesArray)
   myLog(index + ' eliminado')
   $qtyGummies.value = $gummiesArray.length
-  updateGummys('deleteGummy')
-  // enableBuyButton(true)
+  updateGummys('deleteGummy');
+  ($gummiesArray.length >= maxGummys && $gummiesArray.length <= minGummys) ? enableBuyButton(true) : enableBuyButton(false)
 }
 
 function updateGummys(caller) {
   myLog(caller)
-  document.querySelector('#charmsForm').value = `<div style="padding:16px">TamaÃ±o del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
+  document.querySelector('#charmsForm').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
 }
 
 function changeGummiesColor(color) {
