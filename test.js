@@ -1546,7 +1546,7 @@ function deleteGummy(index) {
   myLog(index + ' eliminado')
   $qtyGummies.value = $gummiesArray.length
   updateGummys('deleteGummy')
-  enableBuyButton(true)
+  // enableBuyButton(true)
 }
 
 function updateGummys(caller) {
