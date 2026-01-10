@@ -174,7 +174,6 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
         <div id="color14" class="color-picker color14"  onclick="changeKeysColor('color14')">&nbsp;</div>
         <div id="color15" class="color-picker color15"  onclick="changeKeysColor('color15')">&nbsp;</div>
         <div id="color16" class="color-picker color16"  onclick="changeKeysColor('color16')">&nbsp;</div>
-        <div id="color23" class="color-picker color23"  onclick="changeKeysColor('color23')">&nbsp;</div> 
         <div id="color17" class="color-picker color17"  onclick="changeKeysColor('color17')">&nbsp;</div>
         <div id="color18" class="color-picker color18"  onclick="changeKeysColor('color18')">&nbsp;</div>
         <div id="color19" class="color-picker color19"  onclick="changeKeysColor('color19')">&nbsp;</div>
@@ -996,7 +995,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color22').classList.remove('hidden') /*Activar charms Conffetti */
-      document.querySelector('#color23').classList.add('hidden') /*Desactivar color aqua*/
+      // document.querySelector('#color23').classList.add('hidden') /*Desactivar color aqua*/
       document.querySelector('.medidas').style.display = "none"
       document.querySelector('#size-title').innerHTML="01: Eligue el tamaño de tus charms"
       document.querySelector('#personalize').innerHTML="02: Perzonaliza tus charms"
