@@ -96,7 +96,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
           <div class="size-button size-l" onclick="changeCollarSize('l')">L<span class="medidas">40-55cm</span></div>
           <div class="size-button size-xl" onclick="changeCollarSize('xl')">XL<span class="medidas">50-66cm</span>
           </div>
-          <div class="size-button size-sml" onclick="changeCollarSize('sml')">S/M/L</div>
+          <div class="size-button size-sml" onclick="changeCollarSize('sml')">S/M/L/XL</div>
         </div>
       </div>
     </div>
