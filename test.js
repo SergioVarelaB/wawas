@@ -969,7 +969,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "flex"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
-      document.querySelector('#personalize').innerHTML="Perzonaliza tus charms"
+      document.querySelector('#personalize').innerHTML="Personaliza tus charms"
       changeCollarSize('xs', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color1')
@@ -998,12 +998,12 @@ function switchCustomizer(id, isFirst = true){
       // document.querySelector('#color23').classList.add('hidden') /*Desactivar color aqua*/
       document.querySelector('.medidas').style.display = "none"
       document.querySelector('#size-title').innerHTML="01: Eligue el tamaño de tus charms"
-      document.querySelector('#personalize').innerHTML="02: Perzonaliza tus charms"
+      document.querySelector('#personalize').innerHTML="02: Personaliza tus charms (hasta 19 pz)"
       changeCollarSize('sml', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 1
-      maxCharms = 100
+      maxCharms = 19
       break;
     case 7804532261014: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
@@ -1013,7 +1013,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-title').innerHTML = "01: Elije el tamaño de tu pechera"
-      document.querySelector('#personalize').innerHTML="02: Perzonaliza tus 15 charms"
+      document.querySelector('#personalize').innerHTML="02: Personaliza tus 15 charms"
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
@@ -1052,7 +1052,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
+      document.querySelector('#personalize').innerHTML="01: Personaliza tus charms"
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
@@ -1080,7 +1080,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
+      document.querySelector('#personalize').innerHTML="01: Personaliza tus charms"
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
@@ -1108,7 +1108,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Perzonaliza tus charms"
+      document.querySelector('#personalize').innerHTML="01: Personaliza tus charms"
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
@@ -1831,7 +1831,7 @@ function nextBtn(){
     var charmsGummies = 0
     if ($steps[currentStep].keyboardType == "charms") { charmsGummies = $charmsArray.length } else {charmsGummies = $gummiesArray.length}
     if(firstClick) {
-      btnSiguiente.innerHTML = `Perzonaliza tus ${$steps[currentStep].keyboardType}`
+      btnSiguiente.innerHTML = `Personaliza tus ${$steps[currentStep].keyboardType}`
       btnSiguiente.setAttribute('disabled', true)
     }else{
       if ($steps[currentStep].minCharms - charmsGummies > 0) {
