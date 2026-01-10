@@ -995,6 +995,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('#color22').classList.remove('hidden') /*Activar charms Conffetti */
       document.querySelector('.medidas').style.display = "none"
       document.querySelector('#size-title').innerHTML="01: Eligue el tamaño de tus charms"
       document.querySelector('#personalize').innerHTML="02: Perzonaliza tus charms"
