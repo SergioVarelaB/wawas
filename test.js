@@ -403,6 +403,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
           </svg>
         </div>
       </div>
+      <div class="msg-borrar"> Da click a la figura para borrar un Gummie</div>
       </div>
       <div class="accordion-item active">
         <button type="button" id="personalize" class="accordion-header collar-title"> 02: Comienza a personalizar tus 7 Gummies!</button>
@@ -1626,10 +1627,8 @@ async function capture(event) {
   
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
-
-  const button = event.target.closest("button[id^='ProductSubmitButton']");
-
-  const form = button.closest('form');
+  
+  const form = event.currentTarget.closest('form');
   // Esconder los items de borrar charms
   const msgBorrar = document.querySelector('.msg-borrar');
   const borrarIcon = document.getElementById('vaciar-collar');
@@ -1672,9 +1671,9 @@ async function capture(event) {
                   console.log('URL de la imagen generada:', data.publicUrl);
                   document.querySelector('#imageProduct').value = data.publicUrl
                   allowSubmit = true;
-                  setTimeout(() => {
-                    button.click();
-                  }, 0);
+                  if (form) {
+                    form.requestSubmit();
+                  }
                   pointZero()
               } else {
                   throw new Error('Error al procesar la respuesta del servidor.');
@@ -1717,21 +1716,24 @@ async function getFinalCaptureImage() {
     const infoContainer = document.createElement('div');
     infoContainer.className = 'info-bottom-right';
 
-    const h3Tamaño = document.createElement('h3');
-    h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
-    h3Tamaño.className = 'info-item';
-    // document.querySelector('#charmsForm')
-    document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
-    if(document.querySelector('#phone').value !== "") {
-      const h3Telefono = document.createElement('h3');
-      h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone')? document.querySelector('#phone').value : ""}`;
-      h3Telefono.className = 'info-item';
-      infoContainer.appendChild(h3Telefono);
-      document.querySelector('#telefono').value = document.querySelector('#phone')? document.querySelector('#phone').value : ""
+    if(!isPack){
+      const h3Tamaño = document.createElement('h3');
+      h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
+      h3Tamaño.className = 'info-item';
+      // document.querySelector('#charmsForm')
+      document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
+      if(document.querySelector('#phone').value !== "") {
+        const h3Telefono = document.createElement('h3');
+        h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone')? document.querySelector('#phone').value : ""}`;
+        h3Telefono.className = 'info-item';
+        infoContainer.appendChild(h3Telefono);
+        document.querySelector('#telefono').value = document.querySelector('#phone')? document.querySelector('#phone').value : ""
+      }
+      infoContainer.appendChild(h3Tamaño);
     }
-    infoContainer.appendChild(h3Tamaño);
 
     el.appendChild(infoContainer);
+    
     const styles = window.getComputedStyle(el);
     
     const dataUrl = await domtoimage.toPng(el, {
