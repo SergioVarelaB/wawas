@@ -976,7 +976,7 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 1
       maxCharms = 100
       break;
-    case 7319719280790: //charms-extra
+    case 9117785129193: //charms-extra
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1598,7 +1598,8 @@ async function capture(event) {
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
 
-  const button = event.currentTarget;
+  const button = event.target.closest("button[id^='ProductSubmitButton']");
+
   const form = button.closest('form');
   // Esconder los items de borrar charms
   const msgBorrar = document.querySelector('.msg-borrar');
