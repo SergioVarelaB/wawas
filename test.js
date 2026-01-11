@@ -1005,6 +1005,35 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 1
       maxCharms = 19
       break;
+    case 7319719280790: //charms-extra
+      myLog(currentSlug)
+      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+      wawasContainer.innerHTML = charmsKeyboardHTML
+      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      document.querySelector('.size-s').style.display = "none"
+      document.querySelector('.size-m').style.display = "none"
+      document.querySelector('.size-l').style.display = "none"
+      document.querySelector('.size-xl').style.display = "none"
+      /*document.querySelector('#size-title').style.display="none"          
+      document.querySelector('#size-container').style.display="none"          */
+      document.querySelector('.collar-title').style.display = "none"
+      document.querySelector('.color-collar').style.display = "none"
+      document.querySelector('.collar').style.display = "none"
+      document.querySelector('.elije-charms').style.display = "none"
+      document.querySelector('#charm-container').classList.add('charms-sueltos')
+      document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('#color22').classList.remove('hidden') /*Activar charms Conffetti */
+      // document.querySelector('#color23').classList.add('hidden') /*Desactivar color aqua*/
+      document.querySelector('.medidas').style.display = "none"
+      document.querySelector('#size-title').innerHTML="01: Elige el tamaño de tus charms"
+      document.querySelector('#personalize').innerHTML="02: Personaliza tus charms (hasta 19 pz)"
+      changeCollarSize('sml', false)
+      if (isFirst) enableBuyButton(false)
+      changeKeysColor('color11')
+      minCharms = 1
+      maxCharms = 19
+      break;
     case 7804532261014: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
       $charmsArray = [['P', 11], ['E', 12], ['C', 13], ['H', 14], ['E', 15], ['R', 16], ['A', 17], ['2', 18], ['8', 19]]
