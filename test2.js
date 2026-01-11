@@ -1713,24 +1713,27 @@ async function getFinalCaptureImage() {
   // Capturar cada elemento como PNG usando tu librería actual (dom-to-image)
   let images = [];
   for (const el of elements) {
-    const infoContainer = document.createElement('div');
-    infoContainer.className = 'info-bottom-right';
 
-    const h3Tamaño = document.createElement('h3');
-    h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
-    h3Tamaño.className = 'info-item';
-    // document.querySelector('#charmsForm')
-    document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
-    if(document.querySelector('#phone').value !== "") {
-      const h3Telefono = document.createElement('h3');
-      h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone')? document.querySelector('#phone').value : ""}`;
-      h3Telefono.className = 'info-item';
-      infoContainer.appendChild(h3Telefono);
-      document.querySelector('#telefono').value = document.querySelector('#phone')? document.querySelector('#phone').value : ""
+    if(!isPack){
+      const infoContainer = document.createElement('div');
+      infoContainer.className = 'info-bottom-right';
+      const h3Tamaño = document.createElement('h3');
+      h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
+      h3Tamaño.className = 'info-item';
+      // document.querySelector('#charmsForm')
+      document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
+      if(document.querySelector('#phone').value !== "") {
+        const h3Telefono = document.createElement('h3');
+        h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone')? document.querySelector('#phone').value : ""}`;
+        h3Telefono.className = 'info-item';
+        infoContainer.appendChild(h3Telefono);
+        document.querySelector('#telefono').value = document.querySelector('#phone')? document.querySelector('#phone').value : ""
+      }
+      infoContainer.appendChild(h3Tamaño);
+    
+      el.appendChild(infoContainer);
     }
-    infoContainer.appendChild(h3Tamaño);
-
-    el.appendChild(infoContainer);
+    
     const styles = window.getComputedStyle(el);
     
     const dataUrl = await domtoimage.toPng(el, {
