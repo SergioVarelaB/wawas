@@ -1730,7 +1730,7 @@ async function getFinalCaptureImage() {
         document.querySelector('#telefono').value = document.querySelector('#phone')? document.querySelector('#phone').value : ""
       }
       infoContainer.appendChild(h3Tamaño);
-    
+
       el.appendChild(infoContainer);
     }
     
@@ -1756,7 +1756,7 @@ async function getFinalCaptureImage() {
       bgcolor: null
     });
     images.push(dataUrl);
-    el.removeChild(infoContainer);
+    if(!isPack){el.removeChild(infoContainer);}
     }
 
   images = images.filter(item => item !== "data:,");
