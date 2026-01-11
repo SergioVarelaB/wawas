@@ -403,6 +403,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
           </svg>
         </div>
       </div>
+      <div class="msg-borrar"> Da click a la figura para borrar un Gummie</div>
       </div>
       <div class="accordion-item active">
         <button type="button" id="personalize" class="accordion-header collar-title"> 02: Comienza a personalizar tus 7 Gummies!</button>
@@ -1626,8 +1627,6 @@ async function capture(event) {
   
   // Seleccionar el elemento que deseas capturar
   event.preventDefault();
-
-  const button = event.target.closest("button[id^='ProductSubmitButton']");
   
   const form = event.currentTarget.closest('form');
   // Esconder los items de borrar charms
