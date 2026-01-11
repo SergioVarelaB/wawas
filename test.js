@@ -997,7 +997,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#color22').classList.remove('hidden') /*Activar charms Conffetti */
       // document.querySelector('#color23').classList.add('hidden') /*Desactivar color aqua*/
       document.querySelector('.medidas').style.display = "none"
-      document.querySelector('#size-title').innerHTML="01: Eligue el tamaño de tus charms"
+      document.querySelector('#size-title').innerHTML="01: Elige el tamaño de tus charms"
       document.querySelector('#personalize').innerHTML="02: Personaliza tus charms (hasta 19 pz)"
       changeCollarSize('sml', false)
       if (isFirst) enableBuyButton(false)
