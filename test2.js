@@ -1713,10 +1713,10 @@ async function getFinalCaptureImage() {
   // Capturar cada elemento como PNG usando tu librería actual (dom-to-image)
   let images = [];
   for (const el of elements) {
+    const infoContainer = document.createElement('div');
+    infoContainer.className = 'info-bottom-right';
 
     if(!isPack){
-      const infoContainer = document.createElement('div');
-      infoContainer.className = 'info-bottom-right';
       const h3Tamaño = document.createElement('h3');
       h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
       h3Tamaño.className = 'info-item';
@@ -1730,9 +1730,9 @@ async function getFinalCaptureImage() {
         document.querySelector('#telefono').value = document.querySelector('#phone')? document.querySelector('#phone').value : ""
       }
       infoContainer.appendChild(h3Tamaño);
-
-      el.appendChild(infoContainer);
     }
+    
+    el.appendChild(infoContainer);
     
     const styles = window.getComputedStyle(el);
     
@@ -1756,7 +1756,7 @@ async function getFinalCaptureImage() {
       bgcolor: null
     });
     images.push(dataUrl);
-    if(!isPack){el.removeChild(infoContainer);}
+    el.removeChild(infoContainer);
     }
 
   images = images.filter(item => item !== "data:,");
