@@ -85,7 +85,7 @@ function pointZero(){
   enableAccordion()
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
-    <div class="accordion-item active">
+    <div id="size-container-acordion" class="accordion-item active">
       <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
       <div class="accordion-content">
         <div id="size-container">
@@ -1135,10 +1135,11 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.color-collar').style.display = "none"
       document.querySelector('.collar').style.display = "none"
       document.querySelector('.elije-charms').style.display = "none"
+      document.querySelector('#size-container-acordion').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu llavero (6 charms)" 
+      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu llavero \n (6 charms)" 
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
@@ -1717,8 +1718,14 @@ async function getFinalCaptureImage() {
     infoContainer.className = 'info-bottom-right';
 
     if(!isPack){
+      const textoTamanio = ""
+      if(idProduct != 8289135952022) {
+        textoTamanio = `Tamaño : ${document.querySelector('#values-collar-size').value}`; 
+      }else {
+        textoTamanio = `Tamaño : llavero`; 
+      }
       const h3Tamaño = document.createElement('h3');
-      h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
+      h3Tamaño.textContent = textoTamanio
       h3Tamaño.className = 'info-item';
       // document.querySelector('#charmsForm')
       document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
