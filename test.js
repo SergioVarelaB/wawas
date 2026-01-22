@@ -1718,7 +1718,7 @@ async function getFinalCaptureImage() {
     infoContainer.className = 'info-bottom-right';
 
     if(!isPack){
-      const textoTamanio = ""
+      let textoTamanio = ""
       if(idProduct != 8289135952022) {
         textoTamanio = `Tamaño : ${document.querySelector('#values-collar-size').value}`; 
       }else {
