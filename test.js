@@ -1449,6 +1449,9 @@ function deletePhone() {
 
 function changeCollarSize(size, update = true) {
   console.log(size)
+  if (currentSlug == "llavero-de-charms") {
+    document.querySelector('#values-collar-size').value = 'llavero'
+  }
   document.querySelector('#values-collar-size').value = size;
   removeActive();
   document.querySelector('.size-' + size).classList.add('active')
