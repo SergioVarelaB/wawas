@@ -1139,7 +1139,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu llavero \n (6 charms)" 
+      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu llavero <br> (6 charms)" 
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
