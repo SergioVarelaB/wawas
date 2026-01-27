@@ -1453,7 +1453,6 @@ function changeCollarSize(size, update = true) {
   document.querySelector('#values-collar-size').value = size;
   removeActive();
   document.querySelector('.size-' + size).classList.add('active')
-  if (size == 'sml') document.querySelector(`input[value='normal']+label`).click()
   try {
     document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
   } catch (error) {
