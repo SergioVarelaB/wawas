@@ -4,7 +4,7 @@ const instances = [
   { id: 7340949438614, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
-  { id: 7319719280790, class: 'charms-extra' },
+  { id: 9183669879017, class: 'charms-extra' },
   { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
   { id: 9117784867049, class: 'collar-de-gummies' }, // otra copia gummies
   { id: 7634477645974, class: 'collar-de-gummies' },
@@ -85,7 +85,7 @@ function pointZero(){
   enableAccordion()
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
-    <div class="accordion-item active">
+    <div id="size-container-acordion" class="accordion-item active">
       <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
       <div class="accordion-content">
         <div id="size-container">
@@ -1006,7 +1006,7 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 1
       maxCharms = 19
       break;
-    case 7319719280790: //charms-extra
+    case 9183669879017: //charms-extra
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1125,7 +1125,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-container').style.display = 'none'
-      document.querySelector('#size-title').innerHTML = "Elije tus 6 charms"
+      document.querySelector('#size-title').innerHTML = " "
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
@@ -1135,10 +1135,11 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.color-collar').style.display = "none"
       document.querySelector('.collar').style.display = "none"
       document.querySelector('.elije-charms').style.display = "none"
+      document.querySelector('#size-container-acordion').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Personaliza tus charms"
+      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu llavero <br> (6 charms)" 
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
@@ -1324,12 +1325,13 @@ async function getCart() {
 function updateCharms(caller) {
   myLog('Updated by: ' + caller)
   document.querySelector('#values-charms-number').value = $charmsArray.length
-  if (currentSlug == 'charms-extra' || currentSlug == 'charms-extra-xs') {
-    document.querySelector('.quantity__input').value = $charmsArray.length
-  } else {
-    if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`))
+  // if (currentSlug == 'charms-extra' || currentSlug == 'charms-extra-xs') {
+  //   document.querySelector('.quantity__input').value = $charmsArray.length
+  // } else {
+    if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`)){
       document.querySelector(`input[value='${$charmsArray.length}']+label`).click()
-  }
+    }
+  // }
 
   //avanzar el termometro del telefono
   let phoneDigits = document.querySelector('#phone').value.length
@@ -1465,6 +1467,9 @@ function changeCollarSize(size, update = true) {
     document.querySelector('#color21').style.display = "none"
   } else if (currentSlug == "charms-extra" && size == 'sml') {
     document.querySelector('#color21').style.display = "block"
+  }
+  if (currentSlug == "llavero-de-charms") {
+    document.querySelector('#values-collar-size').value = 'llavero'
   }
 }
 
@@ -1717,8 +1722,14 @@ async function getFinalCaptureImage() {
     infoContainer.className = 'info-bottom-right';
 
     if(!isPack){
+      let textoTamanio = ""
+      if(idProduct != 8289135952022) {
+        textoTamanio = `Tamaño : ${document.querySelector('#values-collar-size').value}`; 
+      }else {
+        textoTamanio = `Tamaño : llavero`; 
+      }
       const h3Tamaño = document.createElement('h3');
-      h3Tamaño.textContent = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
+      h3Tamaño.textContent = textoTamanio
       h3Tamaño.className = 'info-item';
       // document.querySelector('#charmsForm')
       document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
