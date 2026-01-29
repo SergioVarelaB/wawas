@@ -1325,12 +1325,13 @@ async function getCart() {
 function updateCharms(caller) {
   myLog('Updated by: ' + caller)
   document.querySelector('#values-charms-number').value = $charmsArray.length
-  if (currentSlug == 'charms-extra' || currentSlug == 'charms-extra-xs') {
-    document.querySelector('.quantity__input').value = $charmsArray.length
-  } else {
-    if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`))
+  // if (currentSlug == 'charms-extra' || currentSlug == 'charms-extra-xs') {
+  //   document.querySelector('.quantity__input').value = $charmsArray.length
+  // } else {
+    if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`)){
       document.querySelector(`input[value='${$charmsArray.length}']+label`).click()
-  }
+    }
+  // }
 
   //avanzar el termometro del telefono
   let phoneDigits = document.querySelector('#phone').value.length
@@ -1452,7 +1453,6 @@ function changeCollarSize(size, update = true) {
   document.querySelector('#values-collar-size').value = size;
   removeActive();
   document.querySelector('.size-' + size).classList.add('active')
-  if (size == 'sml') document.querySelector(`input[value='normal']+label`).click()
   try {
     document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
   } catch (error) {
