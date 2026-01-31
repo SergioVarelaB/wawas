@@ -412,7 +412,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
       <div class="msg-borrar"> Da click a la figura para borrar un Gummie</div>
       </div>
       <div class="accordion-item active">
-        <button type="button" id="personalize" class="accordion-header collar-title"> 02: Comienza a personalizar tus 7 Gummies!</button>
+        <button type="button" id="personalize" class="accordion-header collar-title"> 02: Click aquí para comenzar a personalizar</button>
         <div class="accordion-content">
           <div id="keyboard-container">
             <div class="color-keyboard">
