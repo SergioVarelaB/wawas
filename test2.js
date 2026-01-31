@@ -259,6 +259,12 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
         </div>
       </div>
       <div class="collar-container">
+      <img src="https://sergiovarelab.github.io/wawas/assets/elige.gummies.png" alt="Imagen pública" style="
+    position: absolute;
+    top: 10px;
+    max-width: 47%;
+    height: auto;
+    left: 25%;">
      <style>
     @font-face {
       font-family: 'gummies';
@@ -309,7 +315,6 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
         <div class="chaquiron" style="background: rgb(217, 124, 223);">&nbsp;</div>
       </div>
       <div id="gummies-container">
-      <img src="https://sergiovarelab.github.io/wawas/assets/elige.gummies.png" alt="Imagen pública">
         <div id="gummy-9" class="gummy gummy-color-rojo" onclick="deleteGummy(0)">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81.67 61.09" class="gummy-color-rojo">
             <defs>
