@@ -1193,7 +1193,7 @@ function switchCustomizer(id, isFirst = true){
       break;
     case 8582499074198: //collar-de-charms-conffeti
       myLog(currentSlug)
-      $charmsArray = [['C', 22], ['H', 22], ['A', 22], ['R', 22], ['M', 22], ['S', 22], ['1', 22], ['2', 22], ['#', 22]]
+      $charmsArray = [['A', 22], ['R', 22], ['M', 22], ['A', 22], ['1', 22], ['A', 22], ['Q', 22], ['U', 22], ['I', 22]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-sml').style.display = "none"
