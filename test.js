@@ -1014,7 +1014,7 @@ function switchCustomizer(id, isFirst = true){
       break;
     case 7319719280790: //charms-extra
       myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19], ['#',19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-s').style.display = "none"
