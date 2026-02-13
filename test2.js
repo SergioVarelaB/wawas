@@ -116,6 +116,20 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
               onclick="selectCollar(this); changeCollarColor('collar5','Rosa Neon')"></div>
           <div id="collar6" class="collar-option collar6" data-label="Rojo"
               onclick="selectCollar(this); changeCollarColor('collar6','Rojo')"></div>
+          <div id="collar7" class="collar-option collar7" data-label="test"
+              onclick="selectCollar(this); changeCollarColor('collar7','test')">
+              <span class="badge-nuevo-collar hidden">
+                    <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
+                    New
+                 </span>
+          </div>
+          <div id="collar8" class="collar-option collar8" data-label="test 2"
+              onclick="selectCollar(this); changeCollarColor('collar8','test 2')">
+              <span class="badge-nuevo-collar hidden">
+                    <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
+                    New
+                 </span>
+          </div>
         </div>
       </div>
     </div>
@@ -176,6 +190,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
         <div id="color16" class="color-picker color16"  onclick="changeKeysColor('color16')">&nbsp;</div>
         <div id="color17" class="color-picker color17"  onclick="changeKeysColor('color17')">&nbsp;</div>
         <div id="color18" class="color-picker color18"  onclick="changeKeysColor('color18')">&nbsp;</div>
+        <div id="color23" class="color-picker color18 hidden" onclick="changeKeysColor('color18')">&nbsp; <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="Nuevo" class="new-badge"></div>
         <div id="color19" class="color-picker color19"  onclick="changeKeysColor('color19')">&nbsp;</div>
         <div id="color20" class="color-picker color20 hidden"  onclick="changeKeysColor('color20')">&nbsp;</div>
         <div id="color21" class="color-picker color21 hidden"  onclick="changeKeysColor('color21')">&nbsp;</div>
@@ -1422,7 +1437,7 @@ function renderCharms(array) {
 
 function changeCollarColor(clave, color, update = true) {
   const $collar = document.querySelector('.collar')
-  $collar.classList.remove('collar1', 'collar2', 'collar3', 'collar4', 'collar5', 'collar6')
+  $collar.classList.remove('collar1', 'collar2', 'collar3', 'collar4', 'collar5', 'collar6', 'collar7', 'collar8')
   $collar.classList.add(clave) 
   document.querySelector('#values-collar-color').value = color
   if (document.querySelector(`input[value='${color}']+label`)) document.querySelector(`input[value='${color}']+label`).click()

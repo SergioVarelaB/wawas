@@ -175,6 +175,8 @@
   --collar4:#F1FF3A;
   --collar5:#FF136F;
   --collar6:#D60C0C; 
+  --collar7:#702F6E; /* TODO cambiar a color correcto */
+  --collar8:#1acb5e; /* TODO cambiar a color correcto */
   --charm1:#702F6E;
   --charm2:#94E1EE;
   --charm3:#ffd10e;
@@ -324,6 +326,15 @@ div[id^=collar] {
   
   background-color:var(--collar6);
 }
+
+.collar7{
+  background-color:var(--collar7);
+}
+
+.collar8{
+  background-color:var(--collar8);
+}
+
 .row {
   display: flex;
   justify-content: space-around;
@@ -1245,6 +1256,55 @@ dt {
 
 [data-shopify="payment-button"] {
   display: none !important;
+}
+
+
+.color-picker {
+  position: relative; /* clave para que el badge se posicione dentro */
+}
+
+.new-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  width: 22px;
+  animation: pulse 1.6s infinite;
+}
+
+.badge-nuevo-collar {
+  position: absolute;
+  top: -6px;
+  right: -26px;
+
+  font-size: 10px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  border: 1px solid #000000;
+  padding: 0 6px;
+  border-radius: 20px;
+
+  background: #000000;
+  color: #ffffff;
+  z-index: 1;
+
+  pointer-events: none; /* no bloquea el click */
+  white-space: nowrap;
+
+  animation: pulse 1.6s infinite;
+
+  box-shadow: 0 1px 3px rgba(0,0,0,.15);
+  font-weight: 600;
+
+}
+
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.15); }
+  100% { transform: scale(1); }
 }
 
 
