@@ -1292,6 +1292,18 @@ function enableAccordion() {
   });
 }
 
+function activateAccordionByHeaderId(headerId) {
+  console.log("skdjbncsdkjvnsdkjvcnsdkjcn")
+  const header = document.querySelector(`#${headerId}`);
+  const item = header.parentElement;
+  const accordion = item.parentElement;
+  accordion.querySelectorAll('.accordion-item').forEach(i => {
+    if (i !== item) i.classList.remove('active');
+  });
+  item.classList.toggle('active');
+}
+
+
 function addCartPropertiesField() {
   let idfieldImg = document.createElement('input')
   idfieldImg.setAttribute('type', 'hidden')
@@ -1430,10 +1442,16 @@ function changeKeysColor(color) {
 }
 
 function deleteCharm(charm) {
-  $charmsArray.splice(charm, 1)
-  document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-  myLog(charm + ' eliminado')
-  updateCharms('deleteCharm')
+  if(firstClick){
+    activateAccordionByHeaderId("personalize")
+    firstClick = false
+    emptyCharms()
+  } else {
+    $charmsArray.splice(charm, 1)
+    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+    myLog(charm + ' eliminado')
+    updateCharms('deleteCharm')
+  }
 }
 
 function deletePhone() {
