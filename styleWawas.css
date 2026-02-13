@@ -626,6 +626,13 @@ input[id^='color']{
   .keyboard_key {    
     font-size: 1.3em;
   }
+  div[id^=collar] {
+    height: 40px;
+    width: 40px;
+  }
+  .color-collar {
+    padding: 30px 0;
+  }
 }
 
 .gummy-a{
