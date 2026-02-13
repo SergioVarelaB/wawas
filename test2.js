@@ -1756,7 +1756,8 @@ async function getFinalCaptureImage() {
       h3Tamaño.className = 'info-item';
       // document.querySelector('#charmsForm')
       document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
-      if(document.querySelector('#phone').value !== "") {
+      const phoneInput = document.querySelector('#phone');
+      if (phoneInput?.value) {
         const h3Telefono = document.createElement('h3');
         h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone')? document.querySelector('#phone').value : ""}`;
         h3Telefono.className = 'info-item';
