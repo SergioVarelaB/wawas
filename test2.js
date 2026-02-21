@@ -1089,7 +1089,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-container').style.display = 'none'
-      document.querySelector('#size-title').innerHTML = "Elije tus 15 charms"
+      document.querySelector('#size-title').innerHTML = " "
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
@@ -1117,7 +1117,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-container').style.display = 'none'
-      document.querySelector('#size-title').innerHTML = "Elije tus 15 charms"
+      document.querySelector('#size-title').innerHTML = " "
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
