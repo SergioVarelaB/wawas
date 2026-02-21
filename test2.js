@@ -940,7 +940,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      changeCollarSize('s', false)
+      changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
       // document.querySelector(`input[value='5']+label`).click()
