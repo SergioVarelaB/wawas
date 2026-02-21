@@ -8,7 +8,7 @@ const instances = [
   { id: 9198218805481, class: 'pechera-y-correa-para-mascota-de-charms' },
   { id: 9117784867049, class: 'collar-de-gummies' }, // otra copia gummies
   { id: 7634477645974, class: 'collar-de-gummies' },
-  { id: 7923429998742, class: 'correa-de-charms' },
+  { id: 9206898065641, class: 'correa-de-charms' },
   { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 9141063024873, class: 'collar-de-charms-conffetti' }, // confeti
@@ -1081,7 +1081,7 @@ function switchCustomizer(id, isFirst = true){
       maxCharms = 15
       break;
 
-    case 7923429998742: //correa-de-charms
+    case 9206898065641: //correa-de-charms
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
