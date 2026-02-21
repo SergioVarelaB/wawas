@@ -1102,7 +1102,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Personaliza tus charms"
+      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu correa <br> (15 charms)" 
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
@@ -1130,7 +1130,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Personaliza tus charms"
+      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu correa <br> (15 charms)" 
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
