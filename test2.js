@@ -60,6 +60,7 @@ let type = 'charms'
 let $steps = []
 let firstClick = true
 let allowSubmit = false;
+enableBuyButton(false)
 
 function pointZero(){
   // $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
