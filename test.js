@@ -1043,7 +1043,7 @@ function switchCustomizer(id, isFirst = true){
       break;
     case 7804532261014: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
-      $charmsArray = [['P', 11], ['E', 12], ['C', 13], ['H', 14], ['E', 15], ['R', 16], ['A', 17], ['2', 18], ['8', 19]]
+      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
@@ -1069,13 +1069,13 @@ function switchCustomizer(id, isFirst = true){
 
     case 7923429998742: //correa-de-charms
       myLog(currentSlug)
-      $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
+      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-container').style.display = 'none'
-      document.querySelector('#size-title').innerHTML = "Elije tus 15 charms"
+      document.querySelector('#size-title').innerHTML = " "
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
@@ -1088,7 +1088,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Personaliza tus charms"
+      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu correa <br> (15 charms)" 
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
@@ -1097,13 +1097,13 @@ function switchCustomizer(id, isFirst = true){
       break;
     case 8247523573910: //correa-para-gato-y-razas-chicas ///
       myLog(currentSlug)
-      $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
+      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-container').style.display = 'none'
-      document.querySelector('#size-title').innerHTML = "Elije tus 15 charms"
+      document.querySelector('#size-title').innerHTML = " "
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
@@ -1116,7 +1116,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#size-title').classList.add('accordion-header-disabled')
       document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Personaliza tus charms"
+      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu correa <br> (15 charms)" 
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
