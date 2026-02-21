@@ -9,7 +9,7 @@ const instances = [
   { id: 9117784867049, class: 'collar-de-gummies' }, // otra copia gummies
   { id: 7634477645974, class: 'collar-de-gummies' },
   { id: 9206898065641, class: 'correa-de-charms' },
-  { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
+  { id: 9206899507433, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 9141063024873, class: 'collar-de-charms-conffetti' }, // confeti
   { id: 8582499074198, class: 'collar-de-charms-conffetti' }, // confeti 
@@ -1083,7 +1083,7 @@ function switchCustomizer(id, isFirst = true){
 
     case 9206898065641: //correa-de-charms
       myLog(currentSlug)
-      $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
+      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
@@ -1109,9 +1109,9 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 15
       maxCharms = 15
       break;
-    case 8247523573910: //correa-para-gato-y-razas-chicas ///
+    case 9206899507433: //correa-para-gato-y-razas-chicas ///
       myLog(currentSlug)
-      $charmsArray = [['C', 11], ['O', 12], ['R', 13], ['R', 14], ['E', 15], ['A', 16], ['1', 17], ['2', 18], ['8', 19]]
+      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
