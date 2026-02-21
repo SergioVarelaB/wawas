@@ -1140,7 +1140,7 @@ function switchCustomizer(id, isFirst = true){
       break;
     case 8289135952022: //llavero-de-charms
       myLog(currentSlug)
-      $charmsArray = [['W', 11], ['A', 12], ['W', 13], ['A', 14], ['S', 15], ['1', 21]]
+      $charmsArray = [['A', 19], ['R', 18], ['M', 17], ['A', 16], ['M', 15], ['E', 14]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
