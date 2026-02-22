@@ -153,7 +153,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div class="accordion-item">
       <button id="personalize" type="button" class="accordion-header">03: Comienza a personalizar tus Charms!</button>
       <div class="accordion-content">
-        <h4 class="elije-charms">Elije tus charms (mínimo 5 - máximo 9)</h4>
+        <h4 class="elije-charms">Elige tus charms (mínimo 5 - máximo 9)</h4>
         <div id="keyboard-container" class="charms-sml">
     <div class="keyboard charms-keyboard">
     <div class="color-keyboard" style="display:none">
@@ -1048,7 +1048,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('#size-title').innerHTML = "01: Elije el tamaño de tu pechera"
+      document.querySelector('#size-title').innerHTML = "01: Elige el tamaño de tu pechera"
       document.querySelector('#personalize').innerHTML="02: Personaliza tus 15 charms"
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
