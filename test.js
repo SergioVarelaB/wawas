@@ -1493,6 +1493,12 @@ function changeCollarSize(size, update = true) {
   if (currentSlug == "llavero-de-charms") {
     document.querySelector('#values-collar-size').value = 'llavero'
   }
+  if (currentSlug == "correa-de-charms"){
+    document.querySelector('#values-collar-size').value = 'Correa'
+  }
+  if (currentSlug == "correa-para-gato-y-razas-chicas"){
+    document.querySelector('#values-collar-size').value = 'Correa XS'
+  }
 }
 
 function displayCharms(array) {
