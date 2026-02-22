@@ -904,11 +904,10 @@ function switchCustomizer(id, isFirst = true){
       $charmsArray = [['A', 11], ['R',   12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      changeCollarSize('s', false)
+      changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
       // document.querySelector(`input[value='5']+label`).click()
