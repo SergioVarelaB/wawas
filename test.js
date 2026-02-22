@@ -901,7 +901,7 @@ function switchCustomizer(id, isFirst = true){
   switch (id) {
     case 7340949438614: //collar-de-charms
       myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
+      $charmsArray = [['A', 11], ['R',   12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-xs').style.display = "none"
