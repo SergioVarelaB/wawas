@@ -84,7 +84,10 @@ function pointZero(){
   firstClick = true
   switchCustomizer(idProduct, false)
   enableAccordion()
-  addCartPropertiesField()
+  document.querySelector('#size').value = ""
+  document.querySelector('#telefono').value = ""
+  document.querySelector('#idPixelemos').value = ""
+  document.querySelector('#imageProduct').value = ""
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div id="size-container-acordion" class="accordion-item active">
