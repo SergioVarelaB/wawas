@@ -1497,6 +1497,7 @@ function changeCollarSize(size, update = true) {
     document.querySelector('#size').value = size
   } catch (error) {
     console.warn('No existe el collar xs por el limite de variaciones o son charms sueltos');
+    console.log("error ", error)
     // Expected output: ReferenceError: nonExistentFunction is not defined
     // (Note: the exact output may be browser-dependent)
   }
