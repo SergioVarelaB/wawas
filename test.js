@@ -83,6 +83,7 @@ function pointZero(){
   firstClick = true
   switchCustomizer(idProduct, false)
   enableAccordion()
+  allowSubmit = false;
 }
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div id="size-container-acordion" class="accordion-item active">
@@ -1475,7 +1476,8 @@ function changeCollarSize(size, update = true) {
   document.querySelector('#values-collar-size').value = size;
   removeActive();
   document.querySelector('.size-' + size).classList.add('active')
-  try {
+  try {    
+    document.querySelector('#size').value = size
     document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
   } catch (error) {
     console.warn('No existe el collar xs por el limite de variaciones o son charms sueltos');
@@ -1491,12 +1493,6 @@ function changeCollarSize(size, update = true) {
   }
   if (currentSlug == "llavero-de-charms") {
     document.querySelector('#values-collar-size').value = 'llavero'
-  }
-  if (currentSlug == "correa-de-charms"){
-    document.querySelector('#values-collar-size').value = 'Correa'
-  }
-  if (currentSlug == "correa-para-gato-y-razas-chicas"){
-    document.querySelector('#values-collar-size').value = 'Correa XS'
   }
 }
 
