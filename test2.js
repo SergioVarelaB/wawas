@@ -1668,6 +1668,7 @@ function getIdPixelemos() {
 
 /*Capturar pantalla y enviarla */
 async function capture(event) {
+  console.log(event)
   if (allowSubmit) return;
   enableBuyButton(false)
   
