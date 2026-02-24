@@ -1492,9 +1492,9 @@ function changeCollarSize(size, update = true) {
   document.querySelector('#values-collar-size').value = size;
   removeActive();
   document.querySelector('.size-' + size).classList.add('active')
-  try {
-    document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
+  try {    
     document.querySelector('#size').value = size
+    document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
   } catch (error) {
     console.warn('No existe el collar xs por el limite de variaciones o son charms sueltos');
     console.log("error ", error)
