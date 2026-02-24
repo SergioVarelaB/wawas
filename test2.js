@@ -63,7 +63,6 @@ let allowSubmit = false;
 enableBuyButton(false)
 
 function pointZero(){
-  // $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
   isPack = false
   verbose = false
   wawasContainer
@@ -84,11 +83,8 @@ function pointZero(){
   firstClick = true
   switchCustomizer(idProduct, false)
   enableAccordion()
-  const props = form.querySelectorAll('input[name^="properties["]');
-  props.forEach(input => {
-    input.value = '';
-  });
 }
+
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div id="size-container-acordion" class="accordion-item active">
       <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
@@ -1498,6 +1494,7 @@ function changeCollarSize(size, update = true) {
   document.querySelector('.size-' + size).classList.add('active')
   try {
     document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
+    document.querySelector('#size').value = size
   } catch (error) {
     console.warn('No existe el collar xs por el limite de variaciones o son charms sueltos');
     // Expected output: ReferenceError: nonExistentFunction is not defined
