@@ -60,9 +60,9 @@ let type = 'charms'
 let $steps = []
 let firstClick = true
 let allowSubmit = false;
+enableBuyButton(false)
 
 function pointZero(){
-  // $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
   isPack = false
   verbose = false
   wawasContainer
@@ -85,6 +85,7 @@ function pointZero(){
   enableAccordion()
   allowSubmit = false;
 }
+
 const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div id="size-container-acordion" class="accordion-item active">
       <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
