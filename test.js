@@ -1489,7 +1489,7 @@ function changeCollarSize(size, update = true) {
   //desaparecer color dorado en charms xs
   if ((currentSlug == "charms-extra" && size == 'xs') || (currentSlug == "collar-para-charms" && size == 'xs')) {
     document.querySelector('#color21').style.display = "none"
-  } else if (currentSlug == "charms-extra" && size == 'sml') {
+  } else if ((currentSlug == "charms-extra" && size == 'sml') || (currentSlug == "collar-para-charms" && size !== 'xs')) {
     document.querySelector('#color21').style.display = "block"
   }
   if (currentSlug == "llavero-de-charms") {
