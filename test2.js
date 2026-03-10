@@ -118,16 +118,16 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
               onclick="selectCollar(this); changeCollarColor('collar5','Rosa Neon')"></div>
           <div id="collar6" class="collar-option collar6" data-label="Rojo"
               onclick="selectCollar(this); changeCollarColor('collar6','Rojo')"></div>
-          <div id="collar7" class="collar-option collar7" data-label="test"
-              onclick="selectCollar(this); changeCollarColor('collar7','test')">
-              <span class="badge-nuevo-collar hidden">
+          <div id="collar7" class="collar-option collar7" data-label="Morado"
+              onclick="selectCollar(this); changeCollarColor('collar7','Morado')">
+              <span class="badge-nuevo-collar">
                     <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
                     New
                  </span>
           </div>
-          <div id="collar8" class="collar-option collar8" data-label="test 2"
-              onclick="selectCollar(this); changeCollarColor('collar8','test 2')">
-              <span class="badge-nuevo-collar hidden">
+          <div id="collar8" class="collar-option collar8" data-label="Azul Aqua"
+              onclick="selectCollar(this); changeCollarColor('collar8','Azul Aqua')">
+              <span class="badge-nuevo-collar">
                     <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
                     New
                  </span>
@@ -169,7 +169,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
     <div class="accordion-item">
       <button id="personalize" type="button" class="accordion-header">03: Comienza a personalizar tus Charms!</button>
       <div class="accordion-content">
-        <h4 class="elije-charms">Elije tus charms (mínimo 5 - máximo 9)</h4>
+        <h4 class="elije-charms">Elige tus charms (mínimo 5 - máximo 9)</h4>
         <div id="keyboard-container" class="charms-sml">
     <div class="keyboard charms-keyboard">
     <div class="color-keyboard" style="display:none">
@@ -429,7 +429,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
       <div class="msg-borrar"> Da click a la figura para borrar un Gummie</div>
       </div>
       <div class="accordion-item active">
-        <button type="button" id="personalize" class="accordion-header collar-title"> 02: Comienza a personalizar tus 7 Gummies!</button>
+        <button type="button" id="personalize" class="accordion-header collar-title"> 02: Click aquí para comenzar a personalizar</button>
         <div class="accordion-content">
           <div id="keyboard-container">
             <div class="color-keyboard">
@@ -918,14 +918,13 @@ function switchCustomizer(id, isFirst = true){
   switch (id) {
     case 7340949438614: //collar-de-charms
       myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+      $charmsArray = [['A', 11], ['R',   12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      changeCollarSize('s', false)
+      changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
       // document.querySelector(`input[value='5']+label`).click()
@@ -934,15 +933,16 @@ function switchCustomizer(id, isFirst = true){
       if (isFirst) enableBuyButton(false)
       document.querySelector('#charmsForm').value = ""
       break;
-    case 9117785129193: //collar-de-charms
+    case 91177851291934: //collar-de-charms
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      changeCollarSize('xs', false)
+      changeCollarSize('s', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
       // document.querySelector(`input[value='5']+label`).click()
@@ -999,7 +999,7 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 1
       maxCharms = 100
       break;
-    case 91177851291934: //charms-extra
+    case 9117785129193: //charms-extra
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1028,9 +1028,9 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 1
       maxCharms = 19
       break;
-    case 9183669879017: //charms-extra
+    case 7319719280790: //charms-extra
       myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19], ['#',19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-s').style.display = "none"
@@ -1057,14 +1057,14 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 1
       maxCharms = 19
       break;
-    case 9198218805481: //pechera-y-correa-para-mascota-de-charms
+    case 7804532261014: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
       $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('#size-title').innerHTML = "01: Elije el tamaño de tu pechera"
+      document.querySelector('#size-title').innerHTML = "01: Elige el tamaño de tu pechera"
       document.querySelector('#personalize').innerHTML="02: Personaliza tus 15 charms"
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
@@ -1083,7 +1083,7 @@ function switchCustomizer(id, isFirst = true){
       maxCharms = 15
       break;
 
-    case 9206898065641: //correa-de-charms
+    case 7923429998742: //correa-de-charms
       myLog(currentSlug)
       $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1111,7 +1111,7 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 15
       maxCharms = 15
       break;
-    case 9206899507433: //correa-para-gato-y-razas-chicas ///
+    case 8247523573910: //correa-para-gato-y-razas-chicas ///
       myLog(currentSlug)
       $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1194,7 +1194,7 @@ function switchCustomizer(id, isFirst = true){
       break;
     case 7484253372566: //collar-de-charms-glow-in-the-dark
       myLog(currentSlug)
-      $charmsArray = [['C', 10], ['H', 10], ['A', 10], ['R', 10], ['M', 10], ['S', 10], ['1', 10], ['2', 10], ['#', 10]]
+      $charmsArray = [['A', 10], ['R', 10], ['M', 10], ['A', 10], ['1', 10], ['A', 10], ['Q', 10], ['U', 10], ['I', 10]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-sml').style.display = "none"
@@ -1207,9 +1207,9 @@ function switchCustomizer(id, isFirst = true){
       // document.querySelector(`input[value='5']+label`).click()
       if (isFirst) enableBuyButton(false)
       break;
-    case 9141063024873: //collar-de-charms-conffeti
+    case 8582499074198: //collar-de-charms-conffeti
       myLog(currentSlug)
-      $charmsArray = [['C', 22], ['H', 22], ['A', 22], ['R', 22], ['M', 22], ['S', 22], ['1', 22], ['2', 22], ['#', 22]]
+      $charmsArray = [['A', 22], ['R', 22], ['M', 22], ['A', 22], ['1', 22], ['A', 22], ['Q', 22], ['U', 22], ['I', 22]]
       wawasContainer.innerHTML = charmsKeyboardHTML
       document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('.size-sml').style.display = "none"
@@ -1309,7 +1309,6 @@ function enableAccordion() {
 }
 
 function activateAccordionByHeaderId(headerId) {
-  console.log("skdjbncsdkjvnsdkjvcnsdkjcn")
   const header = document.querySelector(`#${headerId}`);
   const item = header.parentElement;
   const accordion = item.parentElement;
@@ -1498,15 +1497,14 @@ function changeCollarSize(size, update = true) {
     document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
   } catch (error) {
     console.warn('No existe el collar xs por el limite de variaciones o son charms sueltos');
-    console.log("error ", error)
     // Expected output: ReferenceError: nonExistentFunction is not defined
     // (Note: the exact output may be browser-dependent)
   }
   if (update) updateCharms('changeCollarSize')
   //desaparecer color dorado en charms xs
-  if (currentSlug == "charms-extra" && size == 'xs') {
+  if ((currentSlug == "charms-extra" && size == 'xs') || (currentSlug == "collar-para-charms" && size == 'xs')) {
     document.querySelector('#color21').style.display = "none"
-  } else if (currentSlug == "charms-extra" && size == 'sml') {
+  } else if ((currentSlug == "charms-extra" && size == 'sml') || (currentSlug == "collar-para-charms" && size !== 'xs')) {
     document.querySelector('#color21').style.display = "block"
   }
   if (currentSlug == "llavero-de-charms") {
@@ -1662,14 +1660,12 @@ function displayGummies(array) {
 }
 
 function getIdPixelemos() {
-  console.log("getIdPixelemos" , currentSlug + '-' + Date.now())
   document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
   return document.querySelector('#idPixelemos').value;
 }
 
 /*Capturar pantalla y enviarla */
 async function capture(event) {
-  console.log('Capturar pantalla y enviarla' , allowSubmit )
   if (allowSubmit) return;
   enableBuyButton(false)
   
