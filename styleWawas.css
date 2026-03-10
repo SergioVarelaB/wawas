@@ -175,7 +175,7 @@
   --collar4:#F1FF3A;
   --collar5:#FF136F;
   --collar6:#D60C0C; 
-  --collar7:#B56AD6; /* TODO cambiar a color correcto */
+  --collar7:#c87ce8; /* TODO cambiar a color correcto */
   --collar8:#49e5f4; /* TODO cambiar a color correcto */
   --charm1:#702F6E;
   --charm2:#94E1EE;
@@ -998,7 +998,7 @@ span.medidas {
 .collar4 { background: #eaff00; }     /* Amarillo Neon */
 .collar5 { background: #ff5fc0; }     /* Rosa Neon */
 .collar6 { background: #ff3b3b; }     /* Rojo */
-.collar7 { background: #B56AD6;}      /* Morado*/
+.collar7 { background: #c87ce8;}      /* Morado*/
 .collar8 { background: #49e5f4;}      /* Azul Aqua*/
 
 /* Estado seleccionado */
