@@ -118,6 +118,18 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
               onclick="selectCollar(this); changeCollarColor('collar5','Rosa Neon')"></div>
           <div id="collar6" class="collar-option collar6" data-label="Rojo"
               onclick="selectCollar(this); changeCollarColor('collar6','Rojo')"></div>
+          <div id="collar7" class="collar-option collar7" data-label="Morado"
+              onclick="selectCollar(this); changeCollarColor('collar7','Morado')">
+              <span class="badge-nuevo-collar">
+                    <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
+                 </span>
+          </div>
+          <div id="collar8" class="collar-option collar8" data-label="Azul Aqua"
+              onclick="selectCollar(this); changeCollarColor('collar8','Azul Aqua')">
+              <span class="badge-nuevo-collar">
+                    <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
+                 </span>
+          </div>
         </div>
       </div>
     </div>
@@ -1422,7 +1434,7 @@ function renderCharms(array) {
 
 function changeCollarColor(clave, color, update = true) {
   const $collar = document.querySelector('.collar')
-  $collar.classList.remove('collar1', 'collar2', 'collar3', 'collar4', 'collar5', 'collar6')
+  $collar.classList.remove('collar1', 'collar2', 'collar3', 'collar4', 'collar5', 'collar6', 'collar7', 'collar8' )
   $collar.classList.add(clave) 
   document.querySelector('#values-collar-color').value = color
   if (document.querySelector(`input[value='${color}']+label`)) document.querySelector(`input[value='${color}']+label`).click()
