@@ -933,7 +933,7 @@ function switchCustomizer(id, isFirst = true){
       if (isFirst) enableBuyButton(false)
       document.querySelector('#charmsForm').value = ""
       break;
-    case 91177851291934: //collar-de-charms
+    case 9117785129193: //collar-de-charms
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -999,7 +999,7 @@ function switchCustomizer(id, isFirst = true){
       minCharms = 1
       maxCharms = 100
       break;
-    case 9117785129193: //charms-extra
+    case 91177851291934: //charms-extra
       myLog(currentSlug)
       $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
