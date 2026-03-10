@@ -118,13 +118,13 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
               onclick="selectCollar(this); changeCollarColor('collar5','Rosa Neon')"></div>
           <div id="collar6" class="collar-option collar6" data-label="Rojo"
               onclick="selectCollar(this); changeCollarColor('collar6','Rojo')"></div>
-          <div id="collar7" class="collar-option collar7" data-label="Morado"
+          <div id="collar7" class="collar-option collar7" data-label="Morado New!"
               onclick="selectCollar(this); changeCollarColor('collar7','Morado')">
               <span class="badge-nuevo-collar">
                     <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
                  </span>
           </div>
-          <div id="collar8" class="collar-option collar8" data-label="Azul Aqua"
+          <div id="collar8" class="collar-option collar8" data-label="Azul Aqua New!"
               onclick="selectCollar(this); changeCollarColor('collar8','Azul Aqua')">
               <span class="badge-nuevo-collar">
                     <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
