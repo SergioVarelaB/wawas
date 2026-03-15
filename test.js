@@ -1073,7 +1073,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.collar').style.display = "none"
       document.querySelector('.elije-charms').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
-      changeCollarSize('s', false)
+      changeCollarSize('xs', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
       minCharms = 15
