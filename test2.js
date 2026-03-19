@@ -166,8 +166,8 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       </div>
       <div class="msg-borrar"> Da click a la figura para borrar un charm</div>
     </div>
-    <div class="accordion-item">
-      <button id="personalize" type="button" class="accordion-header active">03: Comienza a personalizar tus Charms!</button>
+    <div id="personalize-item" class="accordion-item active">
+      <button id="personalize" type="button" class="accordion-header">03: Comienza a personalizar tus Charms!</button>
       <div class="accordion-content">
         <h4 class="elije-charms">Elige tus charms (mínimo 5 - máximo 9)</h4>
         <div id="keyboard-container" class="charms-sml">
@@ -1303,7 +1303,10 @@ function enableAccordion() {
       const accordion = item.parentElement;
 
       accordion.querySelectorAll('.accordion-item').forEach(i => {
-        if (i !== item) i.classList.remove('active');
+        if (i !== item && i.id !== "personalize-item"){
+          i.classList.remove('active');
+        } 
+
       });
 
       item.classList.toggle('active');
@@ -1407,7 +1410,12 @@ function emptyCharms() {
 }
 
 function addCharm(charm) {
+  if(firstClick){
+    firstClick = false
+    emptyCharms()
+  }
   if ($charmsArray.length < maxCharms) {
+    console.log("charmssss")
     $charmsArray.push([charm, currentColor])
     document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
     if (charm == '#') {
@@ -1461,7 +1469,7 @@ function changeKeysColor(color) {
 
 function deleteCharm(charm) {
   if(firstClick){
-    activateAccordionByHeaderId("personalize")
+    // activateAccordionByHeaderId("personalize")
     firstClick = false
     emptyCharms()
   } else {
