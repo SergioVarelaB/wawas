@@ -167,7 +167,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       <div class="msg-borrar"> Da click a la figura para borrar un charm</div>
     </div>
     <div class="accordion-item">
-      <button id="personalize" type="button">03: Comienza a personalizar tus Charms!</button>
+      <button id="personalize" type="button" class="accordion-header">03: Comienza a personalizar tus Charms!</button>
       <div class="accordion-content">
         <h4 class="elije-charms">Elige tus charms (mínimo 5 - máximo 9)</h4>
         <div id="keyboard-container" class="charms-sml">
@@ -1295,6 +1295,8 @@ function enableAccordion() {
         }
         firstClick = false
       }
+
+      if (header.id === "personalize") return;
       
       const item = header.parentElement;
       const accordion = item.parentElement;
