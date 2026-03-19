@@ -885,7 +885,7 @@ function customizer(id) {
 
   //activar la captura si se activa el personalizador
   // document.querySelector("button[id^='ProductSubmitButton']").addEventListener('click', capture)
-  document.querySelectorAll("button[id^='ProductSubmitButton']").forEach(button => { button.addEventListener('click', capture);});
+  // document.querySelectorAll("button[id^='ProductSubmitButton']").forEach(button => { button.addEventListener('click', capture);});
 
   const productForm = document.querySelector('form[action*="/cart/add"]');
 
