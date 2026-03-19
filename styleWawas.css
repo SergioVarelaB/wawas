@@ -1317,6 +1317,19 @@ dt {
 }
 
 
+.min-charms {
+  background-color: #000;
+  color: #fff;
+  font-family: 'Arial Black', Impact, sans-serif;
+  font-size: 48px;
+  font-weight: 900;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 20px 10px;
+}
+
+
 /*
  .charms-sml  #charm-key-6.color21{
   pointer-events: none;
