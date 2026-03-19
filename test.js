@@ -138,9 +138,9 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       position: absolute;
       display: block;
       top: 10px;
-      max-width: 36%;
+      max-width: 50%;
       height: auto;
-      left: 30%;">
+      left: 25%;">
     <style>
     <style>
     @font-face {
