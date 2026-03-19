@@ -134,6 +134,14 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       </div>
     </div>
     <div class="collar-container">
+    <img id="min-charms" src="https://sergiovarelab.github.io/wawas/assets/5 a 9 charms.png" alt="Imagen pública" style="
+      position: absolute;
+      display: block;
+      top: 10px;
+      max-width: 36%;
+      height: auto;
+      left: 30%;">
+    <style>
     <style>
     @font-face {
       font-family: 'charms';
@@ -1024,6 +1032,7 @@ function switchCustomizer(id, isFirst = true){
       changeKeysColor('color11')
       minCharms = 1
       maxCharms = 19
+      document.getElementById('min-charms').style.display = "none"
       break;
     case 7319719280790: //charms-extra
       myLog(currentSlug)
@@ -1053,6 +1062,7 @@ function switchCustomizer(id, isFirst = true){
       changeKeysColor('color11')
       minCharms = 1
       maxCharms = 19
+      document.getElementById('min-charms').style.display = "none"
       break;
     case 7804532261014: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
@@ -1078,6 +1088,7 @@ function switchCustomizer(id, isFirst = true){
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
+      document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/15 Charms.png';
       break;
 
     case 7923429998742: //correa-de-charms
@@ -1107,6 +1118,7 @@ function switchCustomizer(id, isFirst = true){
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
+      document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/15 Charms.png';
       break;
     case 8247523573910: //correa-para-gato-y-razas-chicas ///
       myLog(currentSlug)
@@ -1135,6 +1147,7 @@ function switchCustomizer(id, isFirst = true){
       changeKeysColor('color11')
       minCharms = 15
       maxCharms = 15
+      document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/15 Charms.png';
       break;
     case 8289135952022: //llavero-de-charms
       myLog(currentSlug)
@@ -1164,6 +1177,7 @@ function switchCustomizer(id, isFirst = true){
       changeKeysColor('color11')
       minCharms = 6
       maxCharms = 6
+      document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/6 Charms.png';
       break;
     case 9120268222697: //llavero-de- testttttttt
       myLog(currentSlug)
