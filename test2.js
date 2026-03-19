@@ -136,6 +136,12 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       </div>
     </div>
     <div class="collar-container">
+    <img id="" src="https://sergiovarelab.github.io/wawas/assets/elige.gummies.png" alt="Imagen pública" style="
+      position: absolute;
+      top: 10px;
+      max-width: 36%;
+      height: auto;
+      left: 30%;">
     <style>
     @font-face {
       font-family: 'charms';
