@@ -102,7 +102,7 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
         </div>
       </div>
     </div>
-    <div class="accordion-item">
+    <div class="accordion-item active">
       <button type="button" class="accordion-header collar-title">02: Elige el color de tu collar</button>
       <div class="accordion-content">
         <div class="color-collar">
@@ -1291,6 +1291,8 @@ function enableAccordion() {
           emptyCharms()
         }
         firstClick = false
+      }else{
+        return
       }
 
       if (header.id === "personalize") return;
