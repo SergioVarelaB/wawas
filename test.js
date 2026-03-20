@@ -281,7 +281,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
         </div>
       </div>
       <div class="collar-container">
-      <img src="https://sergiovarelab.github.io/wawas/assets/7 charms.png" alt="Imagen pública" style="
+      <img src="https://sergiovarelab.github.io/wawas/assets/7 Charms.png" alt="Imagen pública" style="
     position: absolute;
     top: 10px;
     max-width: 36%;
