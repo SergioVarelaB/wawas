@@ -1392,7 +1392,7 @@ function updateCharms(caller) {
   myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
   document.querySelector('#charmsForm').value = displayCharms($charmsArray)
   let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : ' No aplica'
-  let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono}</div>`
+  let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono} <br> charms: ${document.querySelector('.collar-container')} </div>`
   if ($gummiesArray.length !== 0) {
     document.querySelector('#charmsForm').value = general + displayCharms($charmsArray) + displayGummies($gummiesArray)
   } else {
