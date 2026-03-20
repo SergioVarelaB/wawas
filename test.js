@@ -929,6 +929,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('.size-xs .medidas').textContent = '20-33cm';
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
@@ -950,6 +951,7 @@ function switchCustomizer(id, isFirst = true){
       changeCollarSize('s', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
+      document.querySelector('.size-xs .medidas').textContent = '20-33cm';
       // document.querySelector(`input[value='5']+label`).click()
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
@@ -1212,6 +1214,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "none"
+      document.querySelector('.size-xs .medidas').textContent = '20-33cm';
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color10')
@@ -1227,6 +1230,7 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "none"
+      document.querySelector('.size-xs .medidas').textContent = '20-33cm';
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color22')
