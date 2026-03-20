@@ -284,9 +284,9 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
       <img src="https://sergiovarelab.github.io/wawas/assets/7 Charms.png" alt="7 gummyes" style="
     position: absolute;
     top: 10px;
-    max-width: 36%;
+    max-width: 50%;
     height: auto;
-    left: 30%;">
+    left: 25%;">
      <style>
     @font-face {
       font-family: 'gummies';
