@@ -1396,7 +1396,7 @@ function updateCharms(caller) {
   let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>
           Color del collar: ${document.querySelector('#values-collar-color').value}<br>
           Teléfono: ${telefono} <br>
-          charms: ${safehtml.replace(/"/g, '&quot;').replace(/'/g, '&#39;')} </div>`
+          charms: ${safehtml} </div>`
   if ($gummiesArray.length !== 0) {
     document.querySelector('#charmsForm').value = general + displayCharms($charmsArray) + displayGummies($gummiesArray)
   } else {
