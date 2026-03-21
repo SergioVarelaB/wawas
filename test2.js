@@ -1036,7 +1036,7 @@ function switchCustomizer(id, isFirst = true){
       maxCharms = 19
       document.getElementById('min-charms').style.display = "none"
       break;
-    case 7319719280790: //charms-extra
+    case 9183669879017: //charms-extra
       myLog(currentSlug)
       $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19], ['#',19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1066,7 +1066,7 @@ function switchCustomizer(id, isFirst = true){
       maxCharms = 19
       document.getElementById('min-charms').style.display = "none"
       break;
-    case 7804532261014: //pechera-y-correa-para-mascota-de-charms
+    case 9198218805481: //pechera-y-correa-para-mascota-de-charms
       myLog(currentSlug)
       $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1093,7 +1093,7 @@ function switchCustomizer(id, isFirst = true){
       document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/15 Charms.png';
       break;
 
-    case 7923429998742: //correa-de-charms
+    case 9206898065641: //correa-de-charms
       myLog(currentSlug)
       $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1122,7 +1122,7 @@ function switchCustomizer(id, isFirst = true){
       maxCharms = 15
       document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/15 Charms.png';
       break;
-    case 8247523573910: //correa-para-gato-y-razas-chicas ///
+    case 9206899507433: //correa-para-gato-y-razas-chicas ///
       myLog(currentSlug)
       $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1220,7 +1220,7 @@ function switchCustomizer(id, isFirst = true){
       // document.querySelector(`input[value='5']+label`).click()
       if (isFirst) enableBuyButton(false)
       break;
-    case 8582499074198: //collar-de-charms-conffeti
+    case 9141063024873: //collar-de-charms-conffeti
       myLog(currentSlug)
       $charmsArray = [['A', 22], ['R', 22], ['M', 22], ['A', 22], ['1', 22], ['A', 22], ['Q', 22], ['U', 22], ['I', 22]]
       wawasContainer.innerHTML = charmsKeyboardHTML
@@ -1392,11 +1392,7 @@ function updateCharms(caller) {
   myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
   document.querySelector('#charmsForm').value = displayCharms($charmsArray)
   let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : ' No aplica'
-  let safehtml = document.querySelector('.collar-container').outerHTML;
-  let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>
-          Color del collar: ${document.querySelector('#values-collar-color').value}<br>
-          Teléfono: ${telefono} <br>
-          charms: ${safehtml} </div>`
+  let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono}</div>`
   if ($gummiesArray.length !== 0) {
     document.querySelector('#charmsForm').value = general + displayCharms($charmsArray) + displayGummies($gummiesArray)
   } else {
