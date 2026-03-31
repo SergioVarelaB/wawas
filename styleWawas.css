@@ -21,6 +21,14 @@
   font-display: block;
 }
 
+@font-face {
+  font-family: 'GoBanana';
+  src: url('/assets/fonts/GoBanana.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 *[id^='variant-selects-template'] {
   display: none;
 }
