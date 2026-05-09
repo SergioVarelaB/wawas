@@ -3,6 +3,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/lz-string@1.4.4/libs/lz-string.min.js"></script>
 <link rel="stylesheet" href="https://sergiovarelab.github.io/wawas/styleWawas.css">
+<link
+  href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap"
+  rel="stylesheet"
+>
 
 <script>
   // 🔹 leer parámetro ?data=
@@ -56,6 +60,21 @@
     };
 
     return map[color] || '';
+  }
+
+  function getCollarColor(color) {
+    const collarMap = {
+      '1' : 'Naranja Neon',
+      '2'  : 'Negro',
+      '3'  :'Azul Rey',
+      '4'  :'Amarillo Neon',
+      '5'  :'Rosa Neon',
+      '6'  :'Rojo',
+      '7'  :'Morado',
+      '8'  :'Azul Aqua'
+    };
+    return collarMap[color] || '';
+
   }
 
   // 🔹 render final (usa tu lógica)
@@ -207,7 +226,7 @@
 
 
   function getExtras(data) {
-    return `<div style="padding:16px; font-family: 'GoBanana', sans-serif;">Tamaño del collar: ${data.cS || "NA"}<br>Color del collar: ${data.c || "NA"} <br>Teléfono: ${data.p || "NA"}</div>`
+    return `<div style="padding:16px; font-family: 'Outfit', sans-serif; font-weight: 500; ">Tamaño del collar: ${data.cS || "NA"}<br>Color del collar: ${data.colorCollar || "NA"} <br>Teléfono: ${data.p || "NA"}</div>`
   }
 
   function decodeCharms(str) {
@@ -263,7 +282,10 @@
     const charmsArray = decodeCharms(data.ch)
     const charmsDisplayed = displayCharms(charmsArray)
     const collarClass = getCollarClass(data.c)
-    const extras = getExtras(data)
+    const extras = getExtras({
+      ...data, 
+      'colorCollar' : getCollarColor(data.c)
+    })
     console.log(charmsDisplayed)
     if (charmsDisplayed) {
       renderFromData(charmsDisplayed, collarClass, extras);
