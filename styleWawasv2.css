@@ -210,7 +210,7 @@
 }
 .collar-container {
   background-color: #FFFFFF;
-  height: 15vh;
+  height: 200px;
   display: flex;
   justify-content: center;  
   overflow: hidden;
