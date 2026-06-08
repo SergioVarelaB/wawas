@@ -915,11 +915,11 @@ span.medidas {
   border-radius: 32px;
 }
 
-#charm-key-6.color21,#charm-key-2.color21{
+#charm-key-6.color21,#charm-key-2.color21,#charm-key-1.color21{
   pointer-events: none;
 }
 
-#charm-key-6.color21:before,#charm-key-2.color21:before{
+#charm-key-6.color21:before,#charm-key-2.color21:before,#charm-key-1.color21:before{
   content: "AGOTADO";
   display: block;
   font-family: sans-serif;
