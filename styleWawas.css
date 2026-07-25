@@ -177,7 +177,7 @@
 
 :root{  
   --textura:url()assets/fonts/;/*url("assets/fonts/data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAMCAYAAAEomcwLAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAOJJREFUeNpi+P//fwjT+fPnGQACiAHMunDhAgNAADGeOXMmhJmZmQEggBhBQgxAwMQABXAGQAAxXrt2LURTU5Ph+vXrDCCa6du3b2CZnz9/QlT8+/cvhJGREWQuw8WLFxkAAghuGtywr1+/MoAwDLBwc3ODGX///mUAOYCJAQ3ABUCGAi1gYIEJPH/+HEwDBBjj9+/fQ+7fv88Acg8XFxeDoqIiAwcHB8KSq1evMhgbG8MFQJ7X19dnYGJiQrUD7leoJzAcgQswiYmJoQgICwszvHjxguH3798MT58+xQwKdAAA0qtaAxCoGJYAAAAASUVORK5CYII=");*/
-  --collar1:#FC7433;
+  --collar1:#FF8C39;
   --collar2:#000000;
   --collar3:#0347F2;
   --collar4:#F1FF3A;
@@ -185,7 +185,7 @@
   --collar6:#D60C0C; 
   --collar7:#ab65c9; 
   --collar8:#49e5f4;
-  --collar9:#FC7433;
+  --collar9:#906138;
   --charm1:#702F6E;
   --charm2:#94E1EE;
   --charm3:#ffd10e;
@@ -1013,7 +1013,7 @@ span.medidas {
 .collar6 { background: #ff3b3b; }     /* Rojo */
 .collar7 { background: #ab65c9;}      /* Morado*/
 .collar8 { background: #49e5f4;}      /* Azul Aqua*/
-.collar9 { background: #FC7433;}      /* Marron */
+.collar9 { background: #906138;}      /* Marron */
 
 /* Estado seleccionado */
 .collar-option.active {
