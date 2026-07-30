@@ -185,6 +185,7 @@
   --collar6:#D60C0C; 
   --collar7:#ab65c9; 
   --collar8:#49e5f4;
+  --collar9:#906138;
   --charm1:#702F6E;
   --charm2:#94E1EE;
   --charm3:#ffd10e;
@@ -340,6 +341,10 @@ div[id^=collar] {
 
 .collar8{
   background-color:var(--collar8);
+}
+
+.collar9{
+  background-color:var(--collar9);
 }
 
 .row {
@@ -1006,6 +1011,7 @@ span.medidas {
 .collar6 { background: #ff3b3b; }     /* Rojo */
 .collar7 { background: #ab65c9;}      /* Morado*/
 .collar8 { background: #49e5f4;}      /* Azul Aqua*/
+.collar9 { background: #906138;}      /* Cafe */
 
 /* Estado seleccionado */
 .collar-option.active {
