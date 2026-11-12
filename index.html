@@ -3,38 +3,68 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Test Customizer DOM</title>
+  <title>Wawas | Personalizador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+    rel="stylesheet">
+  <style>
+    body {
+      font-family: "Noto Sans", sans-serif;
+      font-weight: 600;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
+    div:nth-child(2) {
+      margin-block-end: 100px;
+    }
+    
+    h2 {
+      font-size: 17px;
+      text-align: center;
+    }
+
+    a {
+      color: black;
+      text-decoration: none;
+    }
+
+    .buttons-container {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      padding: 0 20px;
+    }
+
+    .button {
+      padding: 16px;
+      outline: 2px solid black;
+      border-radius: 16px;
+    }
+  </style>
 </head>
 
 <body>
-
-  <!-- DOM correcto para test.js -->
-  <div>
-    <form id="product-form-template-" class="product-form">
-
-  <input id="Quantity-Form-template" type="number" min="1" value="1" />
-
-  <div id="wawas-customizer-container"></div>
-
-  <div class="product-form__buttons">
-    <button id="ProductSubmitButton-template" type="button">
-      Añadir al carrito
-    </button>
+  <div class="main-container">
+    <h2>Entra al revelador</h2>
+    <div class="buttons-container">
+      <a href="/revelador/">
+        <div class="button">Revelador</div>
+      </a>
+    </div>
+    <h2>Entra a algún personalizador</h2>
+    <div class="buttons-container">
+      <a href="/personalizador/general.html">
+        <div class="button">General</div>
+      </a>
+      <a href="/personalizador/gummy.html">
+        <div class="button">Gummy</div>
+      </a>
+    </div>
   </div>
-
-</form>
-
-
-    <script>
-      // Simular Shopify product id
-      window.__st = { rid: 7340949438614};
-    </script>
-
-
-    <script src="test2.js"></script>
-
-
 </body>
 
 </html>

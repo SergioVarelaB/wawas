@@ -1,15 +1,22 @@
+const debug = {
+  active: true,
+  log: (...items) => {
+    if (debug.active) console.log(...items);
+  },
+};
+
 //ids de producto activas
 const instances = [
   { id: 9117785129193, class: 'collar-para-charms' },// copia dev
   { id: 7340949438614, class: 'collar-para-charms' },
   { id: 7412912783510, class: 'collar-de-charms-mini' },
   { id: 7820838174870, class: 'charms-extra-xs' },
-  { id: 9183669879017, class: 'charms-extra' },
-  { id: 9198218805481, class: 'pechera-y-correa-para-mascota-de-charms' },
+  { id: 7319719280790, class: 'charms-extra' },
+  { id: 7804532261014, class: 'pechera-y-correa-para-mascota-de-charms' },
   { id: 9117784867049, class: 'collar-de-gummies' }, // otra copia gummies
   { id: 7634477645974, class: 'collar-de-gummies' },
-  { id: 9206898065641, class: 'correa-de-charms' },
-  { id: 9206899507433, class: 'correa-para-gato-y-razas-chicas' },
+  { id: 7923429998742, class: 'correa-de-charms' },
+  { id: 8247523573910, class: 'correa-para-gato-y-razas-chicas' },
   { id: 7484253372566, class: 'collar-de-charms-glow-in-the-dark' },
   { id: 9141063024873, class: 'collar-de-charms-conffetti' }, // confeti
   { id: 8582499074198, class: 'collar-de-charms-conffetti' }, // confeti 
@@ -20,15 +27,88 @@ const instances = [
 //obtener el id del producto
 const idProduct = __st.rid;
 
-console.log(idProduct, "idProduct")
+/*  --- GUMMY CHARMS ---
+
+Instrucciones para agregar nuevos gummy charms
+
+1.  Agregar los assets en /assets/charms para probar en un ambiente local
+2.  Agregar un Div con el nombre del archivo como se muestra a continuación:
+      
+      <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-15" onclick="addGummy('15')">
+          <img src="${assetsUrl}/gummy-pepinillo.svg">
+      </div>
+    
+      Asignar un ID único y cambiar la función addGummy con el ID correspondiente.
+3.  Para probar en shopify los archivos se tendrán que subir con el mismo nombre que tienen en el ambiente local a los archivos de la tienda. Cuando el sitio se cargue desde Shopify los archivos deberán ser tomados de los archivos en línea de manera automática gracias a las dos líneas de código debajo de estas instrucciones.
+
+*/
+// Revisar el URL actual para ver de dónde descargamos assets
+const currentUrl = window.location.href;
+const assetsUrl = currentUrl.includes("github") || currentUrl.includes("127.0") ? "./assets/charms" : "https://cdn.shopify.com/s/files/1/0500/2946/1654/files";
 
 document.addEventListener('DOMContentLoaded', function () {
   if (instances.some(product => product.id === idProduct)) {
-    console.log('Powered by Pixelemos ðŸ’œ')
     customizer(idProduct)
 
-  } else {
-    console.log('Powered by Pixelemos ðŸ¤')
+    const steps = document.querySelectorAll(".step");
+
+
+    let steps_header = 1;
+    document.querySelectorAll('.accordion-header').forEach((el, index) => {
+      if (el.style?.display !== "none") {
+        el.dataset.step = steps_header;
+        steps_header++;
+      }
+    });
+
+    let steps_content = 1;
+    document.querySelectorAll('.step').forEach((el, index) => {
+      if (el.style?.display !== "none") {
+        el.dataset.step = steps_content;
+        steps_content++;
+      }
+    });
+
+    function openStep(stepNumber) {
+      steps.forEach(step => {
+        step.classList.remove("active");
+      });
+
+      const next = document.querySelector(`.step[data-step="${stepNumber}"]`);
+      if (next) next.classList.add("active");
+    }
+
+    // regresar
+    document.querySelectorAll(".accordion-header").forEach(btn => {
+      btn.addEventListener("click", function (e) {
+        e.preventDefault(); // clave
+        e.stopPropagation();
+        const currentStep = this.closest(".accordion-header");
+        const stepNumber = parseInt(currentStep.dataset.step);
+        openStep(stepNumber);
+      });
+    });
+
+
+    // click en opciones
+    document.querySelectorAll(".step .option").forEach(btn => {
+      btn.addEventListener("click", function () {
+        const currentStep = this.closest(".step");
+        const stepNumber = parseInt(currentStep.dataset.step);
+        // guardar selección (opcional)
+        currentStep.dataset.selected = this.dataset.value;
+        // avanzar al siguiente
+        openStep(stepNumber + 1);
+      });
+    });
+
+
+
+
+    //init state
+    openStep(1)
+
+
   }
 }, false);
 
@@ -40,17 +120,17 @@ const currentSlug = instances.find(instance => instance.id === idProduct).class;
 const buyButton = document.querySelector('[id^="ProductSubmitButton"]')
 const quantityInput = document.querySelector('[id^="Quantity-Form-template"]')
 const $sizeform = document.querySelector('#values-collar-size')
-var $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+var $charmsArray = [];
 var isPack = false
 let verbose = false
 let wawasContainer
 let currentColor = 4
 let phoneNumber = ""
 let phonecharm = false
-let maxCharms = 9
-let minCharms = 5
-let maxGummys = 7
-let minGummys = 7
+let maxCharms = 9;
+let minCharms = 1;
+let maxGummys = 7;
+let minGummys = 7;
 let collarSize = 'XS'
 let enabledKeyboard = false
 let $gummiesArray = []
@@ -62,17 +142,17 @@ let firstClick = true
 let allowSubmit = false;
 enableBuyButton(false)
 
-function pointZero(){
+function pointZero() {
   isPack = false
   verbose = false
   wawasContainer
   currentColor = 4
   phoneNumber = ""
   phonecharm = false
-  maxCharms = 9
-  minCharms = 5
-  maxGummys = 7
-  minGummys = 7
+  maxCharms = 9;
+  minCharms = 1;
+  maxGummys = 7;
+  minGummys = 7;
   collarSize = 'XS'
   enabledKeyboard = false
   $gummiesArray = []
@@ -82,67 +162,65 @@ function pointZero(){
   $steps = []
   firstClick = true
   switchCustomizer(idProduct, false)
-  enableAccordion()
+  enableTabs()
   allowSubmit = false;
 }
 
-const charmsKeyboardHTML = `<div class="customizer-accordion">
-    <div id="size-container-acordion" class="accordion-item active">
-      <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
-      <div class="accordion-content">
-        <div id="size-container">
-          <div class="size-button size-xs" onclick="changeCollarSize('xs')">XS<span class="medidas">17-29cm</span>
-          </div>
-          <div class="size-button size-s" onclick="changeCollarSize('s')">S<span class="medidas">25-40cm</span></div>
-          <div class="size-button size-m" onclick="changeCollarSize('m')">M<span class="medidas">35-46cm</span></div>
-          <div class="size-button size-l" onclick="changeCollarSize('l')">L<span class="medidas">40-55cm</span></div>
-          <div class="size-button size-xl" onclick="changeCollarSize('xl')">XL<span class="medidas">50-66cm</span>
-          </div>
-          <div class="size-button size-sml" onclick="changeCollarSize('sml')">S/M/L/XL</div>
-        </div>
-      </div>
+const charmsKeyboardHTML = `
+<button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
+<div id="size-step" class="step active" >
+  <div id="size-container">
+    <div class="size-button option size-xs" onclick="changeCollarSize('xs')">XS<span class="medidas">17-29cm</span></div>
+    <div class="size-button option size-s" onclick="changeCollarSize('s')">S<span class="medidas">25-40cm</span></div>
+    <div class="size-button option size-m" onclick="changeCollarSize('m')">M<span class="medidas">35-46cm</span></div>
+    <div class="size-button option size-l" onclick="changeCollarSize('l')">L<span class="medidas">40-55cm</span></div>
+    <div class="size-button option size-xl" onclick="changeCollarSize('xl')">XL<span class="medidas">50-66cm</span></div>
+    <div class="size-button option size-sml" onclick="changeCollarSize('sml')">S/M/L/XL</div></div>
+  </div>
+  <button type="button" id="color-title" class="accordion-header"> 02: Elige el color de tu collar</button>
+  <div id="color-step" class="step" >
+    <div class="color-collar">
+      <div id="collar3" class="option correa-option correa3" data-label="Azul Rey" onclick="selectCollar(this); changeCollarColor('collar3','Azul Rey')"></div>
+      <div id="collar8" class="option correa-option correa8" data-label="Azul Aqua" onclick="selectCollar(this); changeCollarColor('collar8','Azul Aqua')"><!--<span class="badge-nuevo-collar">New</span>--></div>
+      <div id="collar4" class="option correa-option correa4" data-label="Amarillo neón" onclick="selectCollar(this); changeCollarColor('collar4','Amarillo Neon')"></div>
+      <div id="collar1" class="option correa-option correa1" data-label="Naranja neón" onclick="selectCollar(this); changeCollarColor('collar1','Naranja Neon')"></div>
+      <div id="collar6" class="option correa-option correa6" data-label="Rojo" onclick="selectCollar(this); changeCollarColor('collar6','Rojo')"></div>
+      <div id="collar5" class="option correa-option correa5" data-label="Rosa neón" onclick="selectCollar(this); changeCollarColor('collar5','Rosa Neon')"></div>
+      <div id="collar7" class="option correa-option correa7" data-label="Morado" onclick="selectCollar(this); changeCollarColor('collar7','Morado')"> <!--<span class="badge-nuevo-collar">New</span>--></div>
+      <div id="collar2" class="option correa-option correa2" data-label="Negro" onclick="selectCollar(this); changeCollarColor('collar2','Negro')"></div>
+      <div id="collar9" class="option correa-option correa9" data-label="Cafe" onclick="selectCollar(this); changeCollarColor('collar9','Cafe')"></div>
     </div>
-    <div class="accordion-item">
-      <button type="button" class="accordion-header collar-title">02: Elige el color de tu collar</button>
-      <div class="accordion-content">
-        <div class="color-collar">
-          <div id="collar1" class="collar-option collar1" data-label="Naranja neón"
-       onclick="selectCollar(this); changeCollarColor('collar1','Naranja Neon')"></div>
-          <div id="collar2" class="collar-option collar2" data-label="Negro"
-              onclick="selectCollar(this); changeCollarColor('collar2','Negro')"></div>
-          <div id="collar3" class="collar-option collar3" data-label="Azul Rey"
-              onclick="selectCollar(this); changeCollarColor('collar3','Azul Rey')"></div>
-          <div id="collar4" class="collar-option collar4" data-label="Amarillo neón"
-              onclick="selectCollar(this); changeCollarColor('collar4','Amarillo Neon')"></div>
-          <div id="collar5" class="collar-option collar5" data-label="Rosa neón"
-              onclick="selectCollar(this); changeCollarColor('collar5','Rosa Neon')"></div>
-          <div id="collar6" class="collar-option collar6" data-label="Rojo"
-              onclick="selectCollar(this); changeCollarColor('collar6','Rojo')"></div>
-          <div id="collar7" class="collar-option collar7" data-label="Morado"
-              onclick="selectCollar(this); changeCollarColor('collar7','Morado')">
-              <span class="badge-nuevo-collar">
-                    <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
-                    New
-                 </span>
-          </div>
-          <div id="collar8" class="collar-option collar8" data-label="Azul Aqua"
-              onclick="selectCollar(this); changeCollarColor('collar8','Azul Aqua')">
-              <span class="badge-nuevo-collar">
-                    <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="NEW" style="width: 15px;">
-                    New
-                 </span>
-          </div>
+  </div>
+
+  <button type="button" id="keyboard-title" class="accordion-header">03. Comienza a armar tu collar</button>
+  <div id="keyboard-step" class="step"  >
+    <div class="customizer">
+    <style>
+    @font-face {
+      font-family: 'charms';
+      src: url('data:font/ttf;base64,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') format('truetype');
+      font-weight: normal; 
+      font-style: normal;
+      font-display: block;
+    }
+    </style>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="customizer-box">
+
+      <!-- TOP BAR -->
+      <div class="customizer-top">
+        <div class="empty-container" onclick="emptyCharms()">
+        <span class="instruction-text"> <div id="borrar-collar">
+          <svg aria-hidden="true" focusable="false" data-prefix="far"
+            data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img"
+            xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+            <path fill="#FFF"
+              d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z">
+            </path>
+          </svg>
+        </div>BORRAR</span>
         </div>
-      </div>
-    </div>
-    <div class="collar-container">
-    <img id="min-charms" src="https://sergiovarelab.github.io/wawas/assets/5 a 9 charms.png" alt="Imagen pública" style="
-      position: absolute;
-      display: block;
-      top: 10px;
-      max-width: 36%;
-      height: auto;
-      left: 30%;">
+      <div class="collar-container" style="height : 15vh">
     <style>
     @font-face {
       font-family: 'charms';
@@ -152,13 +230,6 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
       font-display: block;
     }
     </style>
-      <div id="vaciar-collar" onclick="emptyCharms()"><svg aria-hidden="true" focusable="false" data-prefix="far"
-          data-icon="trash-alt" class="svg-inline--fa fa-trash-alt fa-w-14" role="img"
-          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
-          <path fill="#fff"
-            d="M268 416h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12zM432 80h-82.41l-34-56.7A48 48 0 0 0 274.41 0H173.59a48 48 0 0 0-41.16 23.3L98.41 80H16A16 16 0 0 0 0 96v16a16 16 0 0 0 16 16h16v336a48 48 0 0 0 48 48h288a48 48 0 0 0 48-48V128h16a16 16 0 0 0 16-16V96a16 16 0 0 0-16-16zM171.84 50.91A6 6 0 0 1 177 48h94a6 6 0 0 1 5.15 2.91L293.61 80H154.39zM368 464H80V128h288zm-212-48h24a12 12 0 0 0 12-12V188a12 12 0 0 0-12-12h-24a12 12 0 0 0-12 12v216a12 12 0 0 0 12 12z">
-          </path>
-        </svg></div>
       <div class="collar">&nbsp;</div>
       <div id="charm-container">
         <div class="charm">A</div>
@@ -171,15 +242,19 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
         <div class="charm">6</div>
         <div class="charm">7</div>
       </div>
-      <div class="msg-borrar"> Da click a la figura para borrar un charm</div>
     </div>
-    <div id="personalize-item" class="accordion-item active">
-      <button id="personalize" type="button" class="accordion-header">03: Comienza a personalizar tus Charms!</button>
-      <div class="accordion-content">
-        <h4 class="elije-charms">Elige tus charms (mínimo 5 - máximo 9)</h4>
-        <div id="keyboard-container" class="charms-sml">
-    <div class="keyboard charms-keyboard">
-    <div class="color-keyboard" style="display:none">
+
+      </div>
+
+      <!-- INSTRUCCIÓN -->
+      <div class="instruction-content">
+          <span id="instruction-charms" class="instruction-text">Incluye 5 charms</span>
+          <span id="instruction-subtext" class="instruction-text instruction-subtext">Charm extra $20 c/u</span>
+      </div>
+
+      <!-- COLORES -->
+      <div>
+       <div class="color-keyboard" style="display:none">
         <div id="color1" class="color-picker color1"  onclick="changeKeysColor('color1')">&nbsp;</div>
         <div id="color2" class="color-picker color2"  onclick="changeKeysColor('color2')">&nbsp;</div>
         <div id="color3" class="color-picker color3"  onclick="changeKeysColor('color3')">&nbsp;</div>
@@ -199,65 +274,66 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
         <div id="color16" class="color-picker color16"  onclick="changeKeysColor('color16')">&nbsp;</div>
         <div id="color17" class="color-picker color17"  onclick="changeKeysColor('color17')">&nbsp;</div>
         <div id="color18" class="color-picker color18"  onclick="changeKeysColor('color18')">&nbsp;</div>
-        <div id="color23" class="color-picker color18 hidden" onclick="changeKeysColor('color18')">&nbsp; <img src="https://sergiovarelab.github.io/wawas/assets/star.png" alt="Nuevo" class="new-badge"></div>
+        <div id="color23" class="color-picker color18 hidden" onclick="changeKeysColor('color18')">&nbsp; <img src="https://wwsmx.com/assets/star.png" alt="Nuevo" class="new-badge"></div>
         <div id="color19" class="color-picker color19"  onclick="changeKeysColor('color19')">&nbsp;</div>
         <div id="color20" class="color-picker color20 hidden"  onclick="changeKeysColor('color20')">&nbsp;</div>
         <div id="color21" class="color-picker color21 hidden"  onclick="changeKeysColor('color21')">&nbsp;</div>
         <div id="color22" class="color-picker color22 hidden"  onclick="changeKeysColor('color22')">&nbsp;</div>
     </div>
-    <div class="row">
-      <div class="keyboard_key color11" id="charm-key-Q" onclick="addCharm('Q')">Q</div>
-      <div class="keyboard_key color11" id="charm-key-W" onclick="addCharm('W')">W</div>
-      <div class="keyboard_key color11" id="charm-key-E" onclick="addCharm('E')">E</div>
-      <div class="keyboard_key color11" id="charm-key-R" onclick="addCharm('R')">R</div>
-      <div class="keyboard_key color11" id="charm-key-T" onclick="addCharm('T')">T</div>
-      <div class="keyboard_key color11" id="charm-key-Y" onclick="addCharm('Y')">Y</div>
-      <div class="keyboard_key color11" id="charm-key-U" onclick="addCharm('U')">U</div>
-      <div class="keyboard_key color11" id="charm-key-I" onclick="addCharm('I')">I</div>
-      <div class="keyboard_key color11" id="charm-key-O" onclick="addCharm('O')">O</div>
-      <div class="keyboard_key color11" id="charm-key-P" onclick="addCharm('P')">P</div>
+      </div>
+  <div class="keyboard charms-keyboard">
+    <div class="lastrow">
+      <div class="keyboard_key_lastrow color11" id="charm-key-Q" onclick="addCharm('Q')">Q</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-W" onclick="addCharm('W')">W</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-E" onclick="addCharm('E')">E</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-R" onclick="addCharm('R')">R</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-T" onclick="addCharm('T')">T</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-Y" onclick="addCharm('Y')">Y</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-U" onclick="addCharm('U')">U</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-I" onclick="addCharm('I')">I</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-O" onclick="addCharm('O')">O</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-P" onclick="addCharm('P')">P</div>
     </div>
-    <div class="row">
-      <div class="keyboard_key color11" id="charm-key-A" onclick="addCharm('A')">A</div>
-      <div class="keyboard_key color11" id="charm-key-S" onclick="addCharm('S')">S</div>
-      <div class="keyboard_key color11" id="charm-key-D" onclick="addCharm('D')">D</div>
-      <div class="keyboard_key color11" id="charm-key-F" onclick="addCharm('F')">F</div>
-      <div class="keyboard_key color11" id="charm-key-G" onclick="addCharm('G')">G</div>
-      <div class="keyboard_key color11" id="charm-key-H" onclick="addCharm('H')">H</div>
-      <div class="keyboard_key color11" id="charm-key-J" onclick="addCharm('J')">J</div>
-      <div class="keyboard_key color11" id="charm-key-K" onclick="addCharm('K')">K</div>
-      <div class="keyboard_key color11" id="charm-key-L" onclick="addCharm('L')">L</div>
-      <div class="keyboard_key color11" id="charm-key-Ã‘" onclick="addCharm('Ñ')">Ñ</div>
+    <div class="lastrow">
+      <div class="keyboard_key_lastrow color11" id="charm-key-A" onclick="addCharm('A')">A</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-S" onclick="addCharm('S')">S</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-D" onclick="addCharm('D')">D</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-F" onclick="addCharm('F')">F</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-G" onclick="addCharm('G')">G</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-H" onclick="addCharm('H')">H</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-J" onclick="addCharm('J')">J</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-K" onclick="addCharm('K')">K</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-L" onclick="addCharm('L')">L</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-Ã‘" onclick="addCharm('Ñ')">Ñ</div>
     </div>
-    <div class="row"> 
-      <div class="keyboard_key color11" id="charm-key-Z" onclick="addCharm('Z')">Z</div>
-      <div class="keyboard_key color11" id="charm-key-X" onclick="addCharm('X')">X</div>
-      <div class="keyboard_key color11" id="charm-key-C" onclick="addCharm('C')">C</div>
-      <div class="keyboard_key color11" id="charm-key-V" onclick="addCharm('V')">V</div>
-      <div class="keyboard_key color11" id="charm-key-B" onclick="addCharm('B')">B</div>
-      <div class="keyboard_key color11" id="charm-key-N" onclick="addCharm('N')">N</div>
-      <div class="keyboard_key color11" id="charm-key-M" onclick="addCharm('M')">M</div>
-      <div class="keyboard_key color11" id="charm-key-1" onclick="addCharm('1')">1</div>
-      <div class="keyboard_key color11" id="charm-key-2" onclick="addCharm('2')">2</div>
-      <div class="keyboard_key color11" id="charm-key-3" onclick="addCharm('3')">3</div>
+    <div class="lastrow"> 
+      <div class="keyboard_key_lastrow color11" id="charm-key-Z" onclick="addCharm('Z')">Z</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-X" onclick="addCharm('X')">X</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-C" onclick="addCharm('C')">C</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-V" onclick="addCharm('V')">V</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-B" onclick="addCharm('B')">B</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-N" onclick="addCharm('N')">N</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-M" onclick="addCharm('M')">M</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-1" onclick="addCharm('1')">1</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-2" onclick="addCharm('2')">2</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-3" onclick="addCharm('3')">3</div>
     </div>
-    <div class="row">
-      <div class="keyboard_key color11" id="charm-key-4" onclick="addCharm('4')">4</div>
-      <div class="keyboard_key color11" id="charm-key-5" onclick="addCharm('5')">5</div>
-      <div class="keyboard_key color11" id="charm-key-6" onclick="addCharm('6')">6</div>
-      <div class="keyboard_key color11" id="charm-key-7" onclick="addCharm('7')">7</div>
-      <div class="keyboard_key color11" id="charm-key-8" onclick="addCharm('8')">8</div>
-      <div class="keyboard_key color11" id="charm-key-9" onclick="addCharm('9')">9</div>
-      <div class="keyboard_key color11" id="charm-key-0" onclick="addCharm('0')">0</div>
-      <div class="keyboard_key color11" >&nbsp;</div>
-      <div class="keyboard_key color11" >&nbsp;</div>      
-      <div class="keyboard_key color11" id="charm-key-phone" onclick="if(!phonecharm)addCharm('#')"><img src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" width="32" height="32" alt="phone charm"></div>
+    <div class="lastrow">
+      <div class="keyboard_key_lastrow color11" id="charm-key-4" onclick="addCharm('4')">4</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-5" onclick="addCharm('5')">5</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-6" onclick="addCharm('6')">6</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-7" onclick="addCharm('7')">7</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-8" onclick="addCharm('8')">8</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-9" onclick="addCharm('9')">9</div>
+      <div class="keyboard_key_lastrow color11" id="charm-key-0" onclick="addCharm('0')">0</div>
+      <div class="keyboard_key_lastrow phone-key color11" id="charm-key-phone" onclick="if(!phonecharm)addCharm('#')"><span class="phone-text">Charm de <br> #telefónico</span><img src="https://cdn.shopify.com/s/files/1/0500/2946/1654/t/3/assets/phonecharm.png?v=2" width="24" height="24" alt="phone charm"></div>
     </div>
+        
     </div>
-  </div>
-  </div>
-  </div>  
-  <h4 id="phone-title" style="display:none">Teléfono (10 digitos)</h4>
+    
+
+      <!-- INPUT TELÉFONO -->
+    <h4 id="phone-title" style="display:none">Teléfono (10 digitos)</h4>
   <input type="phone" id="phone" value="" style="display:none">
   <div id="phone-level" style="display:none">&nbsp;</div>
   <div id="general-values" class="invisible">
@@ -267,11 +343,15 @@ const charmsKeyboardHTML = `<div class="customizer-accordion">
   <input type="text" id="values-collar-color" value="No aplica"><br>
   <label for="values-charms-number">NÃºmero de charms</label><br>
   <input type="number" id="values-charms-number"  value="0"><br>  
-  </div>`
+    </div>
+
+  </div>
+</div> 
+`
 
 const gummysKeyboardHTML = `<div class="customizer-accordion">
+      <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
       <div class="accordion-item active">
-        <button type="button" id="size-title" class="accordion-header"> 01: Elige el tamaño de tu collar</button>
         <div class="accordion-content">
           <div id="size-container">
             <div class="size-button size-xs" onclick="changeGummysCollarSize('xs')">XS</div>
@@ -283,12 +363,12 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
         </div>
       </div>
       <div class="collar-container">
-      <img src="https://sergiovarelab.github.io/wawas/assets/elige.gummies.png" alt="Imagen pública" style="
+      <img src="https://wwsmx.com/assets/7 Charms.png" alt="7 gummyes" style="
     position: absolute;
     top: 10px;
-    max-width: 36%;
+    max-width: 50%;
     height: auto;
-    left: 30%;">
+    left: 25%;">
      <style>
     @font-face {
       font-family: 'gummies';
@@ -575,7 +655,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
                           fill: #ff0d1a;
                         }
 
-                        .corazon-3 {
+                        .cor
                           fill: #ffa0f0;
                         }
 
@@ -819,14 +899,30 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
                       style="fill:#1d1d1b" />
                   </svg>
                 </div>
-                <div style="width: calc(10% - 2px)">&nbsp;</div>
-                <div style="width: calc(10% - 2px)">&nbsp;</div>
-                <div style="width: calc(10% - 2px)">&nbsp;</div>
-                <div style="width: calc(10% - 2px)">&nbsp;</div>
-                <div style="width: calc(10% - 2px)">&nbsp;</div>
-                <div style="width: calc(10% - 2px)">&nbsp;</div>
-                <div style="width: calc(10% - 2px)">&nbsp;</div>
-                <div style="width: calc(10% - 2px)">&nbsp;</div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-15" onclick="addGummy('15')">
+                  <img src="${assetsUrl}/gummy-pepinillo.svg">
+                </div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-16" onclick="addGummy('16')">
+                  <img src="${assetsUrl}/gummy-hotdog-rojo.svg">
+                </div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-17" onclick="addGummy('17')">
+                  <img src="${assetsUrl}/gummy-hotdog-amarillo.svg">
+                </div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-18" onclick="addGummy('18')">
+                  <img src="${assetsUrl}/gummy-galleta.svg">
+                </div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-19" onclick="addGummy('19')">
+                  <img src="${assetsUrl}/gummy-llave-amarilla.svg">
+                </div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-20" onclick="addGummy('20')">
+                  <img src="${assetsUrl}/gummy-candado-amarillo.svg">
+                </div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-21" onclick="addGummy('21')">
+                  <img src="${assetsUrl}/gummy-llave-dorada.svg">
+                </div>
+                <div class="keyboard_key gummy gummy-color-rojo" id="gummyKey-22" onclick="addGummy('22')">
+                  <img src="${assetsUrl}/gummy-candado-dorado.svg">
+                </div>
               </div><!-- row-->
             </div> <!--gummies keyboard-->
           </div>
@@ -847,7 +943,7 @@ const gummysKeyboardHTML = `<div class="customizer-accordion">
 
 
 function packKeyboard(firstKeyboard) {
-    return `
+  return `
 <div class="pack-container">
 
   <div class="customizer">
@@ -881,7 +977,7 @@ function customizer(id) {
   const link = document.createElement('link');
   link.rel = 'stylesheet';
   link.type = 'text/css';
-  link.href = 'https://sergiovarelab.github.io/wawas/styleWawas.css';
+  link.href = 'https://wwsmx.com/styleWawasv2.css';
   document.head.appendChild(link);
   //adjuntar html2canvas 
   let scriptDom = document.createElement('script')
@@ -908,43 +1004,48 @@ function customizer(id) {
   enableBuyButton(false);
 
   //agregar campos para enviar personalizador
-  addCartPropertiesField()
-  document.querySelector('#charmsForm').value = ""
+  addCartPropertiesField();
+  document.querySelector('#charmsCode').value = "";
 
   //cargar teclado personalizado segun id
   switchCustomizer(id)
 
-  if(!isPack){ //isPack
-    enableAccordion();
+  if (!isPack) { //isPack
+    enableTabs();
   }
   // nextBtn()
 }
 
-function switchCustomizer(id, isFirst = true){
+const charmsPlaceholdersArray = {
+  'large-placeholder': [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]],
+  'funfetti-placeholder': [['A', 22], ['R', 22], ['M', 22], ['A', 22], ['7', 22], ['A', 22], ['Q', 22], ['U', 22], ['I', 22]],
+  'gitd-placeholder': [['A', 10], ['R', 10], ['M', 10], ['A', 10], ['7', 10], ['A', 10], ['Q', 10], ['U', 10], ['I', 10]],
+  'small-placeholder': [['C', 11], ['U', 12], ['S', 13], ['T', 14], ['7', 15], ['M', 16]],
+};
+let charmsPlaceholder = [];
+
+function switchCustomizer(id, isFirst = true) {
 
   switch (id) {
     case 7340949438614: //collar-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R',   12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('.size-xs .medidas').textContent = '20-33cm';
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
-      // document.querySelector(`input[value='5']+label`).click()
-      //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       if (isFirst) enableBuyButton(false)
-      document.querySelector('#charmsForm').value = ""
+        document.querySelector('#charmsCode').value = ""
       break;
     case 9117785129193: //collar-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
@@ -952,17 +1053,17 @@ function switchCustomizer(id, isFirst = true){
       changeCollarSize('s', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color11')
+      document.querySelector('.size-xs .medidas').textContent = '20-33cm';
       // document.querySelector(`input[value='5']+label`).click()
       //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       if (isFirst) enableBuyButton(false)
-      document.querySelector('#charmsForm').value = ""
+      document.querySelector('#charmsCode').value = ""
       break;
     case 7412912783510: //collar-de-charms-mini
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "flex"
       document.querySelector('#keyboard-container').classList.replace('charms-sml', 'charms-xs')
@@ -972,20 +1073,17 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.size-l').style.display = "none"
       document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
-      displayCharms($charmsArray)
+      // passProductProperties(idProduct, $charmsArray)
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
-      // document.querySelector(`input[value='5']+label`).click()
-      //detectar el numero de digitos del telefono
       document.querySelector('#phone').addEventListener('input', updateCharms)
       changeKeysColor('color11')
       if (isFirst) enableBuyButton(false)
       break;
     case 7820838174870: //charms-extra-xs
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-s').style.display = "none"
       document.querySelector('.size-m').style.display = "none"
       document.querySelector('.size-l').style.display = "none"
@@ -999,136 +1097,138 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.new-color-keyboard').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "flex"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
-      document.querySelector('#personalize').innerHTML="Personaliza tus charms"
+      document.querySelector('#phone').addEventListener('input', updateCharms)
+      document.querySelector('#personalize').innerHTML = "Personaliza tus charms"
       changeCollarSize('xs', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color1')
       minCharms = 1
       maxCharms = 100
       break;
-    case 91177851291934: //charms-extra
-      myLog(currentSlug)
-      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
+    case 91177851291934: //charms-extra - dev
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-s').style.display = "none"
       document.querySelector('.size-m').style.display = "none"
       document.querySelector('.size-l').style.display = "none"
       document.querySelector('.size-xl').style.display = "none"
       /*document.querySelector('#size-title').style.display="none"          
       document.querySelector('#size-container').style.display="none"          */
-      document.querySelector('.collar-title').style.display = "none"
+      // document.querySelector('.collar-title').style.display = "none"
       document.querySelector('.color-collar').style.display = "none"
-      document.querySelector('.collar').style.display = "none"
-      document.querySelector('.elije-charms').style.display = "none"
+      // document.querySelector('.collar').style.display = "none"
+      // document.querySelector('.elije-charms').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color22').classList.remove('hidden') /*Activar charms Conffetti */
       // document.querySelector('#color23').classList.add('hidden') /*Desactivar color aqua*/
       document.querySelector('.medidas').style.display = "none"
-      document.querySelector('#size-title').innerHTML="01: Elige el tamaño de tus charms"
-      document.querySelector('#personalize').innerHTML="02: Personaliza tus charms (hasta 19 pz)"
+      document.querySelector('#size-title').innerHTML = "01: Elige el tamaño de tus charms"
+      // document.querySelector('#personalize').innerHTML="02: Personaliza tus charms (hasta 19 pz)"
       changeCollarSize('sml', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 1
-      maxCharms = 19
-      document.getElementById('min-charms').style.display = "none"
+      minCharms = 1;
+      maxCharms = 19;
+      // document.getElementById('min-charms').style.display = "none"
       break;
-    case 9183669879017: //charms-extra
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['7', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19], ['#',19]]
+    case 7319719280790: //charms-extra
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-s').style.display = "none"
       document.querySelector('.size-m').style.display = "none"
       document.querySelector('.size-l').style.display = "none"
       document.querySelector('.size-xl').style.display = "none"
-      /*document.querySelector('#size-title').style.display="none"          
-      document.querySelector('#size-container').style.display="none"          */
-      document.querySelector('.collar-title').style.display = "none"
       document.querySelector('.color-collar').style.display = "none"
       document.querySelector('.collar').style.display = "none"
-      document.querySelector('.elije-charms').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color22').classList.remove('hidden') /*Activar charms Conffetti */
-      // document.querySelector('#color23').classList.add('hidden') /*Desactivar color aqua*/
       document.querySelector('.medidas').style.display = "none"
-      document.querySelector('#size-title').innerHTML="01: Elige el tamaño de tus charms"
-      document.querySelector('#personalize').innerHTML="02: Personaliza tus charms (hasta 19 pz)"
+      document.querySelector('#size-title').innerHTML = "01: Elige el tamaño de tus charms"
+      document.querySelector('#color-title').style.display = "none"
+      document.querySelector('#color-step').style.display = "none"
+      document.querySelector('#keyboard-title').innerHTML = "02: Personaliza tus charms (hasta 19 pz)"
+      document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 19 charms";
+      document.querySelector('#instruction-subtext').innerHTML = "";
+      document.querySelector('#instruction-charms').style.fontSize = "1.1rem"
+      document.querySelector('#phone').addEventListener('input', updateCharms)
       changeCollarSize('sml', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 1
-      maxCharms = 19
-      document.getElementById('min-charms').style.display = "none"
+      minCharms = 1;
+      maxCharms = 19;
       break;
-    case 9198218805481: //pechera-y-correa-para-mascota-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
+    case 7804532261014: //pechera-y-correa-para-mascota-de-charms
       wawasContainer.innerHTML = charmsKeyboardHTML
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
       document.querySelector('#size-title').innerHTML = "01: Elige el tamaño de tu pechera"
-      document.querySelector('#personalize').innerHTML="02: Personaliza tus 15 charms"
+      document.querySelector('#keyboard-title').innerHTML = "02: Personaliza tus 15 charms"
+      document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 15 charms";
+      document.querySelector('#instruction-subtext').innerHTML = '';
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
       document.querySelector('.size-sml').style.display = "none"
-      document.querySelector('.size-xs').style.display = "none"
+      document.querySelector('.size-xs .medidas').textContent = '22-28cm';
       document.querySelector('.size-xl').style.display = "none"
-      document.querySelector('.collar-title').style.display = "none"
-      document.querySelector('.color-collar').style.display = "none"
-      document.querySelector('.collar').style.display = "none"
-      document.querySelector('.elije-charms').style.display = "none"
-      document.querySelector('#charm-container').classList.add('charms-sueltos')
-      changeCollarSize('s', false)
-      if (isFirst) enableBuyButton(false)
-      changeKeysColor('color11')
-      minCharms = 15
-      maxCharms = 15
-      document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/15 Charms.png';
-      break;
+      // document.querySelector('.collar-title').style.display = "none"
+      document.querySelector('#color-title').style.display = "none"
+      document.querySelector('#color-step').style.display = "none"
 
-    case 9206898065641: //correa-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
-      wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('#size-container').style.display = 'none'
-      document.querySelector('#size-title').innerHTML = " "
-      document.querySelector('#charm-key-phone').style.pointerEvents = "none"
-      document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
-      document.querySelector('.size-sml').style.display = "none"
-      document.querySelector('.size-xs').style.display = "none"
-      document.querySelector('.size-xl').style.display = "none"
-      document.querySelector('.collar-title').style.display = "none"
-      document.querySelector('.color-collar').style.display = "none"
+      // document.querySelector('.color-collar').style.display = "none"
       document.querySelector('.collar').style.display = "none"
-      document.querySelector('.elije-charms').style.display = "none"
+      // document.querySelector('.elije-charms').style.display = "none"
+
       document.querySelector('#charm-container').classList.add('charms-sueltos')
-      document.querySelector('#size-title').classList.add('accordion-header-disabled')
-      document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu correa <br> (15 charms)" 
-      changeCollarSize('s', false)
+      changeCollarSize('xs', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 15
-      maxCharms = 15
-      document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/15 Charms.png';
+      minCharms = 1;
+      maxCharms = 15;
       break;
-    case 9206899507433: //correa-para-gato-y-razas-chicas ///
-      myLog(currentSlug)
-      $charmsArray = [['A', 11], ['R', 12], ['M', 13], ['A', 14], ['2', 15], ['A', 16], ['Q', 17], ['U', 18], ['I', 19]]
+    case 7923429998742: //correa-de-charms
       wawasContainer.innerHTML = charmsKeyboardHTML
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      document.querySelector('#size-container').style.display = 'none'
+      document.querySelector('#size-title').innerHTML = ""
+      document.querySelector('#charm-key-phone').style.pointerEvents = "none"
+      document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
+      document.querySelector('.size-sml').style.display = "none"
+      document.querySelector('.size-xs').style.display = "none"
+      document.querySelector('.size-xl').style.display = "none"
+      document.querySelector('.color-collar').style.display = "none"
+      document.querySelector('.collar').style.display = "none"
+      document.querySelector('#charm-container').classList.add('charms-sueltos')
+      document.querySelector("#size-step").style.display = "none"
+      document.querySelector("#size-title").style.display = "none"
+      document.querySelector("#color-step").style.display = "none"
+      document.querySelector("#color-title").style.display = "none"
+      document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar <br> tu correa (15 charms)"
+      document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 15 charms"
+      document.querySelector('#instruction-subtext').innerHTML = '';
+      //
+      changeCollarSize('s', false)
+      if (isFirst) enableBuyButton(false)
+      changeKeysColor('color11')
+      minCharms = 1;
+      maxCharms = 15;
+      break;
+    case 8247523573910: //correa-para-gato-y-razas-chicas ///
+      wawasContainer.innerHTML = charmsKeyboardHTML
+      charmsPlaceholder = charmsPlaceholdersArray['large-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
+      document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#size-container').style.display = 'none'
       document.querySelector('#size-title').innerHTML = " "
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
@@ -1136,99 +1236,95 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-xl').style.display = "none"
-      document.querySelector('.collar-title').style.display = "none"
-      document.querySelector('.color-collar').style.display = "none"
       document.querySelector('.collar').style.display = "none"
-      document.querySelector('.elije-charms').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
-      document.querySelector('#size-title').classList.add('accordion-header-disabled')
-      document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu correa <br> (15 charms)" 
+      document.querySelector('#charm-container').classList.add('charms-sueltos')
+      document.querySelector("#size-step").style.display = "none"
+      document.querySelector("#size-title").style.display = "none"
+      document.querySelector("#color-step").style.display = "none"
+      document.querySelector("#color-title").style.display = "none"
+      document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar <br> tu correa (15 charms)"
+      document.querySelector('#instruction-charms').innerHTML = "Elige de 1 a 15 charms";
+      document.querySelector('#instruction-subtext').innerHTML = "";
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 15
-      maxCharms = 15
-      document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/15 Charms.png';
+      minCharms = 1;
+      maxCharms = 15;
       break;
     case 8289135952022: //llavero-de-charms
-      myLog(currentSlug)
-      $charmsArray = [['A', 19], ['R', 18], ['M', 17], ['A', 16], ['M', 15], ['E', 14]]
       wawasContainer.innerHTML = charmsKeyboardHTML
+      charmsPlaceholder = charmsPlaceholdersArray['small-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
       document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-      document.querySelector('#size-container').style.display = 'none'
-      document.querySelector('#size-title').innerHTML = " "
       document.querySelector('#charm-key-phone').style.pointerEvents = "none"
       document.querySelector('#charm-key-phone').innerHTML = "&nbsp;"
+      document.querySelector('.collar').style.display = "none"
       document.querySelector('.size-sml').style.display = "none"
       document.querySelector('.size-xs').style.display = "none"
       document.querySelector('.size-xl').style.display = "none"
-      document.querySelector('.collar-title').style.display = "none"
-      document.querySelector('.color-collar').style.display = "none"
-      document.querySelector('.collar').style.display = "none"
-      document.querySelector('.elije-charms').style.display = "none"
-      document.querySelector('#size-container-acordion').style.display = "none"
       document.querySelector('#charm-container').classList.add('charms-sueltos')
-      document.querySelector('#size-title').classList.add('accordion-header-disabled')
-      document.querySelector('#size-title').classList.remove('accordion-header')
-      document.querySelector('#personalize').innerHTML="01: Click aquí para personalizar tu llavero <br> (6 charms)" 
+      document.querySelector("#size-step").style.display = "none"
+      document.querySelector("#size-title").style.display = "none"
+      document.querySelector("#color-step").style.display = "none"
+      document.querySelector("#color-title").style.display = "none"
+      document.querySelector('#keyboard-title').innerHTML = "01: Comienza a personalizar  <br> tu llavero (6 charms)"
+      document.querySelector('#instruction-charms').innerHTML = " Agrega de 1 a 6 charms";
+      document.querySelector('#instruction-subtext').innerHTML = '';
       changeCollarSize('s', false)
       if (isFirst) enableBuyButton(false)
       changeKeysColor('color11')
-      minCharms = 6
-      maxCharms = 6
-      document.getElementById('min-charms').src = 'https://sergiovarelab.github.io/wawas/assets/6 Charms.png';
+      minCharms = 1;
+      maxCharms = 6;
       break;
     case 9120268222697: //llavero-de- testttttttt
-      myLog(currentSlug)
       document.querySelector("form[id^='product-form-template-'] .product-form__buttons").style.display = "none";
       // primer elemento
       isPack = true;
       $steps = [
         {
-            id:1,
-            stepName :  "Personaliza tu collar",
-            keyboardType : "charms",
-            minCharms : 5,
-            maxCharms : 9,
+          id: 1,
+          stepName: "Personaliza tu collar",
+          keyboardType: "charms",
+          minCharms: 5,
+          maxCharms: 9,
         },
         {
-            id:2,
-            stepName :  "Personaliza tu llavero",
-            keyboardType : "gummies",
-            minCharms : 5,
-            maxCharms : 9,
+          id: 2,
+          stepName: "Personaliza tu llavero",
+          keyboardType: "gummies",
+          minCharms: 5,
+          maxCharms: 9,
         }
       ]
       renderStep()
-      
+
       break;
     case 7484253372566: //collar-de-charms-glow-in-the-dark
-      myLog(currentSlug)
-      $charmsArray = [['A', 10], ['R', 10], ['M', 10], ['A', 10], ['1', 10], ['A', 10], ['Q', 10], ['U', 10], ['I', 10]]
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['gitd-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
-      document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "none"
+      document.querySelector('.size-xs .medidas').textContent = '20-33cm';
+      document.querySelector('#phone').addEventListener('input', updateCharms)
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color10')
-      // document.querySelector(`input[value='5']+label`).click()
+      document.querySelector('#instruction-subtext').innerHTML = 'Charm extra $40 c/u';
       if (isFirst) enableBuyButton(false)
       break;
-    case 9141063024873: //collar-de-charms-conffeti
-      myLog(currentSlug)
-      $charmsArray = [['A', 22], ['R', 22], ['M', 22], ['A', 22], ['1', 22], ['A', 22], ['Q', 22], ['U', 22], ['I', 22]]
+    case 8582499074198: //collar-de-charms-conffeti
       wawasContainer.innerHTML = charmsKeyboardHTML
-      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      charmsPlaceholder = charmsPlaceholdersArray['funfetti-placeholder'];
+      document.querySelector('#charm-container').innerHTML = renderCharms(charmsPlaceholder);
       document.querySelector('.size-sml').style.display = "none"
-      document.querySelector('.size-xl').style.display = "none"
+      //document.querySelector('.size-xl').style.display = "none"
       document.querySelector('.color-keyboard').style.display = "none"
       document.querySelector('.new-color-keyboard').style.display = "none"
+      document.querySelector('.size-xs .medidas').textContent = '20-33cm';
       changeCollarSize('xs', false)
       changeCollarColor('collar1', 'Naranja Neon', false)
       changeKeysColor('color22')
@@ -1236,9 +1332,8 @@ function switchCustomizer(id, isFirst = true){
       document.querySelector('#phone').addEventListener('input', updateCharms)
       // document.querySelector(`input[value='5']+label`).click()
       if (isFirst) enableBuyButton(false)
-      break;  
+      break;
     case 9117784867049: //collar-de-gummies
-      myLog('Inicializando collar de gummys')
       wawasContainer.innerHTML = gummysKeyboardHTML
       window.$gummyColor = document.querySelector('#values-gummys-color')
       window.$qtyGummies = document.querySelector('#values-gummys-number')
@@ -1247,13 +1342,12 @@ function switchCustomizer(id, isFirst = true){
       changeGummysCollarSize('xs')
       break;
     case 7634477645974: //collar-de-gummies
-      myLog('Inicializando collar de gummys')
       wawasContainer.innerHTML = gummysKeyboardHTML
       window.$gummyColor = document.querySelector('#values-gummys-color')
       window.$qtyGummies = document.querySelector('#values-gummys-number')
       $gummyColor.value = 'rojo'
       changeGummysCollarSize('xs')
-    break;
+      break;
     default:
       break;
   }
@@ -1262,10 +1356,6 @@ function switchCustomizer(id, isFirst = true){
 //Shared functions
 function enableBuyButton(enabled) {
   enabled ? buyButton.removeAttribute('disabled') : buyButton.setAttribute('disabled', true)
-}
-
-function myLog(message) {
-  verbose ? console.log(message) : verbose = false
 }
 
 function createWawasContainer(node) {
@@ -1279,7 +1369,7 @@ function createWawasContainer(node) {
 
 
 function selectCollar(el) {
-  document.querySelectorAll('.collar-option').forEach(c => c.classList.remove('active'));
+  document.querySelectorAll('.correa-option').forEach(c => c.classList.remove('active'));
   el.classList.add('active');
 }
 
@@ -1294,37 +1384,60 @@ function removeActive() {
 
 function enableAccordion() {
   const headers = document.querySelectorAll('.accordion-header');
-  if (!headers.length) return; 
+  if (!headers.length) return;
 
   headers.forEach(header => {
     header.addEventListener('click', () => {
-
-      // e.preventDefault() y e.stopPropagation() eliminados.
-      if(header.id === "personalize" && firstClick){
+      e.preventDefault()
+      e.stopPropagation()
+      if (header.id === "personalize" && firstClick) {
         console.log(` ${$steps[currentStep]?.keyboardType} o  ${(!currentSlug.includes('gummies'))}`)
-        if(($steps[currentStep]?.keyboardType && $steps[currentStep].keyboardType !== "gummies") || (!currentSlug.includes('gummies'))){
+        if (($steps[currentStep]?.keyboardType && $steps[currentStep].keyboardType !== "gummies") || (!currentSlug.includes('gummies'))) {
           console.log(($steps[currentStep]?.keyboardType && $steps[currentStep].keyboardType !== "gummies") || (!currentSlug.includes('gummies')))
           allowSubmit = false;
           emptyCharms()
         }
         firstClick = false
+      } else {
+        return
       }
 
       if (header.id === "personalize") return;
-      
+
       const item = header.parentElement;
       const accordion = item.parentElement;
 
       accordion.querySelectorAll('.accordion-item').forEach(i => {
-        if (i !== item && i.id !== "personalize-item"){
+        if (i !== item && i.id !== "personalize-item") {
           i.classList.remove('active');
-        } 
-
+        }
       });
 
       item.classList.toggle('active');
     });
   });
+}
+
+function goToStep(n) {
+  if (n === 3 && firstClick) {
+    if (($steps[currentStep]?.keyboardType && $steps[currentStep].keyboardType !== "gummies") || (!currentSlug.includes('gummies'))) {
+      allowSubmit = false;
+      emptyCharms();
+    }
+    firstClick = false;
+  }
+
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.step-tab').forEach(t => t.classList.remove('active'));
+
+  const panel = document.getElementById('step-panel-' + n);
+  const tab = document.getElementById('step-tab-' + n);
+  if (panel) panel.classList.add('active');
+  if (tab) tab.classList.add('active');
+}
+
+function enableTabs() {
+  // Tab navigation is driven by goToStep() onclick handlers in the HTML.
 }
 
 function activateAccordionByHeaderId(headerId) {
@@ -1339,32 +1452,35 @@ function activateAccordionByHeaderId(headerId) {
 
 
 function addCartPropertiesField() {
-  let idfieldImg = document.createElement('input')
-  idfieldImg.setAttribute('type', 'hidden')
-  idfieldImg.setAttribute('name', 'properties[(Ingresa el siguiente link en tu navegador para ver tu diseño)]')
-  idfieldImg.setAttribute('id', 'imageProduct')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldImg, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfielPhone = document.createElement('input')
-  idfielPhone.setAttribute('type', 'hidden')
-  idfielPhone.setAttribute('name', 'properties[Telefono]')
-  idfielPhone.setAttribute('id', 'telefono') 
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfielPhone, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfieldSize = document.createElement('input')
-  idfieldSize.setAttribute('type', 'hidden')
-  idfieldSize.setAttribute('name', 'properties[Tamaño]')
-  idfieldSize.setAttribute('id', 'size') 
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfieldSize, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let field = document.createElement('input')
-  field.setAttribute('type', 'hidden')
-  field.setAttribute('name', 'properties[_charms]')
-  field.setAttribute('id', 'charmsForm')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(field, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
-  let idfield = document.createElement('input')
-  idfield.setAttribute('type', 'hidden')
-  idfield.setAttribute('name', 'properties[_id_pixelemos]')
-  idfield.setAttribute('id', 'idPixelemos')
-  document.querySelector("form[id^='product-form-template-'] .product-form__buttons").parentElement.insertBefore(idfield, document.querySelector("form[id^='product-form-template-'] .product-form__buttons"))
+  const buttons = (
+    "form[id^='product-form-template-'] .product-form__buttons"
+  );
+  // Si no se encuentra "form" no se hace nada, evita crasheos.
+  if (!buttons) return;
+
+  const fields = [
+    { name: 'Color de collar', id: 'collarColor' },
+    { name: 'Charms', id: 'charmsSimplified' },
+    { name: 'Telefono', id: 'phoneCharm' },
+    { name: '_(Ingresa el siguiente link en tu navegador para ver tu diseño)', id: 'imageProduct' },
+    { name: '_Codigo para revelador', id: 'charmsCode' },
+  ];
+
+  fields.forEach(({ name, id }) => {
+    if (document.getElementById(id)) return; // Evitar duplicados
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = `properties[${name}]`;
+    input.id = id;
+    document.querySelector(buttons).parentElement.insertBefore(input, document.querySelector(buttons));
+  });
 }
+
+
+function encodeCharms(ch) {
+  return ch.map(([char, val]) => `${char},${val}`).join('.');
+}
+
 
 
 async function getCart() {
@@ -1374,41 +1490,101 @@ async function getCart() {
 }
 
 //Charms functions
+
+function syncPhoneState() {
+  const phone = document.getElementById('phone');
+  const display = hasPhoneCharm() ? '' : 'none';
+  phone.style.display = display;
+  document.getElementById('phone-title').style.display = display;
+  document.getElementById('phone-level').style.display = display;
+
+  if (!hasPhoneCharm) {
+    phone.value = '';
+    phoneNumber = '';
+  }
+}
+
 function updateCharms(caller) {
-  myLog('Updated by: ' + caller)
-  document.querySelector('#values-charms-number').value = $charmsArray.length
-  // if (currentSlug == 'charms-extra' || currentSlug == 'charms-extra-xs') {
-  //   document.querySelector('.quantity__input').value = $charmsArray.length
-  // } else {
-    if ($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`)){
-      document.querySelector(`input[value='${$charmsArray.length}']+label`).click()
-    }
+  debug.log('called updateCharms.', '$charmsArray:', JSON.stringify($charmsArray));
+  
+  syncPhoneState();
+
+  const charmsQty = $charmsArray.length;
+  let collarSize;
+  let collarPhone;
+  let phoneDigits;
+
+  document.querySelector('#values-charms-number').value = charmsQty;
+
+  if (charmsQty < minCharms) {
+    document.querySelector(`input[value='${minCharms}']+label`).click();
+  }
+  if (charmsQty >= minCharms && $charmsArray.length <= maxCharms && document.querySelector(`input[value='${$charmsArray.length}']+label`)) {
+    document.querySelector(`input[value='${$charmsArray.length}']+label`).click()
+  }
   // }
 
-  //avanzar el termometro del telefono
-  let phoneDigits = document.querySelector('#phone').value.length
-  document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%'
-  document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red'
-  myLog('Update: #charms: ' + $charmsArray.length + ' digitos: ' + phoneDigits)
-  document.querySelector('#charmsForm').value = displayCharms($charmsArray)
-  let telefono = (document.querySelector('#phone')) ? document.querySelector('#phone').value : ' No aplica'
-  let general = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value}<br>Color del collar: ${document.querySelector('#values-collar-color').value}<br>Teléfono: ${telefono}</div>`
-  if ($gummiesArray.length !== 0) {
-    document.querySelector('#charmsForm').value = general + displayCharms($charmsArray) + displayGummies($gummiesArray)
-  } else {
-    document.querySelector('#charmsForm').value = general + displayCharms($charmsArray)
+
+
+  try {
+    const variantSelects = document.querySelector('variant-selects');
+
+    // Buscar el radio marcado del grupo "Tamaño"
+    const tamañoChecked = document.querySelector('input[name^="Tamaño"]:checked');
+    const collarSize = document.querySelector('#values-collar-size').value
+    if (tamañoChecked?.value && (tamañoChecked?.value != collarSize)) {
+      document.querySelector(`input[value='${collarSize.toUpperCase()}']+label`).click()
+    }
+  } catch (err) {
+    console.error(err)
   }
+
+  //avanzar el termometro del telefono
+  collarSize = document.querySelector('#values-collar-size').value;
+  let collarColor = document.querySelector('#values-collar-color').value;
+  const phoneValue = hasPhoneCharm() ? document.getElementById('phone').value : '';
+  collarPhone = phoneValue || 'N/A';
+  phoneDigits = phoneValue.length;
+  const telefono = phoneValue || 'N/A';
+  document.querySelector('#phone-level').style.width = phoneDigits * 10 + '%';
+  document.querySelector('#phone-level').style.background = phoneDigits == 10 ? 'green' : 'red';
+  passProductProperties(idProduct, collarSize, collarColor, $charmsArray, collarPhone);
   //desbloquear compras si los charms son >= que el minimo, <= maximo, si los digitos del telefono son 10 
-  if (($charmsArray.length >= minCharms && $charmsArray.length <= maxCharms) && ((phoneDigits == 10 && phonecharm) || !phonecharm) && (!firstClick)) {
-    myLog('Compras desbloqueadas')
+  if (($charmsArray.length >= 1 && $charmsArray.length <= maxCharms) && ((phoneDigits == 10) || !phonecharm) && (!firstClick)) {
     enableBuyButton(true)
   } else {
-    myLog('Compras bloqueadas')
     enableBuyButton(false)
   }
 
+  // document.querySelector('#values-collar-color').value
+  const collarMap = {
+    'Naranja Neon': '1',
+    'Negro': '2',
+    'Azul Rey': '3',
+    'Amarillo Neon': '4',
+    'Rosa Neon': '5',
+    'Rojo': '6',
+    'Morado': '7',
+    'Azul Aqua': '8',
+    'Cafe': '9'
+  };
+
+  collarColor = collarMap[document.querySelector('#values-collar-color').value] || ''
+
   nextBtn()
+
+  const data = {
+    cS: document.querySelector('#values-collar-size').value || "NA",
+    c: collarColor,
+    ch: encodeCharms($charmsArray),
+    p: telefono || "NA"
+  }
+
+  const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(data));
+  document.querySelector('#imageProduct').value = `https://wwsmx.com/revelador.html?data=${compressed}`
+
 }
+
 
 function emptyCharms() {
   $charmsArray = [];
@@ -1422,26 +1598,34 @@ function emptyCharms() {
   updateCharms('emptyCharms')
 }
 
+function hasPhoneCharm() {
+  return $charmsArray.some(c => c[0] === '#');
+}
+
 function addCharm(charm) {
-  if(firstClick){
+  if (firstClick) {
     firstClick = false
     emptyCharms()
   }
+
   if ($charmsArray.length < maxCharms) {
-    console.log("charmssss")
-    $charmsArray.push([charm, currentColor])
-    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+    const item = [charm, currentColor];
     if (charm == '#') {
-      phonecharm = true
-      phoneNumber = document.querySelector('#phone').value
-      document.querySelector('#phone').style.display = ''
-      document.querySelector('#phone-title').style.display = ''
-      document.querySelector('#phone-level').style.display = ''
-      //document.querySelector(`input[value='Con']+label`).click()
+      if (hasPhoneCharm()) return;
+      $charmsArray.push(item);
+    } else {
+      const i = $charmsArray.findIndex(c => c[0] === '#');
+      if (i === -1) {
+        $charmsArray.push(item);
+      } else {
+        $charmsArray.splice(i, 0, item);
+      }
     }
+    document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
   }
   updateCharms('addCharm')
 }
+
 function renderCharms(array) {
   let html = ''
   let phone = false
@@ -1461,8 +1645,8 @@ function renderCharms(array) {
 
 function changeCollarColor(clave, color, update = true) {
   const $collar = document.querySelector('.collar')
-  $collar.classList.remove('collar1', 'collar2', 'collar3', 'collar4', 'collar5', 'collar6', 'collar7', 'collar8')
-  $collar.classList.add(clave) 
+  $collar.classList.remove('correa1', 'correa2', 'correa3', 'correa4', 'correa5', 'correa6', 'correa7', 'correa8', 'correa9', 'collar1', 'collar2', 'collar3', 'collar4', 'collar5', 'collar6', 'collar7', 'collar8', 'collar9')
+  $collar.classList.add(clave)
   document.querySelector('#values-collar-color').value = color
   if (document.querySelector(`input[value='${color}']+label`)) document.querySelector(`input[value='${color}']+label`).click()
   if (update) updateCharms('changeCollarColor')
@@ -1470,53 +1654,46 @@ function changeCollarColor(clave, color, update = true) {
 }
 
 function changeKeysColor(color) {
-  const $keys = document.querySelectorAll('.charms-keyboard .keyboard_key')
+  const $keys = document.querySelectorAll('.charms-keyboard .keyboard_key_lastrow')
 
   for (const key of $keys) {
-    key.setAttribute('class', '')
-    key.classList.add('keyboard_key', color)
+    if (key.id != "charm-key-phone") {
+      key.setAttribute('class', '')
+      key.classList.add('keyboard_key_lastrow', color)
+    }
   }
   currentColor = parseInt(color.slice(5))
-  myLog('Color actual: ' + currentColor)
 }
 
 function deleteCharm(charm) {
-  if(firstClick){
-    // activateAccordionByHeaderId("personalize")
+  if (firstClick) {
     firstClick = false
     emptyCharms()
   } else {
     $charmsArray.splice(charm, 1)
     document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-    myLog(charm + ' eliminado')
     updateCharms('deleteCharm')
   }
 }
 
 function deletePhone() {
-  for (let x = 0; x < $charmsArray.length; x++) {
-    if ($charmsArray[x].includes('#')) {
-      charm = x
-      break
-    }
-  }
-  $charmsArray.splice(charm, 1)
+  const idx = $charmsArray.findIndex(c => c[0] === '#');
+  if (idx !== -1) $charmsArray.splice(idx, 1);
+
   document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
   document.querySelector('#phone').value = ''
   document.querySelector('#phone').style.display = 'none'
   document.querySelector('#phone-title').style.display = 'none'
-  //document.querySelector(`input[value='Sin']+label`).click()
-  console.log('telefono eliminado')
-  phonecharm = false
+  phonecharm = false;
+  phoneNumber = '';
   updateCharms('deletePhone')
 }
 
 function changeCollarSize(size, update = true) {
-  console.log(size)
   document.querySelector('#values-collar-size').value = size;
   removeActive();
-  document.querySelector('.size-' + size).classList.add('active')
-  try {    
+  document.querySelector('.size-' + size).classList.add('active');
+  try {
     document.querySelector('#size').value = size
     document.querySelector(`input[value='${size.toUpperCase()}']+label`).click()
   } catch (error) {
@@ -1614,13 +1791,10 @@ function emptyGummies() {
 
 function addGummy(letter) {
   if ($gummiesArray.length < maxGummys) {
-    myLog('addGummy:' + letter + ' ' + $gummyColor.value)
     $gummiesArray.push([letter, $gummyColor.value])
     renderGummies($gummiesArray)
     $qtyGummies.value = $gummiesArray.length
     updateGummys('addGummy')
-  } else {
-    myLog('demasiados gummies')
   }
   ($gummiesArray.length >= maxGummys && $gummiesArray.length <= minGummys) ? enableBuyButton(true) : enableBuyButton(false)
 }
@@ -1643,15 +1817,13 @@ function renderGummies(gummiesArray) {
 function deleteGummy(index) {
   $gummiesArray.splice(index, 1)
   renderGummies($gummiesArray)
-  myLog(index + ' eliminado')
   $qtyGummies.value = $gummiesArray.length
   updateGummys('deleteGummy');
   ($gummiesArray.length >= maxGummys && $gummiesArray.length <= minGummys) ? enableBuyButton(true) : enableBuyButton(false)
 }
 
 function updateGummys(caller) {
-  myLog(caller)
-  document.querySelector('#charmsForm').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
+  document.querySelector('#charmsCode').value = `<div style="padding:16px">Tamaño del collar: ${document.querySelector('#values-collar-size').value.toUpperCase()}</div>` + displayGummies($gummiesArray)
 }
 
 function changeGummiesColor(color) {
@@ -1667,7 +1839,6 @@ function changeGummiesColor(color) {
     $gkeys[x].classList.add('keyboard_key', 'gummy', 'gummy-color-' + color,)
   }
   currentGummyColor = color
-  console.log('Color de Gummies: ' + currentGummyColor)
 }
 
 function displayGummies(array) {
@@ -1683,21 +1854,15 @@ function displayGummies(array) {
 
 }
 
-function getIdPixelemos() {
-  document.querySelector('#idPixelemos').value = currentSlug + '-' + Date.now();
-  return document.querySelector('#idPixelemos').value;
-}
 
 /*Capturar pantalla y enviarla */
 // async function capture(event) {
-  
 //   if (allowSubmit) return;
-
 //   enableBuyButton(false)
-  
+
 //   // Seleccionar el elemento que deseas capturar
 //   event.preventDefault();
-  
+
 //   const form = event.currentTarget.closest('form');
 //   // Esconder los items de borrar charms
 //   const msgBorrar = document.querySelector('.msg-borrar');
@@ -1711,66 +1876,66 @@ function getIdPixelemos() {
 //   const idPixelemosValue = idPixelemosInput.value.trim();
 
 //   // Utilizar html2canvas para capturar el elemento como una imagen
-//   // try {
-//   //   // html2canvas(elementToCapture).then(canvas => {
-//   //     // Obtener la URL de la imagen en formato base64
-//   //     // const imageData = canvas.toDataURL('image/webp');
-//   //     const imageBlob = dataURLtoBlob(finalImage);
-//   //     // Preparar los datos a enviar al servidor
-//   //     const formData = new FormData();
-//   //     formData.append('image_data', imageBlob, 'uploaded_image.webp');
-//   //     formData.append('idPixelemos', idPixelemosValue);
-//   //     console.log(formData)
-//   //     // Realizar la solicitud POST utilizando fetch
-//   //         fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
-//   //             method: 'POST',
-//   //             body: formData,
-//   //          })
-//   //         .then(response => {
-//   //             if (!response.ok) {
-//   //                 enableBuyButton(true)
-//   //                 throw new Error('Error al enviar la imagen al servidor.');
-//   //             }
-//   //             return response.json(); // Convertir la respuesta a JSON
-//   //         })
-//   //         .then(data => {
-//   //             console.log(data)
-//   //             // Manejar la respuesta del servidor
-//   //             if (data.success && data.publicUrl) {
-//   //                 enableBuyButton(true)
-//   //                 console.log('URL de la imagen generada:', data.publicUrl);
-//   //                 document.querySelector('#imageProduct').value = data.publicUrl
-//   //                 allowSubmit = true;
-//   //                 if (form) {
-//   //                   form.requestSubmit();
-//   //                 }
-//   //                 pointZero()
-//   //             } else {
-//   //                 throw new Error('Error al procesar la respuesta del servidor.');
-//   //             }
-//   //         })
-//   //         .catch(error => {
-//   //             console.error('Error en la solicitud fetch:', error);
-//   //             allowSubmit = false;
-//   //             enableBuyButton(true)
-//   //         });
+//   try {
+//     // html2canvas(elementToCapture).then(canvas => {
+//       // Obtener la URL de la imagen en formato base64
+//       // const imageData = canvas.toDataURL('image/webp');
+//       const imageBlob = dataURLtoBlob(finalImage);
+//       // Preparar los datos a enviar al servidor
+//       const formData = new FormData();
+//       formData.append('image_data', imageBlob, 'uploaded_image.webp');
+//       formData.append('idPixelemos', idPixelemosValue);
+//       console.log(formData)
+//       // Realizar la solicitud POST utilizando fetch
+//           fetch('https://shopify-image-uploader.sergioalberto-varelab.workers.dev', {
+//               method: 'POST',
+//               body: formData,
+//            })
+//           .then(response => {
+//               if (!response.ok) {
+//                   enableBuyButton(true)
+//                   throw new Error('Error al enviar la imagen al servidor.');
+//               }
+//               return response.json(); // Convertir la respuesta a JSON
+//           })
+//           .then(data => {
+//               console.log(data)
+//               // Manejar la respuesta del servidor
+//               if (data.success && data.publicUrl) {
+//                   enableBuyButton(true)
+//                   console.log('URL de la imagen generada:', data.publicUrl);
+//                   document.querySelector('#imageProduct').value = data.publicUrl
+//                   allowSubmit = true;
+//                   if (form) {
+//                     form.requestSubmit();
+//                   }
+//                   pointZero()
+//               } else {
+//                   throw new Error('Error al procesar la respuesta del servidor.');
+//               }
+//           })
+//           .catch(error => {
+//               console.error('Error en la solicitud fetch:', error);
+//               allowSubmit = false;
+//               enableBuyButton(true)
+//           });
 
-//   //   // });
-//   // } catch (error) {
-//   //   console.warn('Errores de captura: ' + error)
-//   //   enableBuyButton(true)
-//   // }
+//     // });
+//   } catch (error) {
+//     console.warn('Errores de captura: ' + error)
+//     enableBuyButton(true)
+//   }
 // }
 
 async function getFinalCaptureImage() {
   // Obtiene todos los elementos marcados para capturar
   const scale = 2; // 2x o 3x para más calidad
   await document.fonts.ready;
-  let elements = "" 
-  
-  if(isPack){
-   elements = document.querySelectorAll(".previewPack"); 
-  }else{
+  let elements = ""
+
+  if (isPack) {
+    elements = document.querySelectorAll(".previewPack");
+  } else {
     elements = document.querySelectorAll(".collar-container");
   }
 
@@ -1786,33 +1951,33 @@ async function getFinalCaptureImage() {
     const infoContainer = document.createElement('div');
     infoContainer.className = 'info-bottom-right';
 
-    if(!isPack){
+    if (!isPack) {
       let textoTamanio = ""
-      if(idProduct != 8289135952022) {
-        textoTamanio = `Tamaño : ${document.querySelector('#values-collar-size').value}`; 
-      }else {
-        textoTamanio = `Tamaño : llavero`; 
+      if (idProduct != 9258030989545) {
+        textoTamanio = `Tamaño : ${document.querySelector('#values-collar-size').value}`;
+      } else {
+        textoTamanio = `Tamaño : llavero`;
       }
       const h3Tamaño = document.createElement('h3');
       h3Tamaño.textContent = textoTamanio
       h3Tamaño.className = 'info-item';
-      // document.querySelector('#charmsForm')
-      document.querySelector('#size').value = document.querySelector('#values-collar-size').value    
+      // document.querySelector('#charmsCode')
+      document.querySelector('#size').value = document.querySelector('#values-collar-size').value
       const phoneInput = document.querySelector('#phone');
       if (phoneInput?.value) {
         const h3Telefono = document.createElement('h3');
-        h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone')? document.querySelector('#phone').value : ""}`;
+        h3Telefono.textContent = `Teléfono: ${document.querySelector('#phone') ? document.querySelector('#phone').value : ""}`;
         h3Telefono.className = 'info-item';
         infoContainer.appendChild(h3Telefono);
-        document.querySelector('#telefono').value = document.querySelector('#phone')? document.querySelector('#phone').value : ""
+        document.querySelector('#telefono').value = document.querySelector('#phone') ? document.querySelector('#phone').value : ""
       }
       infoContainer.appendChild(h3Tamaño);
     }
 
     el.appendChild(infoContainer);
-    
+
     const styles = window.getComputedStyle(el);
-    
+
     const dataUrl = await domtoimage.toPng(el, {
       width: 240 * scale,
       height: 105 * scale,
@@ -1834,7 +1999,7 @@ async function getFinalCaptureImage() {
     });
     images.push(dataUrl);
     el.removeChild(infoContainer);
-    }
+  }
 
   images = images.filter(item => item !== "data:,");
 
@@ -1877,38 +2042,38 @@ async function getFinalCaptureImage() {
  * @returns {Blob} - El objeto Blob listo para FormData.
  */
 function dataURLtoBlob(dataurl) {
-    const arr = dataurl.split(',');
-    const mime = arr[0].match(/:(.*?);/)[1]; // Obtiene 'image/webp'
-    const bstr = atob(arr[1]); // Decodifica Base64 a cadena binaria
-    let n = bstr.length;
-    const u8arr = new Uint8Array(n);
+  const arr = dataurl.split(',');
+  const mime = arr[0].match(/:(.*?);/)[1]; // Obtiene 'image/webp'
+  const bstr = atob(arr[1]); // Decodifica Base64 a cadena binaria
+  let n = bstr.length;
+  const u8arr = new Uint8Array(n);
 
-    // Crea un array binario de bytes
-    while(n--){
-        u8arr[n] = bstr.charCodeAt(n);
-    }
-    
-    return new Blob([u8arr], {type: mime});
+  // Crea un array binario de bytes
+  while (n--) {
+    u8arr[n] = bstr.charCodeAt(n);
+  }
+
+  return new Blob([u8arr], { type: mime });
 }
 
 
 function saveCurrentKeyboard() {
-    const obj = {
-        id : currentStep,
-        size : document.querySelector('#values-collar-size').value,
-        type_keyboard : $steps[currentStep].keyboardType,
-        charms : $charmsArray.length || $gummiesArray.length,
-        content : cleanHTML(document.querySelector(".collar-container")),
-        phone : document.querySelector('#phone')? document.querySelector('#phone').value : "",
-    }
+  const obj = {
+    id: currentStep,
+    size: document.querySelector('#values-collar-size').value,
+    type_keyboard: $steps[currentStep].keyboardType,
+    charms: $charmsArray.length || $gummiesArray.length,
+    content: cleanHTML(document.querySelector(".collar-container")),
+    phone: document.querySelector('#phone') ? document.querySelector('#phone').value : "",
+  }
 
-    if ($steps[currentStep].minCharms > $charmsArray.length) {
+  if ($steps[currentStep].minCharms > $charmsArray.length) {
 
-    }else {
-        packs.push(obj);
-        currentStep += 1
-        renderStep()
-    }
+  } else {
+    packs.push(obj);
+    currentStep += 1
+    renderStep()
+  }
 }
 
 function cleanHTML(originalNode) {
@@ -1927,26 +2092,26 @@ function cleanHTML(originalNode) {
   return clone;
 }
 
-function hideKeyboard(){
-    const teclado = document.getElementById("customizer-body");
-    const btnSiguiente = document.getElementById("save-and-continue");
-    teclado.style.display = "none";
-    btnSiguiente.style.display = "none";
+function hideKeyboard() {
+  const teclado = document.getElementById("customizer-body");
+  const btnSiguiente = document.getElementById("save-and-continue");
+  teclado.style.display = "none";
+  btnSiguiente.style.display = "none";
 }
 
-function nextBtn(){
-  if(isPack){
+function nextBtn() {
+  if (isPack) {
     const btnSiguiente = document.getElementById("save-and-continue");
     var charmsGummies = 0
-    if ($steps[currentStep].keyboardType == "charms") { charmsGummies = $charmsArray.length } else {charmsGummies = $gummiesArray.length}
-    if(firstClick) {
+    if ($steps[currentStep].keyboardType == "charms") { charmsGummies = $charmsArray.length } else { charmsGummies = $gummiesArray.length }
+    if (firstClick) {
       btnSiguiente.innerHTML = `Personaliza tus ${$steps[currentStep].keyboardType}`
       btnSiguiente.setAttribute('disabled', true)
-    }else{
+    } else {
       if ($steps[currentStep].minCharms - charmsGummies > 0) {
         btnSiguiente.innerHTML = `recuerda que faltan al menos ${$steps[currentStep].minCharms - charmsGummies} ${$steps[currentStep].keyboardType}`
         btnSiguiente.setAttribute('disabled', true)
-      } 
+      }
       else {
         btnSiguiente.innerHTML = "Guardar y Continuar"
         btnSiguiente.removeAttribute('disabled')
@@ -1957,67 +2122,108 @@ function nextBtn(){
 
 
 function renderResultados(resultados) {
-    const cont = document.getElementById('previewPack');
-    cont.innerHTML = ""; // limpiamos antes de renderizar
-    resultados.forEach(node => {
-        const clone = node.content.cloneNode(true);
+  const cont = document.getElementById('previewPack');
+  cont.innerHTML = ""; // limpiamos antes de renderizar
+  resultados.forEach(node => {
+    const clone = node.content.cloneNode(true);
 
-        const infoContainer = document.createElement('div');
-        infoContainer.className = 'info-bottom-right';
-        const h3Tamaño = document.createElement('p');
-        h3Tamaño.textContent = "Tamaño: " + (node.size || 'No especificado'); 
-        h3Tamaño.className = 'info-item'; 
-        if (node.phone != "") { 
-          const h3Telefono = document.createElement('p');
-          h3Telefono.textContent = "Teléfono: " + (node.phone || 'No disponible'); 
-          h3Telefono.className = 'info-item';
-          infoContainer.appendChild(h3Telefono);
-        }
-        infoContainer.appendChild(h3Tamaño);
-        clone.appendChild(infoContainer);
-        clone.classList.add('resultado-item-container');
-        
-        cont.appendChild(clone);
+    const infoContainer = document.createElement('div');
+    infoContainer.className = 'info-bottom-right';
+    const h3Tamaño = document.createElement('p');
+    h3Tamaño.textContent = "Tamaño: " + (node.size || 'No especificado');
+    h3Tamaño.className = 'info-item';
+    if (node.phone != "") {
+      const h3Telefono = document.createElement('p');
+      h3Telefono.textContent = "Teléfono: " + (node.phone || 'No disponible');
+      h3Telefono.className = 'info-item';
+      infoContainer.appendChild(h3Telefono);
+    }
+    infoContainer.appendChild(h3Tamaño);
+    clone.appendChild(infoContainer);
+    clone.classList.add('resultado-item-container');
 
-    });
+    cont.appendChild(clone);
+
+  });
 }
 
 
 function renderStep() {
-    if (currentStep < $steps.length){
-        firstClick = true
-        if($steps[currentStep].keyboardType == "charms") {
-            keyborard = packKeyboard(charmsKeyboardHTML)
-            wawasContainer.innerHTML = keyborard
-            $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15], ['S', 16], ['1', 17], ['2', 18], ['#', 19]]
-            document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
-            document.querySelector('.size-xs').style.display = "none"
-            document.querySelector('.size-xs').style.display = "none"
-            document.querySelector('.size-sml').style.display = "none"
-            document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
-            document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
-            changeCollarSize('s', false)
-            changeCollarColor('collar1', 'Naranja Neon', false)
-            changeKeysColor('color11')
-            document.querySelector('#phone').addEventListener('input', updateCharms)
-            nextBtn();
-        }else{
-            keyborard = packKeyboard(gummysKeyboardHTML)
-            wawasContainer.innerHTML = keyborard
-            window.$gummyColor = document.querySelector('#values-gummys-color')
-            window.$qtyGummies = document.querySelector('#values-gummys-number')
-            $gummyColor.value = 'rojo'
-            changeGummysCollarSize('xs')
-        }
-        const title = document.getElementById("tittleCustomizer") 
-        title.innerText = $steps[currentStep].stepName
-        enableAccordion();
-    }else{
-        document.querySelector("form[id^='product-form-template-'] .product-form__buttons").style.display = "block";
-        renderResultados(packs)
-        hideKeyboard()
-        enableBuyButton(true)
-        const title = document.getElementById("tittleCustomizer") 
-        title.innerText = "Finaliza tu compra!"
+  if (currentStep < $steps.length) {
+    firstClick = true
+    if ($steps[currentStep].keyboardType == "charms") {
+      keyborard = packKeyboard(charmsKeyboardHTML)
+      wawasContainer.innerHTML = keyborard
+      $charmsArray = [['C', 11], ['H', 12], ['A', 13], ['R', 14], ['M', 15]]
+      document.querySelector('#charm-container').innerHTML = renderCharms($charmsArray)
+      document.querySelector('.size-xs').style.display = "none"
+      document.querySelector('.size-xs').style.display = "none"
+      document.querySelector('.size-sml').style.display = "none"
+      document.querySelector('#color20').classList.remove('hidden')/*Activar charms glitter */
+      document.querySelector('#color21').classList.remove('hidden')/*Activar charms glitter */
+      changeCollarSize('s', false)
+      changeCollarColor('collar1', 'Naranja Neon', false)
+      changeKeysColor('color11')
+      document.querySelector('#phone').addEventListener('input', updateCharms)
+      nextBtn();
+    } else {
+      keyborard = packKeyboard(gummysKeyboardHTML)
+      wawasContainer.innerHTML = keyborard
+      window.$gummyColor = document.querySelector('#values-gummys-color')
+      window.$qtyGummies = document.querySelector('#values-gummys-number')
+      $gummyColor.value = 'rojo'
+      changeGummysCollarSize('xs')
     }
+    const title = document.getElementById("tittleCustomizer")
+    title.innerText = $steps[currentStep].stepName
+    enableTabs();
+  } else {
+    document.querySelector("form[id^='product-form-template-'] .product-form__buttons").style.display = "block";
+    renderResultados(packs)
+    hideKeyboard()
+    enableBuyButton(true)
+    const title = document.getElementById("tittleCustomizer")
+    title.innerText = "Finaliza tu compra!"
+  }
+}
+
+function passProductProperties(productId, collarSize = 'N/A', collarColor = 'N/A', charmsArray, phoneCharm = null, collarType = 'og') {
+  document.querySelector('#collarColor').value = collarColor;
+
+  let savePhoneCharm;
+  charmsArray.forEach((item, index) => {
+    if (item[0] === '#' && !(index === charmsArray - 1)) {
+      savePhoneCharm = item;
+      charmsArray.splice(index, 1);
+    }
+    if (savePhoneCharm) {
+      charmsArray.push(savePhoneCharm);
+    }
+  });
+
+  let charmsSimplified = [];
+  const abc = 'ABCDEFGHIJKLMNÑOPQRSTUVWXYZ';
+  charmsArray.forEach((item) => {
+    if (item[0] !== '#') {
+      if (abc.includes(item[0])) {
+        charmsSimplified += `[ ${item[0]} ]`;
+      } else {
+        charmsSimplified += '[ Figura ]';
+      }
+    } else if (phoneCharm) {
+      charmsSimplified += ('[Charm teléfono]');
+    }
+  });
+  document.querySelector('#charmsSimplified').value = charmsSimplified;
+
+  document.querySelector('#phoneCharm').value = phoneCharm;
+
+  let charmsCode = {
+    productId: productId,
+    collarSize: collarSize,
+    collarColor: collarColor,
+    charmsArray: charmsArray,
+    phoneCharm: phoneCharm,
+  };
+  document.querySelector('#charmsCode').value = JSON.stringify(charmsCode);
 }
